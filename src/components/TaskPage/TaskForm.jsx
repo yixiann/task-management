@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Button, Form, Input, DatePicker, Tag, Select } from "antd";
+import { Row, Col, Button, Form, Input, DatePicker, Tag, Select, Typography } from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { CustomMenu, getColour, getKeyById } from "../../utils";
+import { getKeyById } from "../../utils";
 import { priority, taskStatus } from "../../utils/enum";
 
-const TaskForm = ({ form, language, createTask, tagsData }) => {
+const TaskForm = ({
+  form,
+  language,
+  createTask,
+  deleteTask,
+  tagsData,
+  taskDetails,
+}) => {
+  const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    if (taskDetails) {
+      setEdit(true);
+      form.setFieldsValue({
+        ...taskDetails,
+        deadline: moment(taskDetails.deadline, "YYYY-MM-DD").local(),
+      });
+    }
+  }, []);
+
+
   const { TextArea } = Input;
+  const { Title } = Typography;
   const { Option } = Select;
   const layout = {
     labelCol: {
-      span: 3,
+      span: 2,
     },
     wrapperCol: {
       span: 10,
     },
   };
 
-  function tagRender(props) {
+  const tagRender = (props) => {
     const { label, value, closable, onClose } = props;
     const onPreventMouseDown = (event) => {
       event.preventDefault();
@@ -34,7 +55,7 @@ const TaskForm = ({ form, language, createTask, tagsData }) => {
         {label}
       </Tag>
     );
-  }
+  };
 
   return (
     <Form
@@ -72,8 +93,7 @@ const TaskForm = ({ form, language, createTask, tagsData }) => {
       </Form.Item>
       <Form.Item label={language.task.deadline} name="deadline">
         <DatePicker
-          format="YYYY-MM-DD HH:mm:ss"
-          showTime={{ defaultValue: moment("00:00:00", "HH:mm:ss") }}
+          format="DD-MM-YYYY"
         />
       </Form.Item>
       <Form.Item
@@ -109,7 +129,7 @@ const TaskForm = ({ form, language, createTask, tagsData }) => {
       </Form.Item>
       <Form.Item
         label={language.task.status}
-        name="status"
+        name="taskStatus"
         wrapperCol={{
           span: 4,
         }}
@@ -120,12 +140,42 @@ const TaskForm = ({ form, language, createTask, tagsData }) => {
           ))}
         </Select>
       </Form.Item>
-      <Form.Item>
-        <Row>
-          <Col align="center">
-            <Button type="primary" htmlType="submit">
-              {language.button.create}
+      <Form.Item
+        wrapperCol={{
+          span: 24,
+        }}
+      >
+        <Row align="center">
+          <Col span={9} />
+          <Col span={3} align="center">
+            <Button type="primary" style={{ width: "100px" }}>
+              <Link
+                to={edit ? `/task/details?id=${taskDetails.id}` : "/overview"}
+              >
+                {language.button.cancel}
+              </Link>
             </Button>
+          </Col>
+          <Col span={3} align="center">
+            <Button
+              type="primary"
+              style={{ width: "100px" }}
+              onClick={() => createTask()}
+            >
+              {edit ? language.button.save : language.button.create}
+            </Button>
+          </Col>
+          <Col span={6} />
+          <Col span={3} align="center">
+            {edit && (
+              <Button
+                type="danger"
+                style={{ width: "120px" }}
+                onClick={() => deleteTask()}
+              >
+                {language.button.deleteTask}
+              </Button>
+            )}
           </Col>
         </Row>
       </Form.Item>

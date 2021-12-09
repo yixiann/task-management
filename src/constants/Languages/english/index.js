@@ -2,6 +2,9 @@ export default {
   title: {
     taskManagement: "Task Management",
     createTask: "Create Task",
+    viewTask: "View Task",
+    editTask: "Edit Task",
+    updateTask: "Update Task",
     overviewPage: "Overview Page",
   },
   text: {
@@ -9,6 +12,7 @@ export default {
     tagName: "Tag Name"
   },
   button: {
+    back: "Back",
     cancel: "Cancel",
     create: "Create",
     details: "Details",
@@ -44,7 +48,8 @@ export default {
   taskStatus: {
     completed: "Completed",
     inProgress: "In-Progress",
-    backlog: "Backlog"
+    notStarted: "Not Started",
+    backlog: "Backlog",
   },
   message: {
     taskName: "Please input a task name!",
@@ -56,10 +61,9 @@ export default {
     tags: "Tags",
     deadline: "Deadline",
     createdBy: "Created By",
-    createdOn: "Created On",
     assignedTo: "Assigned To",
     priority: "Priority",
-    status: "Status",
+    taskStatus: "Status",
     actions: "Actions",
   },
   tagsManagement: {

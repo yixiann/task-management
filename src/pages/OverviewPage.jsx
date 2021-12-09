@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { PageHeader } from "antd";
+import { Typography } from "antd";
 import SearchBarAndButtons from "../components/OverviewPage/SearchBarButtons";
 import TaskManagementTable from "../components/OverviewPage/TaskManagementTable";
 import fakeData, { fakeTagsData } from "./fakeData";
 import TagsManagement from "../components/OverviewPage/TagsManagement/TagsManagement";
 
 export const OverviewPage = ({ language, ...props }) => {
+  const { Title } = Typography;
+
   // Task Management
   const [dataSource, setDataSource] = useState([]);
   const [fullData, setFullData] = useState([]);
@@ -55,15 +57,17 @@ export const OverviewPage = ({ language, ...props }) => {
     setTagsData(fakeTagsData);
     setLoading(false);
   }, []);
-  
+
   // Request
   // Fetch All Task
   // Fetch All Tags
 
   return (
     <div className="overview">
-      <PageHeader className="site-page-header" title="Task Management" />
-      <div style={{ margin: "0px 20px" }}>
+      <Title level={2} style={{ margin: "50px 20px 40px 20px" }}>
+        {language.title.taskManagement}
+      </Title>
+      <div style={{ margin: "0px 40px" }}>
         <SearchBarAndButtons
           language={language}
           searchData={searchData}

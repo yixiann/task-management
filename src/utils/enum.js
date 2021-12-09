@@ -22,5 +22,6 @@ export const priority = Object.freeze({
 export const taskStatus = Object.freeze({
   completed: "Completed",
   inProgress: "In-Progress",
+  notStarted: "Not Started",
   backlog: "Backlog",
 });

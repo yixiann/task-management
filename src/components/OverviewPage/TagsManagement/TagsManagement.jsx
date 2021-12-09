@@ -17,7 +17,7 @@ const TagsManagement = ({
   editTag,
   deleteTag,
 }) => {
-  const { Paragraph } = Typography;
+  const { Paragraph, Title } = Typography;
 
   const columns = [
     {
@@ -91,10 +91,7 @@ const TagsManagement = ({
         width={600}
         style={{ minWidth: "600px" }}
       >
-        <PageHeader
-          style={{ padding: "0px" }}
-          title={language.tagsManagement.manageTags}
-        />
+        <Title level={2}>{language.tagsManagement.manageTags}</Title>
         <Table
           style={{ marginTop: "10px" }}
           columns={columns}

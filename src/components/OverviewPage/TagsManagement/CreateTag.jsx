@@ -7,7 +7,6 @@ const CreateTag = ({
   createTag,
   tagName,
   setTagName,
-  tagColour,
   setTagColour,
 }) => {
   return (

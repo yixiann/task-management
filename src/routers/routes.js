@@ -9,18 +9,18 @@ const PublicRoutes = [
   {
     path: '/task/create',
     exact: true,
-    component: React.lazy(() => import("../pages/TaskPage")),
+    component: React.lazy(() => import("../pages/TaskPages/CreateTaskPage")),
   },
-  // {
-  //   path: '/task/update',
-  //   exact: true,
-  //   component: React.lazy(() => import("../pages/task/update")),
-  // },
-  // {
-  //   path: '/task/delete',
-  //   exact: true,
-  //   component: React.lazy(() => import("../pages/task/delete")),
-  // },
+  {
+    path: '/task/details',
+    exact: true,
+    component: React.lazy(() => import("../pages/TaskPages/ViewTaskPage")),
+  },
+  {
+    path: '/task/edit',
+    exact: true,
+    component: React.lazy(() => import("../pages/TaskPages/EditTaskPage")),
+  },
 ];
 
 const PrivateRoutes = [
