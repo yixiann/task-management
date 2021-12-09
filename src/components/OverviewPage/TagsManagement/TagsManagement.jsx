@@ -48,6 +48,7 @@ const TagsManagement = ({
       render: (text, record) => {
         return (
           <CustomMenu
+            colour={true}
             language={language.colour}
             fields={colours}
             defaultValue={text}

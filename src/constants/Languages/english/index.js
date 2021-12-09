@@ -1,4 +1,13 @@
 export default {
+  title: {
+    taskManagement: "Task Management",
+    createTask: "Create Task",
+    overviewPage: "Overview Page",
+  },
+  text: {
+    search: "Search Task or Details",
+    tagName: "Tag Name"
+  },
   button: {
     cancel: "Cancel",
     create: "Create",
@@ -15,32 +24,37 @@ export default {
   },
   colour: {
     none: "None",
+    magenta: "Magenta",
     red: "Red",
+    volcano: "Volcano",
     orange: "Orange",
-    yellow: "Yellow",
+    gold: "Gold",
+    lime: "Lime",
     green: "Green",
+    cyan: "Cyan",
     blue: "Blue",
-    purple: "Purple",
-    brown: "Brown",
-    grey: "Grey"
+    geekblu: "Geek blue",
+    purple: "Purple"
   },
   priority:{
     high: "High",
     medium: "Medium",
     low: "Low"
   },
-  status: {
+  taskStatus: {
     completed: "Completed",
     inProgress: "In-Progress",
     backlog: "Backlog"
   },
   message: {
-    cannotBeEmpty: "Cannot be empty!",
+    taskName: "Please input a task name!",
+
   },
   overviewTaskTable: {
     taskName: "Task Name",
     details: "Details",
     tags: "Tags",
+    deadline: "Deadline",
     createdBy: "Created By",
     createdOn: "Created On",
     assignedTo: "Assigned To",
@@ -57,4 +71,14 @@ export default {
     colour: "Colour",
     actions: "Actions"
   },
+  task: {
+    taskName: "Task Name",
+    details: "Details",
+    tags: "Tags",
+    deadline: "Deadline",
+    createdBy: "Created By",
+    assignedTo: "Assigned To",
+    priority: "Priority",
+    status: "Status"
+  }
 };

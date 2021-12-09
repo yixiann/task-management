@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Input, Radio } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const SearchBarAndButtons = ({ language, searchData, setVisible }) => {
   return (
@@ -8,7 +9,7 @@ const SearchBarAndButtons = ({ language, searchData, setVisible }) => {
       <Col className="search-bar" span={10}>
         <Input
           prefix={<SearchOutlined />}
-          placeholder={"Search"}
+          placeholder={language.text.search}
           onChange={searchData}
         />
       </Col>
@@ -17,11 +18,8 @@ const SearchBarAndButtons = ({ language, searchData, setVisible }) => {
           <Radio.Button value="manageTags" onChange={() => setVisible(true)}>
             {language.button.manageTags}
           </Radio.Button>
-          <Radio.Button value="deleteTask">
-            {language.button.deleteTask}
-          </Radio.Button>
           <Radio.Button value="createTask">
-            {language.button.createTask}
+            <Link to="/task/create">{language.button.createTask}</Link>
           </Radio.Button>
         </Radio.Group>
       </Col>

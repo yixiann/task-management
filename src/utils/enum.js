@@ -1,23 +1,26 @@
 export const colours = Object.freeze({
-  none: "#000000",
-  red: "#ff7875",
-  orange: "#ffc069",
-  yellow: "#fff566",
-  green: "#95de64",
-  blue: "#69c0ff",
-  purple: "#b37feb",
-  brown: "#d48806",
-  grey: "#bfbfbf"
+  none: "white",
+  magenta: "magenta",
+  red: "red",
+  volcano: "volcano",
+  orange: "orange",
+  gold: "gold",
+  lime: "lime",
+  green: "green",
+  cyan: "cyan",
+  blue: "blue",
+  geekblu: "geekblue",
+  purple: "purple",
 });
 
 export const priority = Object.freeze({
   high: "High",
   medium: "Medium",
-  low: "Low"
-})
+  low: "Low",
+});
 
-export const status = Object.freeze({
+export const taskStatus = Object.freeze({
   completed: "Completed",
   inProgress: "In-Progress",
-  backlog: "Backlog"
-})
+  backlog: "Backlog",
+});

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { PageHeader, Row, Col, Input, Table, Radio, Button, Dropdown, Menu, Typography, Pagination} from "antd";
-import { SearchOutlined, DownOutlined } from "@ant-design/icons";
+import { PageHeader } from "antd";
 import SearchBarAndButtons from "../components/OverviewPage/SearchBarButtons";
 import TaskManagementTable from "../components/OverviewPage/TaskManagementTable";
 import fakeData, { fakeTagsData } from "./fakeData";
 import TagsManagement from "../components/OverviewPage/TagsManagement/TagsManagement";
 
 export const OverviewPage = ({ language, ...props }) => {
-  // Search Logic requires me to store the original copy and filter
+  // Task Management
   const [dataSource, setDataSource] = useState([]);
   const [fullData, setFullData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const searchData = (e) => {
     const currValue = e.target.value;
@@ -24,49 +24,41 @@ export const OverviewPage = ({ language, ...props }) => {
     setDataSource([...filteredData]);
   };
 
+  const editTask = (e) => {
+    console.log("EDIT TASK", e);
+  };
+
   // Tags management
   const [visible, setVisible] = useState(false);
   const [tagsData, setTagsData] = useState([]);
+  const [tagName, setTagName] = useState("");
+  const [tagColour, setTagColour] = useState("");
+
+  const createTag = () => {
+    console.log("CREATE", { tagName: tagName, tagColour: tagColour });
+    setTagName("");
+    setTagColour("");
+  };
+
+  const editTag = (e) => {
+    console.log("EDIT TAG", e);
+  };
+
+  const deleteTag = (e) => {
+    console.log("DELETE TAG", e);
+  };
 
   // To update data when retrieved
   useEffect(() => {
     setDataSource(fakeData);
     setFullData(fakeData);
     setTagsData(fakeTagsData);
+    setLoading(false);
   }, []);
-
+  
   // Request
   // Fetch All Task
   // Fetch All Tags
-  // Fetch Task by Id
-
-  const createTask = (e) => {
-    console.log("CREATE TASK", e)
-  }
-
-  const editTask = (e) => {
-    console.log("EDIT TASK", e)
-  }
-
-  const deleteTask = (e) => {
-    console.log("DELETE TASK", e.value)
-  }
-
-  const [ tagName, setTagName ] = useState("");
-  const [ tagColour, setTagColour ] = useState("");
-  const createTag = () => {
-    console.log("CREATE", {tagName: tagName, tagColour: tagColour})
-    setTagName("");
-    setTagColour("");
-  }
-
-  const editTag = (e) => {
-    console.log("EDIT TAG", e)
-  }
-
-  const deleteTag = (e) => {
-    console.log("DELETE TAG", e)
-  }
 
   return (
     <div className="overview">
@@ -77,13 +69,15 @@ export const OverviewPage = ({ language, ...props }) => {
           searchData={searchData}
           setVisible={setVisible}
         />
-        <TaskManagementTable 
-          language={language} 
-          dataSource={dataSource} 
-          editTask={(e)=>editTask(e)}
+        <TaskManagementTable
+          language={language}
+          dataSource={dataSource}
+          fullData={fullData}
+          loading={loading}
+          editTask={(e) => editTask(e)}
         />
         <TagsManagement
-          language={language} 
+          language={language}
           visible={visible}
           setVisible={setVisible}
           tagsData={tagsData}

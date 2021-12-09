@@ -5,12 +5,12 @@ const PublicRoutes = [
     path: '/overview',
     exact: true,
     component: React.lazy(() => import("../pages/OverviewPage"))
-  }
-  // {
-  //   path: '/task/create',
-  //   exact: true,
-  //   component: React.lazy(() => import("../pages/task/create")),
-  // },
+  },
+  {
+    path: '/task/create',
+    exact: true,
+    component: React.lazy(() => import("../pages/TaskPage")),
+  },
   // {
   //   path: '/task/update',
   //   exact: true,

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Row, Table, Button, Dropdown, Menu } from "antd";
-import { Link } from "react-router-dom";
-import { CustomMenu, PriorityMenu } from "../../utils";
-import { priority, status } from "../../utils/enum";
+import React from "react";
+import { Table } from "antd";
+import { CustomMenu, getFilters, sorter } from "../../utils";
+import { priority, taskStatus } from "../../utils/enum";
 
 const TaskManagementTable = ({ 
-  language, 
+  language,
   dataSource, 
+  loading,
   editTask
 }) => {
 
@@ -16,28 +16,30 @@ const TaskManagementTable = ({
       dataIndex: "taskName",
       key: "taskName",
       width: "200px",
+      sorter: (a, b) => sorter(a.taskName, b.taskName)
     },
     {
       title: language.overviewTaskTable.details,
       dataIndex: "details",
       key: "details",
-      width: "400px",
+      width: "300px",
+      sorter: (a, b) => sorter(a.details, b.details)
     },
-    // {title: language.overviewTaskTable.tags, dataIndex: 'tags', key: 'tags', width: '150px'},
-    // {title: language.overviewTaskTable.createdBy, dataIndex: 'createdBy', key: 'createdBy', width: '150px'},
-    // {title: language.overviewTaskTable.createdOn, dataIndex: 'createdOn', key: 'createdOn', width: '150px'},
-    // {title: language.overviewTaskTable.assignedTo, dataIndex: 'assignedTo', key: 'assignedTo', width: '200px'},
+    {title: language.overviewTaskTable.tags, dataIndex: 'tags', key: 'tags', width: '150px'},
+    {title: language.overviewTaskTable.deadline, dataIndex: 'deadline', key: 'deadline', width: '150px'},
     {
       title: language.overviewTaskTable.priority,
       dataIndex: "priority",
       key: "priority",
       width: "150px",
+      filters:  getFilters(language.priority, dataSource, 'priority'),
+      onFilter: (value, record) => record.priority === value, 
       render: (text, record) => {
         return (
           <CustomMenu
             language={language.priority}
             fields={priority}
-            defaultValue={text}
+            value={text}
             onSelect={(e) => editTask({id: record.id, priority: e})}
           />
         );
@@ -48,32 +50,16 @@ const TaskManagementTable = ({
       dataIndex: "status",
       key: "status",
       width: "150px",
+      filters:  getFilters(language.taskStatus, dataSource, 'status'),
+      onFilter: (value, record) => record.status=== value, 
       render: (text, record) => {
         return (
           <CustomMenu
-            language={language.status}
-            fields={status}
-            defaultValue={text}
+            language={language.taskStatus}
+            fields={taskStatus}
+            value={text}
             onSelect={(e) => editTask({id: record.id, status: e})}
           />
-        );
-      },
-    },
-    {
-      title: language.overviewTaskTable.actions,
-      dataIndex: "actions",
-      key: "actions",
-      width: "200px",
-      render: (text, record) => {
-        return (
-          <Row justify="space-around">
-            <Button type="primary" style={{ width: "80px" }}>
-              <Link to={`/task/edit`}>{language.button.edit}</Link>
-            </Button>
-            <Button type="primary" style={{ width: "80px" }}>
-              <Link to={`/task/details`}>{language.button.details}</Link>
-            </Button>
-          </Row>
         );
       },
     },
@@ -82,6 +68,7 @@ const TaskManagementTable = ({
   return (
     <Table
       dataSource={dataSource}
+      loading={loading}
       columns={columns}
       pagination={false}
       scroll={{ x: 1100 }}
