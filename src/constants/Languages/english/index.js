@@ -5,11 +5,12 @@ export default {
     viewTask: "View Task",
     editTask: "Edit Task",
     updateTask: "Update Task",
-    overviewPage: "Overview Page",
+    taskOverview: "Task Overview",
   },
   text: {
     search: "Search Task or Details",
-    tagName: "Tag Name"
+    tagName: "Tag Name",
+    none: "None",
   },
   button: {
     back: "Back",
@@ -17,6 +18,7 @@ export default {
     create: "Create",
     details: "Details",
     delete: "Delete",
+    deleteSelected: "Delete Selected",
     edit: "Edit",
     save: "Save",
     submit: "Submit",
@@ -24,7 +26,7 @@ export default {
     manageTags: "Manage Tags",
     deleteTask: "Delete Task",
     createTask: "Create Task",
-    createTag: "Create Tag"
+    createTag: "Create Tag",
   },
   colour: {
     none: "None",
@@ -38,12 +40,12 @@ export default {
     cyan: "Cyan",
     blue: "Blue",
     geekblu: "Geek blue",
-    purple: "Purple"
+    purple: "Purple",
   },
-  priority:{
+  priority: {
     high: "High",
     medium: "Medium",
-    low: "Low"
+    low: "Low",
   },
   taskStatus: {
     completed: "Completed",
@@ -53,7 +55,14 @@ export default {
   },
   message: {
     taskName: "Please input a task name!",
-
+    confirmDeletion: "Confirm Deletion",
+    actionIrreversible: "This action is irreversible!",
+    deleteForever: "Delete Forever",
+    successfullyDeleted: "Successfully Deleted",
+    failedToDelete: "Failed To Delete",
+    loading: "Loading...",
+    success: "Success!",
+    error: "Error!"
   },
   overviewTaskTable: {
     taskName: "Task Name",
@@ -73,7 +82,7 @@ export default {
     tagColour: "Tag Colour",
     tags: "Tags",
     colour: "Colour",
-    actions: "Actions"
+    actions: "Actions",
   },
   task: {
     taskName: "Task Name",
@@ -83,6 +92,6 @@ export default {
     createdBy: "Created By",
     assignedTo: "Assigned To",
     priority: "Priority",
-    status: "Status"
-  }
+    status: "Status",
+  },
 };

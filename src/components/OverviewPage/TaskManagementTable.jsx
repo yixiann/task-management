@@ -1,15 +1,36 @@
-import React from "react";
-import { Table } from "antd";
-import { CustomMenu, getFilters, sorter } from "../../utils";
+import React, { useEffect, useState } from "react";
+import { Table, Tag, Row, Button } from "antd";
+import { CustomMenu, getFilters, getKeyById, sorter } from "../../utils";
 import { priority, taskStatus } from "../../utils/enum";
 import { useNavigate } from "react-router-dom";
 
-const TaskManagementTable = ({ language, dataSource, loading, editTask }) => {
+const TaskManagementTable = ({
+  language,
+  dataSource,
+  loading,
+  editTask,
+  deleteSelected,
+  selectedRows,
+  setSelectedRows,
+  tagsData,
+}) => {
   const navigate = useNavigate();
   const routeChange = (id) => {
     let path = `/task/details?id=${id}`;
     navigate(path);
   };
+
+
+  const [visible, setVisible] = useState([]);
+  const rowSelection = {
+    onChange: (selectedRowKeys) => {
+      setSelectedRows(selectedRowKeys);
+    },
+  };
+
+  useEffect(() => {
+    setVisible(selectedRows.length > 0 ? true : false);
+  }, [selectedRows]);
 
   const columns = [
     {
@@ -25,18 +46,34 @@ const TaskManagementTable = ({ language, dataSource, loading, editTask }) => {
       key: "details",
       width: "300px",
       sorter: (a, b) => sorter(a.details, b.details),
+      render: (text, record) => (text ? text : language.text.none),
     },
     {
       title: language.overviewTaskTable.tags,
       dataIndex: "tags",
       key: "tags",
       width: "150px",
+      filters: tagsData.map((item) => ({ text: item.tags, value: item.id })),
+      onFilter: (value, record) => record.tags.includes(value),
+      render: (text, record) => {
+        return record.tags
+          ? record.tags.map((item) => (
+              <Row style={{ margin: "10px" }}>
+                <Tag color={getKeyById(tagsData, "colour", item)}>
+                  {getKeyById(tagsData, "tags", item)}
+                </Tag>
+              </Row>
+            ))
+          : language.text.none;
+      },
     },
     {
       title: language.overviewTaskTable.deadline,
       dataIndex: "deadline",
       key: "deadline",
       width: "150px",
+      sorter: (a, b) => sorter(a.deadline, b.deadline),
+      render: (text, record) => (text ? text : language.text.none),
     },
     {
       title: language.overviewTaskTable.priority,
@@ -57,9 +94,9 @@ const TaskManagementTable = ({ language, dataSource, loading, editTask }) => {
       },
     },
     {
-      title: language.overviewTaskTable.status,
-      dataIndex: "status",
-      key: "status",
+      title: language.overviewTaskTable.taskStatus,
+      dataIndex: "taskStatus",
+      key: "taskStatus",
       width: "150px",
       filters: getFilters(language.taskStatus, dataSource, "status"),
       onFilter: (value, record) => record.status === value,
@@ -77,18 +114,30 @@ const TaskManagementTable = ({ language, dataSource, loading, editTask }) => {
   ];
 
   return (
-    <Table
-      dataSource={dataSource}
-      loading={loading}
-      columns={columns}
-      pagination={false}
-      scroll={{ x: 1100 }}
-      defaultPageSize={8}
-      pagination={{ pageSize: 8 }}
-      onRow={(record) => ({
-        onClick: () => routeChange(record.id),
-      })}
-    />
+    <>
+      <Table
+        dataSource={dataSource}
+        loading={loading}
+        columns={columns}
+        pagination={false}
+        scroll={{ x: 1100 }}
+        defaultPageSize={8}
+        pagination={{ pageSize: 8 }}
+        onRow={(record) => ({
+          onClick: () => routeChange(record.id),
+        })}
+        rowSelection={{ type: "checkbox", ...rowSelection }}
+      />
+      {visible && (
+        <Button
+          type="danger"
+          onClick={() => deleteSelected()}
+          style={{ position: "relative", bottom: "48px" }}
+        >
+          {language.button.deleteSelected}
+        </Button>
+      )}
+    </>
   );
 };
 

@@ -10,21 +10,28 @@ export const CustomMenu = ({
 }) => {
   const { Option } = Select;
   return (
-    <Select
-      value={value}
-      defaultValue={defaultValue}
-      style={{ width: 120 }}
-      onSelect={(e) => onSelect(e)}
+    <a
+      href="#"
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
     >
-      {Object.keys(fields).map((item) => (
-        <Option
-          value={item}
-          style={{ backgroundColor: colour ? getColour(item) : "white" }}
-        >
-          {language?.[item]}
-        </Option>
-      ))}
-    </Select>
+      <Select
+        value={value}
+        defaultValue={defaultValue}
+        style={{ width: 120 }}
+        onSelect={(e) => onSelect(e)}
+      >
+        {Object.keys(fields).map((item) => (
+          <Option
+            value={item}
+            style={{ backgroundColor: colour ? getColour(item) : "white" }}
+          >
+            {language?.[item]}
+          </Option>
+        ))}
+      </Select>
+    </a>
   );
 };
 
@@ -46,7 +53,8 @@ export const getColour = (value) => {
 };
 
 export const getKeyById = (data, key, value) => {
-  return data.filter((item) => item.id === value)[0]?.[key];
+  const result = data?.filter((item) => item.id === value)[0]?.[key];
+  return result;
 };
 
 export const sorter = (c, d) => {

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { Form, Breadcrumb, Typography, Divider, Row, Col, Button } from "antd";
-import TaskForm from "../../components/TaskPage/TaskForm";
+import { Breadcrumb, Typography, Divider, Row, Col, Button } from "antd";
 import { fakeTagsData } from "../fakeData";
 import TagsManagement from "../../components/OverviewPage/TagsManagement/TagsManagement";
+import { ConfirmationSwal } from "../../components/UI/ConfirmationSwal";
 
-export const TaskHeaders = ({ language, pageName, button, ...props }) => {
-
-  const {Title} = Typography;
+export const TaskHeaders = ({
+  language,
+  pageName,
+  button,
+  breadcrumbs = true,
+  ...props
+}) => {
+  const { Title } = Typography;
 
   // Tags management
   const [visible, setVisible] = useState(false);
@@ -26,8 +30,19 @@ export const TaskHeaders = ({ language, pageName, button, ...props }) => {
     console.log("EDIT TAG", e);
   };
 
+  const dummyDelete = (item) => {
+    console.log("DELETE TAG", item);
+  };
+
   const deleteTag = (e) => {
-    console.log("DELETE TAG", e);
+    ConfirmationSwal({
+      title: language.message.confirmDeletion,
+      text: language.message.actionIrreversible,
+      confirmButtonText: language.message.deleteForever,
+      confirmFn: () => dummyDelete(e),
+      afterTitle: language.message.successfullyDeleted,
+      failTitle: language.message.failedToDelete,
+    })
   };
 
   // To update data when retrieved
@@ -40,12 +55,14 @@ export const TaskHeaders = ({ language, pageName, button, ...props }) => {
       <Title level={2} style={{ margin: "50px 20px 5px 20px" }}>
         {language.title.taskManagement}
       </Title>
-      <Breadcrumb separator=">" style={{ margin: "0px 24px" }}>
-        <Breadcrumb.Item href="/overview">
-          {language.title.overviewPage}
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>{pageName}</Breadcrumb.Item>
-      </Breadcrumb>
+      {breadcrumbs && (
+        <Breadcrumb separator=">" style={{ margin: "0px 24px" }}>
+          <Breadcrumb.Item href="/overview">
+            {language.title.taskOverview}
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>{pageName}</Breadcrumb.Item>
+        </Breadcrumb>
+      )}
       <Row>
         <Col span={20}>
           <Title
@@ -64,7 +81,7 @@ export const TaskHeaders = ({ language, pageName, button, ...props }) => {
           )}
         </Col>
       </Row>
-      <Divider style={{ margin: "20px" }} />
+      <Divider style={{ margin: "20px"}} />
       <TagsManagement
         language={language}
         visible={visible}

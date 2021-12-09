@@ -4,7 +4,8 @@ import { Typography } from "antd";
 import SearchBarAndButtons from "../components/OverviewPage/SearchBarButtons";
 import TaskManagementTable from "../components/OverviewPage/TaskManagementTable";
 import fakeData, { fakeTagsData } from "./fakeData";
-import TagsManagement from "../components/OverviewPage/TagsManagement/TagsManagement";
+import { TaskHeaders } from "./TaskPages/TaskHeader";
+import { ConfirmationSwal } from "../components/UI/ConfirmationSwal";
 
 export const OverviewPage = ({ language, ...props }) => {
   const { Title } = Typography;
@@ -13,6 +14,7 @@ export const OverviewPage = ({ language, ...props }) => {
   const [dataSource, setDataSource] = useState([]);
   const [fullData, setFullData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const searchData = (e) => {
     const currValue = e.target.value;
@@ -30,25 +32,25 @@ export const OverviewPage = ({ language, ...props }) => {
     console.log("EDIT TASK", e);
   };
 
+  const dummyDelete = (item) => {
+    console.log("DELETE", item);
+  };
+
+  const deleteSelected = (e) => {
+    ConfirmationSwal({
+      title: language.message.confirmDeletion,
+      text: language.message.actionIrreversible,
+      confirmButtonText: language.message.deleteForever,
+      confirmFn: () => dummyDelete(selectedRows),
+      // afterFn: () => setRedirectDelete(true),
+      afterTitle: language.message.successfullyDeleted,
+      failTitle: language.message.failedToDelete,
+    });
+    console.log("DELETE", selectedRows);
+  };
+
   // Tags management
-  const [visible, setVisible] = useState(false);
   const [tagsData, setTagsData] = useState([]);
-  const [tagName, setTagName] = useState("");
-  const [tagColour, setTagColour] = useState("");
-
-  const createTag = () => {
-    console.log("CREATE", { tagName: tagName, tagColour: tagColour });
-    setTagName("");
-    setTagColour("");
-  };
-
-  const editTag = (e) => {
-    console.log("EDIT TAG", e);
-  };
-
-  const deleteTag = (e) => {
-    console.log("DELETE TAG", e);
-  };
 
   // To update data when retrieved
   useEffect(() => {
@@ -64,34 +66,24 @@ export const OverviewPage = ({ language, ...props }) => {
 
   return (
     <div className="overview">
-      <Title level={2} style={{ margin: "50px 20px 40px 20px" }}>
-        {language.title.taskManagement}
-      </Title>
+      <TaskHeaders
+        language={language}
+        pageName={language.title.taskOverview}
+        button={true}
+        breadcrumbs={false}
+      />
       <div style={{ margin: "0px 40px" }}>
-        <SearchBarAndButtons
-          language={language}
-          searchData={searchData}
-          setVisible={setVisible}
-        />
+        <SearchBarAndButtons language={language} searchData={searchData} />
         <TaskManagementTable
           language={language}
           dataSource={dataSource}
           fullData={fullData}
           loading={loading}
           editTask={(e) => editTask(e)}
-        />
-        <TagsManagement
-          language={language}
-          visible={visible}
-          setVisible={setVisible}
+          deleteSelected={(e) => deleteSelected(e)}
+          selectedRows={selectedRows}
+          setSelectedRows={(e)=>setSelectedRows(e)}
           tagsData={tagsData}
-          tagName={tagName}
-          setTagName={setTagName}
-          tagColour={tagColour}
-          setTagColour={setTagColour}
-          createTag={createTag}
-          editTag={(e) => editTag(e)}
-          deleteTag={(e) => deleteTag(e)}
         />
       </div>
     </div>

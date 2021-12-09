@@ -1,28 +1,20 @@
 import React from "react";
-import { Row, Col, Input, Radio } from "antd";
+import { Row, Input, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-const SearchBarAndButtons = ({ language, searchData, setVisible }) => {
+const SearchBarAndButtons = ({ language, searchData }) => {
   return (
     <Row style={{ marginBottom: "20px" }} justify="space-between">
-      <Col className="search-bar" span={10}>
-        <Input
-          prefix={<SearchOutlined />}
-          placeholder={language.text.search}
-          onChange={searchData}
-        />
-      </Col>
-      <Col>
-        <Radio.Group value={"large"}>
-          <Radio.Button value="manageTags" onChange={() => setVisible(true)}>
-            {language.button.manageTags}
-          </Radio.Button>
-          <Radio.Button value="createTask">
-            <Link to="/task/create">{language.button.createTask}</Link>
-          </Radio.Button>
-        </Radio.Group>
-      </Col>
+      <Input
+        prefix={<SearchOutlined />}
+        placeholder={language.text.search}
+        onChange={searchData}
+        style={{ width: "400px" }}
+      />
+      <Button type="primary" value="createTask" style={{ width: "200px" }}>
+        <Link to="/task/create">{language.button.createTask}</Link>
+      </Button>
     </Row>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { Form, Typography} from "antd";
+import { Form } from "antd";
 import TaskForm from "../../components/TaskPage/TaskForm";
 import { fakeTagsData } from "../fakeData";
 import TaskHeaders from "./TaskHeader";
@@ -11,11 +11,11 @@ export const CreateTaskPage = ({ language, ...props }) => {
   const [redirect, setRedirect] = useState(false);
   const [tagsData, setTagsData] = useState([]);
 
-  const { Title } = Typography;
-
   const createTask = () => {
-    console.log("CREATE", form.getFieldValue());
-    setRedirect(true);
+    form.validateFields().then(() => {
+      console.log("CREATE", form.getFieldValue());
+      setRedirect(true);
+    });
   };
 
   useEffect(() => {

@@ -5,6 +5,12 @@ import { Form } from "antd";
 import { fakeTagsData } from "../fakeData";
 import TaskForm from "../../components/TaskPage/TaskForm";
 import { TaskHeaders } from "./TaskHeader";
+import {
+  ConfirmationSwal,
+  ErrorSwal,
+  LoadingSwal,
+  SuccessSwal,
+} from "./../../components/UI/ConfirmationSwal";
 
 export const EditTaskPage = ({ language, ...props }) => {
   const [form] = Form.useForm();
@@ -12,13 +18,28 @@ export const EditTaskPage = ({ language, ...props }) => {
   const [redirectDelete, setRedirectDelete] = useState(false);
 
   const editTask = () => {
+    LoadingSwal(language);
     console.log("EDIT", form.getFieldValue(), taskDetails.id);
     setRedirectEdit(true);
+    setTimeout(() => {  ErrorSwal(language); }, 2000);
+  };
+
+  const dummyDelete = (item) => {
+    console.log("DELETE", item);
   };
 
   const deleteTask = () => {
-    console.log("DELETE", form.getFieldValue());
-    setRedirectDelete(true);
+    ConfirmationSwal({
+      title: language.message.confirmDeletion,
+      text: language.message.actionIrreversible,
+      confirmButtonText: language.message.deleteForever,
+      confirmFn: () => dummyDelete(form.getFieldValue()),
+      afterFn: () => setRedirectDelete(true),
+      afterTitle: language.message.successfullyDeleted,
+      failTitle: language.message.failedToDelete,
+    });
+    // console.log("DELETE", form.getFieldValue());
+    // setRedirectDelete(true);
   };
 
   const [taskDetails, setTaskDetails] = useState({
