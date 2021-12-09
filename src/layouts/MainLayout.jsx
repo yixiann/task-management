@@ -8,9 +8,7 @@ const MainLayout = ({ children, ...props }) => {
   
   return (
     <Layout className="main-layout">
-      <Header>
-      </Header>
-      <Content className='layout-content'>
+      <Content className="main-content">
           {children}
       </Content>
     </Layout>
