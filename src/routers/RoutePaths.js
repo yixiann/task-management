@@ -1,21 +1,21 @@
 const RoutePaths = {
-  'overview' : {
-    path: '/overview',
+  overview: {
+    path: "/overview",
   },
-  'task' :{
-    path: '/task',
+  task: {
+    path: "/task",
     children: {
-      'create' : {
-        path: '/task/create',
+      create: {
+        path: "/task/create",
       },
-      'update' : {
-        path: '/task/update',
+      update: {
+        path: "/task/update",
       },
-      'details' : {
-        path: '/task/details',
-      }
-    }
-  }
+      details: {
+        path: "/task/details",
+      },
+    },
+  },
 };
 
 export { RoutePaths };

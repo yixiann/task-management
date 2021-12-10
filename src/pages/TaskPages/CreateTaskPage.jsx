@@ -72,12 +72,12 @@ export const CreateTaskPage = ({
 
   useEffect(() => {
     if (taskCreateSuccess) {
-      SuccessSwal(language, language.message.taskCreatedSuccessfully);
+      SuccessSwal(language, language.message.taskCreateSuccess);
       resetReducerTask()
       setRedirect(true);
     }
     if (taskCreateFail) {
-      ErrorSwal(language, language.message.taskCreatedFail);
+      ErrorSwal(language, language.message.taskCreateFail);
     }
   }, [taskCreateSuccess, taskCreateFail]);
 

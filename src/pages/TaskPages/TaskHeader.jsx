@@ -5,6 +5,7 @@ import TagsManagement from "../../components/OverviewPage/TagsManagement/TagsMan
 import {
   ConfirmationSwal,
   ErrorSwal,
+  SuccessSwal,
 } from "../../components/UI/ConfirmationSwal";
 import { TagAction } from "../../redux/action_creators";
 import { checkForDuplicates } from "../../utils";
@@ -76,10 +77,14 @@ export const TaskHeaders = ({
 
   // Handle After-Effects Of Actions
   useEffect(() => {
-    if (editSuccess || createSuccess || deleteSuccess) {
+    if (editSuccess || createSuccess) {
       resetReducerTag();
       fetchAllTag();
       setLoading(true);
+    }
+    if(deleteSuccess){
+      SuccessSwal(language, language.message.tagDeleteSuccess);
+      resetReducerTag();
     }
     if (createFail) {
       ErrorSwal(language, language.message.tagCreateFail);

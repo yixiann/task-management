@@ -14,6 +14,7 @@ export default {
   },
   button: {
     back: "Back",
+    backHome: "Back Home",
     cancel: "Cancel",
     create: "Create",
     details: "Details",
@@ -60,11 +61,11 @@ export default {
     deleteForever: "Delete Forever",
     taskExist: "Task Already Exists",
     taskDeleteSuccess: "Task Deleted Successfully",
+    taskDeleteFail: "Task Deleted Failed",
     taskCreateSuccess: "Task Created Successfully",
     taskCreateFail: "Task Created Failed",
     taskEditSuccess: "Task Saved Successfully",
     taskEditFail: "Task Saved Failed",
-    taskDeleteFail: "Failed To Delete Task",
     taskFetchFail: "Failed To Fetch Task Data",
     taskUpdateFail: "Failed To Update Task",
     
@@ -73,6 +74,7 @@ export default {
     tagCreateFail: "Failed To Create Tag",
     tagEditFail: "Failed To Edit Tag",
     tagDeleteFail: "Failed To Delete Tag",
+    tagDeleteSuccess: "Tag Deleted",
     loading: "Loading...",
     success: "Success!",
     error: "Error!"

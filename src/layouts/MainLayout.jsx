@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 
 const MainLayout = ({ children, ...props }) => {
 
-  const { Header, Content } = Layout;
+  const { Content } = Layout;
   
   return (
     <Layout className="main-layout">

@@ -8,7 +8,6 @@ import {
   DatePicker,
   Tag,
   Select,
-  Typography,
 } from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -183,7 +182,7 @@ const TaskForm = ({
               <Button
                 type="danger"
                 style={{ width: "120px" }}
-                onClick={() => deleteTask()}
+                onClick={() => deleteTask(taskDetails.id)}
               >
                 {language.button.deleteTask}
               </Button>

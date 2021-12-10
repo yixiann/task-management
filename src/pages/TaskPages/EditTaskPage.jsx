@@ -78,16 +78,6 @@ export const EditTaskPage = ({
     editTask({ ...form.getFieldValue(), id: taskDetails.id });
   };
 
-  useEffect(() => {
-    if (taskEditSuccess) {
-      SuccessSwal(language, language.message.taskEditSuccess);
-      setRedirectEdit(true);
-    }
-    if (taskEditFail) {
-      ErrorSwal(language, language.message.taskEditFail);
-    }
-  }, [taskEditSuccess, taskEditFail]);
-
   // Delete Task
   const handleDeleteTask = () => {
     ConfirmationSwal({
@@ -100,6 +90,24 @@ export const EditTaskPage = ({
       failTitle: language.message.failedToDelete,
     });
   };
+
+  //
+  useEffect(() => {
+    if (taskEditSuccess) {
+      SuccessSwal(language, language.message.taskEditSuccess);
+      setRedirectEdit(true);
+    }
+    if (taskEditFail) {
+      ErrorSwal(language, language.message.taskEditFail);
+    }
+    if (taskDeleteSuccess) {
+      SuccessSwal(language, language.message.taskDeleteSuccess);
+      setRedirectDelete(true);
+    }
+    if (taskDeleteFail) {
+      ErrorSwal(language, language.message.taskDeleteFail);
+    }
+  }, [taskEditSuccess, taskEditFail, taskDeleteSuccess, taskDeleteFail]);
 
   return (
     <div className="overview">

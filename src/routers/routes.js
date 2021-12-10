@@ -21,6 +21,11 @@ const PublicRoutes = [
     exact: true,
     component: React.lazy(() => import("../pages/TaskPages/EditTaskPage")),
   },
+  {
+    path: '*',
+    exact: true,
+    component: React.lazy(() => import("../pages/NotFound")),
+  },
 ];
 
 const PrivateRoutes = [

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Row, Col, Typography, Button, Tag, Input } from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";

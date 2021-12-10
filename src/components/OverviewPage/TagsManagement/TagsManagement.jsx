@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Table, Modal, Typography, PageHeader } from "antd";
+import { Button, Table, Modal, Typography } from "antd";
 import CreateTag from "./CreateTag";
 import { CustomMenu } from "../../../utils";
 import { colours } from "../../../utils/enum";
