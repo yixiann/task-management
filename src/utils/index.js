@@ -134,3 +134,13 @@ export const getFilters = (language, data, key) => {
 
   return result;
 };
+
+export const checkForDuplicates = (data, key, value) => {
+  return (
+    data?.filter((item) =>
+      item?.[key]
+        ? item[key].toLowerCase().trim() === value.toLowerCase().trim()
+        : false
+    ).length !== 0
+  );
+};

@@ -3,24 +3,93 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Form } from "antd";
 import TaskForm from "../../components/TaskPage/TaskForm";
-import { fakeTagsData } from "../fakeData";
 import TaskHeaders from "./TaskHeader";
+import { TagAction, TaskAction } from "../../redux/action_creators";
+import { ErrorSwal, SuccessSwal } from "../../components/UI/ConfirmationSwal";
+import { checkForDuplicates } from "../../utils";
 
-export const CreateTaskPage = ({ language, ...props }) => {
+export const CreateTaskPage = ({
+  language,
+  resetReducerTask,
+  resetReducerTag,
+
+  createTask,
+  taskCreateSuccess,
+  taskCreateFail,
+
+  fetchAllTask,
+  taskFetchAllData,
+  taskFetchAllSuccess,
+  taskFetchAllFail,
+
+  fetchAllTag,
+  tagFetchAllData,
+  tagFetchAllSuccess,
+  tagFetchAllFail,
+
+  tagsState,
+  createTag,
+  editTag,
+  deleteTag,
+  ...props
+}) => {
+  const tagsFn = {
+    resetReducerTag,
+    fetchAllTag,
+    createTag,
+    editTag,
+    deleteTag,
+  };
   const [form] = Form.useForm();
   const [redirect, setRedirect] = useState(false);
-  const [tagsData, setTagsData] = useState([]);
 
-  const createTask = () => {
+  // Fetch Tags
+  useEffect(() => {
+    if (!tagFetchAllSuccess) {
+      fetchAllTag();
+    }
+    if (tagFetchAllFail) {
+      ErrorSwal(language, language.message.failedFetchTags);
+    }
+  }, [tagFetchAllSuccess, tagFetchAllData]);
+
+  // Create Task
+  const handleCreateTask = () => {
     form.validateFields().then(() => {
-      console.log("CREATE", form.getFieldValue());
-      setRedirect(true);
+      if (
+        checkForDuplicates(
+          taskFetchAllData,
+          "taskName",
+          form.getFieldValue("taskName")
+        )
+      ) {
+        ErrorSwal(language, language.message.taskExist);
+      } else {
+        createTask(form.getFieldValue());
+      }
     });
   };
 
   useEffect(() => {
-    setTagsData(fakeTagsData);
-  }, []);
+    if (taskCreateSuccess) {
+      SuccessSwal(language, language.message.taskCreatedSuccessfully);
+      resetReducerTask()
+      setRedirect(true);
+    }
+    if (taskCreateFail) {
+      ErrorSwal(language, language.message.taskCreatedFail);
+    }
+  }, [taskCreateSuccess, taskCreateFail]);
+
+  // Fetch All Task For Validation
+  useEffect(() => {
+    if (!taskFetchAllSuccess) {
+      fetchAllTask();
+    }
+    if (taskFetchAllFail) {
+      ErrorSwal(language, language.message.failedFetchTask);
+    }
+  }, [taskFetchAllSuccess, taskFetchAllData]);
 
   return (
     <div className="create-task">
@@ -28,20 +97,43 @@ export const CreateTaskPage = ({ language, ...props }) => {
         language={language}
         pageName={language.title.createTask}
         button={true}
+        tagsState={tagsState}
+        tagsFn={tagsFn}
       />
       <TaskForm
         language={language}
         form={form}
-        createTask={createTask}
-        tagsData={tagsData}
+        createTask={handleCreateTask}
+        tagsData={tagFetchAllData}
       />
       {redirect && <Navigate to="/overview" />}
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  taskCreateSuccess: state.task.createSuccess,
+  taskCreateFail: state.task.createFail,
+  taskFetchAllData: state.task.fetchAllData,
+  taskFetchAllSuccess: state.task.fetchAllSuccess,
+  taskFetchAllFail: state.task.fetchAllFail,
 
-const mapDispatchToProps = {};
+  tagFetchAllData: state.tag.fetchAllData,
+  tagFetchAllSuccess: state.tag.fetchAllSuccess,
+  tagFetchAllFail: state.tag.fetchAllFail,
+  tagsState: state.tag,
+});
+
+const mapDispatchToProps = {
+  resetReducerTask: TaskAction.resetReducer,
+  fetchAllTask: TaskAction.fetchAllTask,
+  createTask: TaskAction.createTask,
+
+  resetReducerTag: TagAction.resetReducer,
+  fetchAllTag: TagAction.fetchAllTag,
+  createTag: TagAction.createTag,
+  editTag: TagAction.editTag,
+  deleteTag: TagAction.deleteTag,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTaskPage);

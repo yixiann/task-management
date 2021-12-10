@@ -1,9 +1,10 @@
-import { combineReducers } from 'redux';
-import { ActionType } from '../../constants';
-import TaskReducer from './TaskReducer';
+import { combineReducers } from "redux";
+import TaskReducer from "./TaskReducer";
+import TagReducer from "./TagReducer";
 
 const allReducers = combineReducers({
   task: TaskReducer,
+  tag: TagReducer,
 });
 
 const rootReducer = (state, action) => {

@@ -5,11 +5,6 @@ export const ConfirmationSwal = ({
   text,
   confirmButtonText = "",
   confirmFn = console.log,
-  afterFn = console.log,
-  afterTitle = "",
-  afterText = "",
-  failTitle = "",
-  failText = "",
 }) => {
   return Swal.fire({
     title: title,
@@ -21,26 +16,7 @@ export const ConfirmationSwal = ({
     confirmButtonText: confirmButtonText,
   }).then((result) => {
     if (result.isConfirmed) {
-      try {
-        confirmFn();
-        Swal.fire({
-          title: afterTitle,
-          text: afterText,
-          timer: 1500,
-          icon: "success",
-          showConfirmButton: false,
-        });
-        afterFn();
-      } catch {
-        console.log("WHY");
-        Swal.fire({
-          title: failTitle,
-          text: failText,
-          timer: 1500,
-          icon: "error",
-          showConfirmButton: false,
-        });
-      }
+      confirmFn();
     }
   });
 };
@@ -52,27 +28,29 @@ export const LoadingSwal = (language) => {
     showCancelButton: false,
     showConfirmButton: false,
     didOpen: () => {
-      Swal.showLoading()
-    }
+      Swal.showLoading();
+    },
   });
 };
 
-export const SuccessSwal = (language) => {
+export const SuccessSwal = (language, text) => {
   Swal.fire({
     title: language.message.success,
+    text: text, 
     showCancelButton: false,
     showConfirmButton: false,
     icon: "success",
-    timer: 1500
+    timer: 2000,
   });
 };
 
-export const ErrorSwal = (language) => {
+export const ErrorSwal = (language, text) => {
   Swal.fire({
     title: language.message.error,
+    text: text,
     showCancelButton: false,
     showConfirmButton: false,
     icon: "error",
-    timer: 1500
+    timer: 2000,
   });
 };

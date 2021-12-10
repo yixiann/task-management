@@ -7,9 +7,9 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
   const { Title } = Typography;
   const { TextArea } = Input;
 
-  const tags = tagsData.filter((item) => taskDetails.tags.includes(item.id));
+  const tags = tagsData?.filter((item) => taskDetails?.tagId? taskDetails.tagId.includes(item.id) : []);
 
-  const newDate = moment(taskDetails?.deadline, "YYYY-MM-DD").format("DD/MM/YYYY")
+  const newDate = moment(taskDetails?.deadline? taskDetails.deadline: Date.now(), "YYYY-MM-DD").format("DD/MM/YYYY")
 
   const status = language.taskStatus[taskDetails?.taskStatus];
 
@@ -46,7 +46,7 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
             <Col span={1} />
             <Col span={6}>
               {item.label === language.overviewTaskTable.tags ? (
-                tags.map((item) => <Tag color={item.colour}>{item.tags}</Tag>)
+                tags.map((item) => <Tag color={item.colour}>{item.tagName}</Tag>)
               ) : item.label === language.overviewTaskTable.details ? (
                 <TextArea
                   style={{ backgroundColor: "white", color: "black", minWidth: "800px"}}

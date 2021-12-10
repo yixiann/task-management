@@ -8,10 +8,10 @@ const TaskManagementTable = ({
   language,
   dataSource,
   loading,
-  editTask,
-  deleteSelected,
+  updateTask,
   selectedRows,
   setSelectedRows,
+  deleteSelected,
   tagsData,
 }) => {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ const TaskManagementTable = ({
     let path = `/task/details?id=${id}`;
     navigate(path);
   };
-
 
   const [visible, setVisible] = useState([]);
   const rowSelection = {
@@ -50,17 +49,17 @@ const TaskManagementTable = ({
     },
     {
       title: language.overviewTaskTable.tags,
-      dataIndex: "tags",
-      key: "tags",
+      dataIndex: "tagId",
+      key: "tagId",
       width: "150px",
-      filters: tagsData.map((item) => ({ text: item.tags, value: item.id })),
-      onFilter: (value, record) => record.tags.includes(value),
+      filters: tagsData.map((item) => ({ text: item.tagName, value: item.id })),
+      onFilter: (value, record) => record.tagId.includes(value),
       render: (text, record) => {
-        return record.tags
-          ? record.tags.map((item) => (
+        return record.tagId
+          ? record.tagId.map((item) => (
               <Row style={{ margin: "10px" }}>
                 <Tag color={getKeyById(tagsData, "colour", item)}>
-                  {getKeyById(tagsData, "tags", item)}
+                  {getKeyById(tagsData, "tagName", item)}
                 </Tag>
               </Row>
             ))
@@ -88,7 +87,9 @@ const TaskManagementTable = ({
             language={language.priority}
             fields={priority}
             value={text}
-            onSelect={(e) => editTask({ id: record.id, priority: e })}
+            onSelect={(e) =>
+              updateTask({ id: record.id, type: "priority", value: e })
+            }
           />
         );
       },
@@ -106,7 +107,9 @@ const TaskManagementTable = ({
             language={language.taskStatus}
             fields={taskStatus}
             value={text}
-            onSelect={(e) => editTask({ id: record.id, status: e })}
+            onSelect={(e) =>
+              updateTask({ id: record.id, type: "taskStatus", value: e })
+            }
           />
         );
       },
@@ -116,6 +119,7 @@ const TaskManagementTable = ({
   return (
     <>
       <Table
+        rowKey={"id"}
         dataSource={dataSource}
         loading={loading}
         columns={columns}

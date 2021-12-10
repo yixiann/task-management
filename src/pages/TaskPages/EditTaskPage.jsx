@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { Form } from "antd";
-import { fakeTagsData } from "../fakeData";
 import TaskForm from "../../components/TaskPage/TaskForm";
 import { TaskHeaders } from "./TaskHeader";
 import {
@@ -11,51 +10,96 @@ import {
   LoadingSwal,
   SuccessSwal,
 } from "./../../components/UI/ConfirmationSwal";
+import { TagAction, TaskAction } from "../../redux/action_creators";
 
-export const EditTaskPage = ({ language, ...props }) => {
+export const EditTaskPage = ({
+  language,
+  resetReducerTask,
+  resetReducerTag,
+
+  fetchByIdTask,
+  taskFetchByIdData,
+  taskFetchByIdSuccess,
+  taskFetchByIdFail,
+
+  editTask,
+  taskEditSuccess,
+  taskEditFail,
+
+  deleteTask,
+  taskDeleteSuccess,
+  taskDeleteFail,
+
+  fetchAllTag,
+  tagFetchAllData,
+  tagFetchAllSuccess,
+  tagFetchAllFail,
+
+  tagsState,
+  createTag,
+  editTag,
+  deleteTag,
+  ...props
+}) => {
+  const tagsFn = { resetReducerTag, fetchAllTag, createTag, editTag, deleteTag };
   const [form] = Form.useForm();
   const [redirectEdit, setRedirectEdit] = useState(false);
   const [redirectDelete, setRedirectDelete] = useState(false);
 
-  const editTask = () => {
-    LoadingSwal(language);
-    console.log("EDIT", form.getFieldValue(), taskDetails.id);
-    setRedirectEdit(true);
-    setTimeout(() => {  ErrorSwal(language); }, 2000);
+  // Fetch Task
+  const [taskDetails, setTaskDetails] = useState({ taskFetchByIdData });
+  useEffect(() => {
+    var id = new URLSearchParams(window.location.search).get("id");
+    if (id != taskDetails.id || !!taskDetails.id) {
+      fetchByIdTask(id);
+    }
+    return () => resetReducerTask();
+  }, []);
+
+  useEffect(() => {
+    if (taskFetchByIdSuccess) {
+      setTaskDetails(taskFetchByIdData);
+      resetReducerTask();
+    }
+  }, [taskFetchByIdSuccess]);
+
+  // Fetch Tags
+  useEffect(() => {
+    if (!tagFetchAllSuccess) {
+      fetchAllTag();
+    }
+    if (tagFetchAllFail) {
+      ErrorSwal(language, language.message.failedFetchTags);
+    }
+  }, [tagFetchAllSuccess, tagFetchAllData]);
+
+  // Edit Task
+  const handleEditTask = () => {
+    editTask({ ...form.getFieldValue(), id: taskDetails.id });
   };
 
-  const dummyDelete = (item) => {
-    console.log("DELETE", item);
-  };
+  useEffect(() => {
+    if (taskEditSuccess) {
+      SuccessSwal(language, language.message.taskEditSuccess);
+      setRedirectEdit(true);
+    }
+    if (taskEditFail) {
+      ErrorSwal(language, language.message.taskEditFail);
+    }
+  }, [taskEditSuccess, taskEditFail]);
 
-  const deleteTask = () => {
+  // Delete Task
+  const handleDeleteTask = () => {
     ConfirmationSwal({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => dummyDelete(form.getFieldValue()),
+      confirmFn: () => deleteTask([taskDetails.id]),
       afterFn: () => setRedirectDelete(true),
       afterTitle: language.message.successfullyDeleted,
       failTitle: language.message.failedToDelete,
     });
-    // console.log("DELETE", form.getFieldValue());
-    // setRedirectDelete(true);
   };
-
-  const [taskDetails, setTaskDetails] = useState({
-    id: 1,
-    taskName: "Task Name hha",
-    details:
-      "Some task tasidfgiahuhfdas fibhbhadbfxbsdfbahdsjdfjgwfgbawgghjo do\n\n\n\n\nHaha\n\nlol\n",
-    tags: [1, 2],
-    deadline: "2021-12-04T16:00:00.049Z",
-    createdBy: "Me",
-    assignedTo: "You",
-    priority: "high",
-    taskStatus: "inProgress",
-  });
-
-  const [tagsData, setTagsData] = useState(fakeTagsData);
 
   return (
     <div className="overview">
@@ -63,13 +107,15 @@ export const EditTaskPage = ({ language, ...props }) => {
         language={language}
         pageName={language.title.editTask}
         button={true}
+        tagsState={tagsState}
+        tagsFn={tagsFn}
       />
       <TaskForm
         language={language}
         form={form}
-        createTask={editTask}
-        deleteTask={deleteTask}
-        tagsData={tagsData}
+        createTask={handleEditTask}
+        deleteTask={handleDeleteTask}
+        tagsData={tagFetchAllData}
         taskDetails={taskDetails}
       />
       {redirectEdit && <Navigate to={`/task/details?id=${taskDetails.id}`} />}
@@ -78,8 +124,32 @@ export const EditTaskPage = ({ language, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  taskFetchByIdData: state.task.fetchByIdData,
+  taskFetchByIdSuccess: state.task.fetchByIdSuccess,
+  taskFetchByIdFail: state.task.fetchByIdFail,
+  taskEditSuccess: state.task.editSuccess,
+  taskEditFail: state.task.editFail,
+  taskDeleteSuccess: state.task.deleteSuccess,
+  taskDeleteFail: state.task.deleteFail,
 
-const mapDispatchToProps = {};
+  tagFetchAllData: state.tag.fetchAllData,
+  tagFetchAllSuccess: state.tag.fetchAllSuccess,
+  tagFetchAllFail: state.tag.fetchAllFail,
+  tagsState: state.tag
+});
+
+const mapDispatchToProps = {
+  resetReducerTask: TaskAction.resetReducer,
+  fetchByIdTask: TaskAction.fetchByIdTask,
+  editTask: TaskAction.editTask,
+  deleteTask: TaskAction.deleteTask,
+
+  resetReducerTag: TagAction.resetReducer,
+  fetchAllTag: TagAction.fetchAllTag,
+  createTag: TagAction.createTag,
+  editTag: TagAction.editTag,
+  deleteTag: TagAction.deleteTag,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditTaskPage);

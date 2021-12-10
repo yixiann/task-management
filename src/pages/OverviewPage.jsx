@@ -1,19 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Typography } from "antd";
 import SearchBarAndButtons from "../components/OverviewPage/SearchBarButtons";
 import TaskManagementTable from "../components/OverviewPage/TaskManagementTable";
-import fakeData, { fakeTagsData } from "./fakeData";
 import { TaskHeaders } from "./TaskPages/TaskHeader";
-import { ConfirmationSwal } from "../components/UI/ConfirmationSwal";
+import {
+  ConfirmationSwal,
+  ErrorSwal,
+  SuccessSwal,
+} from "../components/UI/ConfirmationSwal";
+import { TagAction, TaskAction } from "../redux/action_creators";
 
-export const OverviewPage = ({ language, ...props }) => {
-  const { Title } = Typography;
+export const OverviewPage = ({
+  language,
+  resetReducerTask,
+  resetReducerTag,
 
+  fetchAllTask,
+  taskFetchAllData,
+  taskFetchAllSuccess,
+  taskFetchAllFail,
+
+  updateTask,
+  taskUpdateSuccess,
+  taskUpdateFail,
+  deleteTask,
+  taskDeleteSuccess,
+  taskDeleteFail,
+
+  fetchAllTag,
+  tagFetchAllData,
+  tagFetchAllSuccess,
+  tagFetchAllFail,
+
+  tagsState,
+  createTag,
+  editTag,
+  deleteTag,
+  ...props
+}) => {
+  const tagsFn = { resetReducerTag, fetchAllTag, createTag, editTag, deleteTag };
   // Task Management
   const [dataSource, setDataSource] = useState([]);
   const [fullData, setFullData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
   const searchData = (e) => {
@@ -28,12 +57,14 @@ export const OverviewPage = ({ language, ...props }) => {
     setDataSource([...filteredData]);
   };
 
-  const editTask = (e) => {
-    console.log("EDIT TASK", e);
+  const handleUpdateTask = (e) => {
+    resetReducerTask();
+    updateTask(e);
   };
 
-  const dummyDelete = (item) => {
-    console.log("DELETE", item);
+  const handleDeleteTask = (e) => {
+    resetReducerTask();
+    deleteTask(e);
   };
 
   const deleteSelected = (e) => {
@@ -41,28 +72,66 @@ export const OverviewPage = ({ language, ...props }) => {
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => dummyDelete(selectedRows),
-      // afterFn: () => setRedirectDelete(true),
-      afterTitle: language.message.successfullyDeleted,
-      failTitle: language.message.failedToDelete,
+      confirmFn: () => handleDeleteTask(selectedRows),
     });
-    console.log("DELETE", selectedRows);
   };
 
-  // Tags management
+  // Tags Management
   const [tagsData, setTagsData] = useState([]);
 
-  // To update data when retrieved
+  // Initial Fetch All Data
   useEffect(() => {
-    setDataSource(fakeData);
-    setFullData(fakeData);
-    setTagsData(fakeTagsData);
-    setLoading(false);
+    fetchAllTask();
+    fetchAllTag();
   }, []);
 
-  // Request
-  // Fetch All Task
-  // Fetch All Tags
+  // Update Data If Success
+  useEffect(() => {
+    if (taskFetchAllSuccess) {
+      setDataSource(taskFetchAllData);
+      setFullData(taskFetchAllData);
+      setLoading(false);
+    }
+    if (taskFetchAllFail) {
+      ErrorSwal(language, language.message.taskFetchFail);
+    }
+    if (tagFetchAllSuccess) {
+      setTagsData(tagFetchAllData);
+    }
+    if (tagFetchAllFail) {
+      ErrorSwal(language, language.message.tagFetchFail);
+    }
+  }, [
+    taskFetchAllSuccess,
+    taskFetchAllFail,
+    tagFetchAllSuccess,
+    tagFetchAllFail,
+  ]);
+
+  // Handle After-Effects Of Actions
+  useEffect(() => {
+    if (taskUpdateSuccess) {
+      resetReducerTask();
+      setLoading(true);
+      fetchAllTask();
+    }
+    if (taskUpdateFail) {
+      ErrorSwal(language, language.message.taskUpdateFail);
+      resetReducerTask();
+      setLoading(true);
+      fetchAllTask();
+    }
+    if (taskDeleteSuccess) {
+      SuccessSwal(language, language.message.taskDeleteSuccess);
+      resetReducerTask();
+      setLoading(true);
+      fetchAllTask();
+    }
+    if (taskDeleteFail) {
+      ErrorSwal(language, language.message.taskDeleteFail);
+      resetReducerTask();
+    }
+  }, [taskUpdateFail, taskUpdateSuccess, taskDeleteFail, taskDeleteSuccess]);
 
   return (
     <div className="overview">
@@ -71,6 +140,8 @@ export const OverviewPage = ({ language, ...props }) => {
         pageName={language.title.taskOverview}
         button={true}
         breadcrumbs={false}
+        tagsState={tagsState}
+        tagsFn={tagsFn}
       />
       <div style={{ margin: "0px 40px" }}>
         <SearchBarAndButtons language={language} searchData={searchData} />
@@ -79,10 +150,10 @@ export const OverviewPage = ({ language, ...props }) => {
           dataSource={dataSource}
           fullData={fullData}
           loading={loading}
-          editTask={(e) => editTask(e)}
-          deleteSelected={(e) => deleteSelected(e)}
+          updateTask={handleUpdateTask}
           selectedRows={selectedRows}
-          setSelectedRows={(e)=>setSelectedRows(e)}
+          setSelectedRows={setSelectedRows}
+          deleteSelected={deleteSelected}
           tagsData={tagsData}
         />
       </div>
@@ -90,8 +161,34 @@ export const OverviewPage = ({ language, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  taskFetchAllData: state.task.fetchAllData,
+  taskFetchAllSuccess: state.task.fetchAllSuccess,
+  taskFetchAllFail: state.task.fetchAllFail,
 
-const mapDispatchToProps = {};
+  taskUpdateSuccess: state.task.updateSuccess,
+  taskUpdateFail: state.task.updateFail,
+  taskDeleteSuccess: state.task.deleteSuccess,
+  taskDeleteFail: state.task.deleteFail,
+
+  tagFetchAllData: state.tag.fetchAllData,
+  tagFetchAllSuccess: state.tag.fetchAllSuccess,
+  tagFetchFail: state.tag.fetchAllFail,
+  tagsState: state.tag,
+});
+
+const mapDispatchToProps = {
+  resetReducerTask: TaskAction.resetReducer,
+  resetReducerTag: TagAction.resetReducer,
+
+  fetchAllTask: TaskAction.fetchAllTask,
+  updateTask: TaskAction.updateTask,
+  deleteTask: TaskAction.deleteTask,
+
+  fetchAllTag: TagAction.fetchAllTag,
+  createTag: TagAction.createTag,
+  editTag: TagAction.editTag,
+  deleteTag: TagAction.deleteTag,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OverviewPage);

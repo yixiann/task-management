@@ -1,54 +1,103 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Breadcrumb, Typography, Divider, Row, Col, Button } from "antd";
-import { fakeTagsData } from "../fakeData";
 import TagsManagement from "../../components/OverviewPage/TagsManagement/TagsManagement";
-import { ConfirmationSwal } from "../../components/UI/ConfirmationSwal";
+import {
+  ConfirmationSwal,
+  ErrorSwal,
+} from "../../components/UI/ConfirmationSwal";
+import { TagAction } from "../../redux/action_creators";
+import { checkForDuplicates } from "../../utils";
 
 export const TaskHeaders = ({
   language,
   pageName,
   button,
   breadcrumbs = true,
+  tagsState,
+  tagsFn,
   ...props
 }) => {
   const { Title } = Typography;
 
+  const { resetReducerTag, fetchAllTag, createTag, editTag, deleteTag } =
+    tagsFn;
+
+  const {
+    fetchAllData,
+    createSuccess,
+    createFail,
+    editSuccess,
+    editFail,
+    deleteSuccess,
+    deleteFail,
+  } = tagsState;
+
   // Tags management
+  const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
-  const [tagsData, setTagsData] = useState([]);
+  const [tagsData, setTagsData] = useState();
+
+  useEffect(() => {
+    setTagsData(fetchAllData);
+    setLoading(false);
+  }, [fetchAllData]);
+
+  // Create Tag
   const [tagName, setTagName] = useState("");
   const [tagColour, setTagColour] = useState("");
-
-  const createTag = () => {
-    console.log("CREATE", { tagName: tagName, tagColour: tagColour });
-    setTagName("");
-    setTagColour("");
+  const handleCreateTag = () => {
+    if(checkForDuplicates(fetchAllData, "tagName", tagName)){
+      ErrorSwal(language, language.message.tagExist)
+    } else {
+      createTag({ tagName: tagName, tagColour: tagColour });
+      setTagName("");
+      setTagColour("");
+    }
   };
 
-  const editTag = (e) => {
-    console.log("EDIT TAG", e);
+
+  // Edit Tag
+  const handleEditTag = (e) => {
+    editTag(e);
   };
 
-  const dummyDelete = (item) => {
-    console.log("DELETE TAG", item);
-  };
-
-  const deleteTag = (e) => {
+  // Delete Tag
+  const handleDeleteTag = (e) => {
     ConfirmationSwal({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => dummyDelete(e),
+      confirmFn: () => deleteTag([e]),
       afterTitle: language.message.successfullyDeleted,
       failTitle: language.message.failedToDelete,
-    })
+    });
   };
 
-  // To update data when retrieved
+  // Handle After-Effects Of Actions
   useEffect(() => {
-    setTagsData(fakeTagsData);
-  }, []);
+    if (editSuccess || createSuccess || deleteSuccess) {
+      resetReducerTag();
+      fetchAllTag();
+      setLoading(true);
+    }
+    if (createFail) {
+      ErrorSwal(language, language.message.tagCreateFail);
+    }
+    if (editFail) {
+      ErrorSwal(language, language.message.tagEditFail);
+    }
+    if (deleteFail) {
+      ErrorSwal(language, language.message.tagDeleteFail);
+    }
+  }, [
+    createSuccess,
+    editSuccess,
+    deleteSuccess,
+    createFail,
+    editFail,
+    deleteFail,
+  ]);
 
   return (
     <div className="task-header">
@@ -81,26 +130,44 @@ export const TaskHeaders = ({
           )}
         </Col>
       </Row>
-      <Divider style={{ margin: "20px"}} />
+      <Divider style={{ margin: "20px" }} />
       <TagsManagement
         language={language}
         visible={visible}
         setVisible={setVisible}
+        loading={loading}
         tagsData={tagsData}
         tagName={tagName}
         setTagName={setTagName}
         tagColour={tagColour}
         setTagColour={setTagColour}
-        createTag={createTag}
-        editTag={(e) => editTag(e)}
-        deleteTag={(e) => deleteTag(e)}
+        createTag={handleCreateTag}
+        editTag={handleEditTag}
+        deleteTag={handleDeleteTag}
       />
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  state: state,
+  tagFetchAllData: state.tag.fetchAllData,
+  tagFetchAllSuccess: state.tag.fetchAllSuccess,
+  tagFetchAllFail: state.tag.fetchAllFail,
 
-const mapDispatchToProps = {};
+  tagCreateSuccess: state.tag.createSuccess,
+  tagCreateFail: state.tag.createFail,
+  tagEditSuccess: state.tag.editSuccess,
+  tagEditFail: state.tag.editFail,
+  tagDeleteSuccess: state.tag.deleteSuccess,
+  tagDeleteFail: state.tag.deleteFail,
+});
+
+const mapDispatchToProps = {
+  fetchAllTag: TagAction.fetchAllTag,
+  createTag: TagAction.createTag,
+  editTag: TagAction.editTag,
+  deleteTag: TagAction.deleteTag,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskHeaders);

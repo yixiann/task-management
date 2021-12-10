@@ -9,18 +9,15 @@ const InitialState = {
   fetchByIdFail: false,
   createSuccess: false,
   createFail: false,
-  updateSuccess: false,
-  updateFail: false,
   editSuccess: false,
   editFail: false,
   deleteSuccess: false,
   deleteFail: false,
 };
 
-const TaskReducer = (state = InitialState, action) => {
+const TagReducer = (state = InitialState, action) => {
   switch (action.type) {
-    case ActionType.TASK_RESET_REDUCER:
-      // console.log("NO 3")
+    case ActionType.TAG_RESET_REDUCER:
       return {
         ...state,
         fetchAllSuccess: false,
@@ -29,121 +26,80 @@ const TaskReducer = (state = InitialState, action) => {
         fetchByIdFail: false,
         createSuccess: false,
         createFail: false,
-        updateSuccess: false,
-        updateFail: false,
         editSuccess: false,
         editFail: false,
         deleteSuccess: false,
         deleteFail: false,
-      };
-    case ActionType.TASK_FETCH_ALL:
-      // console.log("NO 1")
+      }
+    case ActionType.TAG_FETCH_ALL:
       return {
         ...state,
         fetchAllSuccess: false,
         fetchAllFail: false,
       };
-    case ActionType.TASK_FETCH_ALL_SUCCESS:
-      // console.log("YES 2")
+    case ActionType.TAG_FETCH_ALL_SUCCESS:
+      // console.log("YES")
       return {
         ...state,
         fetchAllData: action.payload.data,
         fetchAllSuccess: true,
         fetchAllFail: false,
       };
-    case ActionType.TASK_FETCH_ALL_FAIL:
-      // console.log("NO 2")
+    case ActionType.TAG_FETCH_ALL_FAIL:
       return {
         ...state,
         fetchAllSuccess: false,
         fetchAllFail: true,
       };
-    case ActionType.TASK_FETCH_BY_ID:
-      return {
-        ...state,
-        fetchByIdSuccess: false,
-        fetchByIdFail: false,
-      };
-    case ActionType.TASK_FETCH_BY_ID_SUCCESS:
-      return {
-        ...state,
-        fetchByIdData: action.payload.data,
-        fetchByIdSuccess: true,
-        fetchByIdFail: false,
-      };
-    case ActionType.TASK_FETCH_BY_ID_FAIL:
-      return {
-        ...state,
-        fetchByIdSuccess: false,
-        fetchByIdFail: true,
-      };
-    case ActionType.TASK_CREATE:
+    case ActionType.TAG_CREATE:
       return {
         ...state,
         createSuccess: false,
         createFail: false,
       };
-    case ActionType.TASK_CREATE_SUCCESS:
+    case ActionType.TAG_CREATE_SUCCESS:
       return {
         ...state,
         createSuccess: true,
         createFail: false,
       };
-    case ActionType.TASK_CREATE_FAIL:
+    case ActionType.TAG_CREATE_FAIL:
       return {
         ...state,
         createSuccess: false,
         createFail: true,
       };
-    case ActionType.TASK_UPDATE:
-      return {
-        ...state,
-        updateSuccess: false,
-        updateFail: false,
-      };
-    case ActionType.TASK_UPDATE_SUCCESS:
-      return {
-        ...state,
-        updateSuccess: true,
-        updateFail: false,
-      };
-    case ActionType.TASK_UPDATE_FAIL:
-      return {
-        ...state,
-        updateSuccess: false,
-        updateFail: true,
-      };
-    case ActionType.TASK_EDIT:
+    case ActionType.TAG_EDIT:
       return {
         ...state,
         editSuccess: false,
         editFail: false,
       };
-    case ActionType.TASK_EDIT_SUCCESS:
+    case ActionType.TAG_EDIT_SUCCESS:
       return {
         ...state,
         editSuccess: true,
         editFail: false,
       };
-    case ActionType.TASK_EDIT_FAIL:
+    case ActionType.TAG_EDIT_FAIL:
       return {
         ...state,
         editSuccess: false,
         editFail: true,
       };
-    case ActionType.TASK_DELETE:
+    case ActionType.TAG_DELETE:
       return {
         ...state,
         deleteSuccess: false,
         deleteFail: false,
       };
-    case ActionType.TASK_DELETE_SUCCESS:
+    case ActionType.TAG_DELETE_SUCCESS:
       return {
         ...state,
         deleteSuccess: true,
         deleteFail: false,
       };
-    case ActionType.TASK_DELETE_FAIL:
+    case ActionType.TAG_DELETE_FAIL:
       return {
         ...state,
         deleteSuccess: false,
@@ -158,4 +114,4 @@ const TaskReducer = (state = InitialState, action) => {
   }
 };
 
-export default TaskReducer;
+export default TagReducer;

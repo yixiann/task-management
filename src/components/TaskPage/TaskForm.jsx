@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Button, Form, Input, DatePicker, Tag, Select, Typography } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  Input,
+  DatePicker,
+  Tag,
+  Select,
+  Typography,
+} from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { getKeyById } from "../../utils";
@@ -23,11 +33,9 @@ const TaskForm = ({
         deadline: moment(taskDetails.deadline, "YYYY-MM-DD").local(),
       });
     }
-  }, []);
-
+  }, [taskDetails]);
 
   const { TextArea } = Input;
-  const { Title } = Typography;
   const { Option } = Select;
   const layout = {
     labelCol: {
@@ -68,6 +76,7 @@ const TaskForm = ({
         label={language.task.taskName}
         name="taskName"
         requiredMark={"optional"}
+        normalize={(value) => value.replace(/[^A-Za-z0-9 ]+/, "")}
         rules={[
           {
             required: true,
@@ -80,24 +89,26 @@ const TaskForm = ({
       <Form.Item label={language.task.details} name="details">
         <TextArea rows={4} />
       </Form.Item>
-      <Form.Item label={language.task.tags} name="tags">
+      <Form.Item label={language.task.tags} name="tagId">
         <Select
           mode="multiple"
           showArrow
           tagRender={tagRender}
           options={tagsData.map((item) => ({
             value: item.id,
-            label: item.tags,
+            label: item.tagName,
           }))}
         />
       </Form.Item>
-      <Form.Item label={language.task.deadline} name="deadline">
-        <DatePicker
-          format="DD-MM-YYYY"
-        />
+      <Form.Item
+        label={language.task.deadline}
+        name="deadline"
+      >
+        <DatePicker format="DD-MM-YYYY" />
       </Form.Item>
       <Form.Item
         label={language.task.createdBy}
+        normalize={(value) => value.replace(/[^A-Za-z0-9 ]+/, "").slice(0, 64)}
         name="createdBy"
         wrapperCol={{
           span: 6,
@@ -107,6 +118,7 @@ const TaskForm = ({
       </Form.Item>
       <Form.Item
         label={language.task.assignedTo}
+        normalize={(value) => value.replace(/[^A-Za-z0-9 ]+/, "").slice(0, 64)}
         name="assignedTo"
         wrapperCol={{
           span: 6,

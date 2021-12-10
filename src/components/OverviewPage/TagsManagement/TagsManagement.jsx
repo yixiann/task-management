@@ -8,6 +8,7 @@ const TagsManagement = ({
   language,
   visible,
   setVisible,
+  loading,
   tagName,
   setTagName,
   tagColour,
@@ -22,14 +23,15 @@ const TagsManagement = ({
   const columns = [
     {
       title: language.tagsManagement.tags,
-      dataIndex: "tags",
-      key: "tags",
+      dataIndex: "tagName",
+      key: "tagName",
       width: "300px",
       render: (text, record) => {
         return (
           <Paragraph
             editable={{
-              onChange: (e) => editTag({ id: record.id, tagName: e }),
+              onChange: (e) =>
+                editTag({ id: record.id, type: "tagName", value: e }),
               maxLength: 18,
             }}
             style={{ margin: "0px 12px" }}
@@ -52,7 +54,9 @@ const TagsManagement = ({
             language={language.colour}
             fields={colours}
             defaultValue={text}
-            onSelect={(e) => editTag({ id: record.id, colour: e })}
+            onSelect={(e) =>
+              editTag({ id: record.id, type: "colour", value: e })
+            }
           />
         );
       },
@@ -68,7 +72,7 @@ const TagsManagement = ({
           <Button
             type="primary"
             style={{ width: "100px" }}
-            onClick={() => deleteTag(record)}
+            onClick={() => deleteTag(record.id)}
           >
             {language.button.delete}
           </Button>
@@ -94,16 +98,17 @@ const TagsManagement = ({
         <Title level={2}>{language.tagsManagement.manageTags}</Title>
         <Table
           style={{ marginTop: "10px" }}
+          loading={loading}
           columns={columns}
           dataSource={tagsData}
           footer={() => (
             <CreateTag
               language={language}
               tagName={tagName}
-              setTagName={(e) => setTagName(e)}
+              setTagName={setTagName}
               tagColour={tagColour}
-              setTagColour={(e) => setTagColour(e)}
-              createTag={(e) => createTag(e)}
+              setTagColour={setTagColour}
+              createTag={createTag}
             />
           )}
         />
