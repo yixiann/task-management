@@ -11,7 +11,8 @@ export function* runFetchAllTask(action) {
       {
         id: 1,
         taskName: "Task 1",
-        details: "Details 1",
+        details:
+          "Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1Details 1",
         deadline: "2021-12-04",
         tagId: [1, 2, 3],
         priority: "high",
@@ -20,7 +21,7 @@ export function* runFetchAllTask(action) {
       {
         id: 2,
         taskName: "Task 2",
-        details: "Details 2",
+        details: "Details 2Details 2Details 2Details 2Details 2Details 2Details 2",
         deadline: "2021-12-05",
         tagId: [1],
         priority: "low",
@@ -103,7 +104,7 @@ export function* runCreateTask(action) {
       priority: "low",
       taskStatus: "notStarted",
     };
-    console.log("CREATING", action.payload.data)
+    console.log("CREATING", action.payload.data);
     // yield axiosRequest(URI.createTask, action.payload.data, RequestMethod.POST);
     yield put(TaskAction.createTaskSuccess());
   } catch (err) {
@@ -138,7 +139,7 @@ export function* runEditTask(action) {
       priority: "low",
       taskStatus: "notStarted",
     };
-    console.log("EDIT", action.payload.data.id, action.payload.data)
+    console.log("EDIT", action.payload.data.id, action.payload.data);
     // yield axiosRequest(URI.editTask, action.payload.data, RequestMethod.POST);
     yield put(TaskAction.editTaskSuccess());
   } catch (err) {
@@ -148,7 +149,7 @@ export function* runEditTask(action) {
 
 export function* runDeleteTask(action) {
   try {
-    console.log("DELETE", action.payload.data)
+    console.log("DELETE", action.payload.data);
     // yield axiosRequest(URI.deleteTask, action.payload.data, RequestMethod.POST);
     yield put(TaskAction.deleteTaskSuccess());
   } catch (err) {

@@ -20,7 +20,6 @@ const InitialState = {
 const TaskReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ActionType.TASK_RESET_REDUCER:
-      // console.log("NO 3")
       return {
         ...state,
         fetchAllSuccess: false,
@@ -37,14 +36,12 @@ const TaskReducer = (state = InitialState, action) => {
         deleteFail: false,
       };
     case ActionType.TASK_FETCH_ALL:
-      // console.log("NO 1")
       return {
         ...state,
         fetchAllSuccess: false,
         fetchAllFail: false,
       };
     case ActionType.TASK_FETCH_ALL_SUCCESS:
-      // console.log("YES 2")
       return {
         ...state,
         fetchAllData: action.payload.data,
@@ -52,7 +49,6 @@ const TaskReducer = (state = InitialState, action) => {
         fetchAllFail: false,
       };
     case ActionType.TASK_FETCH_ALL_FAIL:
-      // console.log("NO 2")
       return {
         ...state,
         fetchAllSuccess: false,

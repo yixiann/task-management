@@ -4,7 +4,7 @@ export const ConfirmationSwal = ({
   title,
   text,
   confirmButtonText = "",
-  confirmFn = console.log,
+  confirmFn = x => x,
 }) => {
   return Swal.fire({
     title: title,

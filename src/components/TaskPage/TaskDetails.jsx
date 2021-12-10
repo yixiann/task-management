@@ -32,7 +32,6 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
     { label: language.overviewTaskTable.taskStatus, data: status },
   ];
 
-  // console.log(formatDetails);
   return (
     <>
       {formatDetails.map((item) => {

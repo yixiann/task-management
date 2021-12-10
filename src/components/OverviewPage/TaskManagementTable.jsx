@@ -3,6 +3,7 @@ import { Table, Tag, Row, Button } from "antd";
 import { CustomMenu, getFilters, getKeyById, sorter } from "../../utils";
 import { priority, taskStatus } from "../../utils/enum";
 import { useNavigate } from "react-router-dom";
+import { tooltipEllipse } from "../UI/TooltipEllipse";
 
 const TaskManagementTable = ({
   language,
@@ -45,7 +46,7 @@ const TaskManagementTable = ({
       key: "details",
       width: "300px",
       sorter: (a, b) => sorter(a.details, b.details),
-      render: (text, record) => (text ? text : language.text.none),
+      render: (text, record) => (text ? tooltipEllipse(text,"300px") : language.text.none),
     },
     {
       title: language.overviewTaskTable.tags,

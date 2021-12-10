@@ -38,7 +38,6 @@ const TagReducer = (state = InitialState, action) => {
         fetchAllFail: false,
       };
     case ActionType.TAG_FETCH_ALL_SUCCESS:
-      // console.log("YES")
       return {
         ...state,
         fetchAllData: action.payload.data,

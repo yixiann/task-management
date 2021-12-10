@@ -35,6 +35,7 @@ const CreateTag = ({
             type="primary"
             style={{ width: "100px", marginLeft: "14px" }}
             onClick={createTag}
+            disabled={tagName.length===0}
           >
             {language.button.create}
           </Button>
