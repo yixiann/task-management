@@ -41,7 +41,7 @@ const TaskForm = ({
   const { Option } = Select;
   const layout = {
     labelCol: {
-      span: 2,
+      span: 4,
     },
     wrapperCol: {
       span: 10,
@@ -157,7 +157,7 @@ const TaskForm = ({
         }}
       >
         <Row align="center">
-          <Col span={9} />
+          <Col span={8} />
           <Col span={3} align="center">
             <Button type="primary" style={{ width: "100px" }}>
               <Link
@@ -167,6 +167,7 @@ const TaskForm = ({
               </Link>
             </Button>
           </Col>
+          <Col span={2} />
           <Col span={3} align="center">
             <Button
               type="primary"
@@ -176,7 +177,7 @@ const TaskForm = ({
               {edit ? language.button.save : language.button.create}
             </Button>
           </Col>
-          <Col span={6} />
+          <Col span={5} />
           <Col span={3} align="center">
             {edit && (
               <Button

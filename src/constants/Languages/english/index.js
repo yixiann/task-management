@@ -56,6 +56,7 @@ export default {
   },
   message: {
     taskName: "Please input a task name!",
+    selectColour: "Please select a colour",
     confirmDeletion: "Confirm Deletion",
     actionIrreversible: "This action is irreversible!",
     deleteForever: "Delete Forever",

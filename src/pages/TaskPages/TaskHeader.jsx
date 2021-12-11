@@ -50,6 +50,8 @@ export const TaskHeaders = ({
   const handleCreateTag = () => {
     if (checkForDuplicates(fetchAllData, "tagName", tagName)) {
       ErrorSwal(language, language.message.tagExist);
+    } else if (tagColour === "") {
+      ErrorSwal(language, language.message.selectColour)
     } else {
       createTag({ tagName: tagName, colour: tagColour });
       setTagName("");

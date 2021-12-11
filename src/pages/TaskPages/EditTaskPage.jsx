@@ -84,7 +84,7 @@ export const EditTaskPage = ({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => deleteTask([taskDetails.id]),
+      confirmFn: () => deleteTask(taskDetails.id),
       afterFn: () => setRedirectDelete(true),
       afterTitle: language.message.successfullyDeleted,
       failTitle: language.message.failedToDelete,

@@ -1,5 +1,5 @@
 export const colours = Object.freeze({
-  none: "white",
+  // none: "white",
   magenta: "magenta",
   red: "red",
   volcano: "volcano",

@@ -7,6 +7,7 @@ const CreateTag = ({
   createTag,
   tagName,
   setTagName,
+  tagColour,
   setTagColour,
 }) => {
   return (
@@ -26,7 +27,7 @@ const CreateTag = ({
             colour={true}
             language={language.colour}
             fields={colours}
-            defaultValue={'none'}
+            value={tagColour}
             onSelect={(e) => setTagColour(e)}
           />
         </Col>

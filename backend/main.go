@@ -24,6 +24,8 @@ func handleRequests() {
 	myRouter.HandleFunc("/task/details/{id}", returnSingleTask)
 	myRouter.HandleFunc("/task/create", createNewTask).Methods("POST")
 	myRouter.HandleFunc("/task/update/{id}", updateTask).Methods("POST")
+	myRouter.HandleFunc("/task/edit/{id}", editTask).Methods("POST")
+	myRouter.HandleFunc("/task/delete/{id}", deleteTask).Methods("POST")
 
 	myRouter.HandleFunc("/tag", returnAllTag)
 	myRouter.HandleFunc("/tag/create", createNewTag).Methods("POST")
@@ -76,6 +78,33 @@ func updateTask(w http.ResponseWriter, r *http.Request) {
 			Tasks = append(Tasks[:index], Task)
 			json.NewEncoder(w).Encode(Task)
 			Tasks = append(Tasks, oldTasks[index+1:]...)
+		}
+	}
+}
+
+func editTask(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	for index, currentTasks := range Tasks {
+		if strconv.Itoa(currentTasks.Id) == id {
+			oldTasks := Tasks
+			reqBody, _ := ioutil.ReadAll(r.Body)
+			fmt.Fprintf(w, "%+v", string(reqBody))
+			var Task Task
+			json.Unmarshal(reqBody, &Task)
+			Tasks = append(Tasks[:index], Task)
+			json.NewEncoder(w).Encode(Task)
+			Tasks = append(Tasks, oldTasks[index+1:]...)
+		}
+	}
+}
+
+func deleteTask(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	for index, Task := range Tasks {
+		if strconv.Itoa(Task.Id) == id {
+			Tasks = append(Tasks[:index], Tasks[index+1:]...)
 		}
 	}
 }

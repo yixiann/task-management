@@ -53,7 +53,7 @@ const TagsManagement = ({
             colour={true}
             language={language.colour}
             fields={colours}
-            defaultValue={text}
+            value={text}
             onSelect={(e) =>
               editTag({ record, type: "colour", value: e })
             }
@@ -101,6 +101,7 @@ const TagsManagement = ({
           // loading={loading}
           columns={columns}
           dataSource={tagsData}
+          defaultPageSize={5}
           footer={() => (
             <CreateTag
               language={language}

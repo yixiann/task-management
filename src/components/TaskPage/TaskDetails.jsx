@@ -45,7 +45,7 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
       {formatDetails.map((item) => {
         return (
           <Row style={{ margin: "12px 24px" }}>
-            <Col span={2}>
+            <Col span={4}>
               <Title level={5} align="right">
                 {item.label + " : "}
               </Title>
@@ -80,7 +80,7 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
           </Row>
         );
       })}
-      <Row align="center">
+      <Row align="center" style={{marginBottom: "50px"}}>
         <Col span={3} align="center">
           <Button type="primary" style={{ width: "100px" }}>
             <Link to="/overview">{language.button.back}</Link>

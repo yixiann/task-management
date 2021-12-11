@@ -10,7 +10,7 @@ const SearchBarAndButtons = ({ language, searchData }) => {
         prefix={<SearchOutlined />}
         placeholder={language.text.search}
         onChange={searchData}
-        style={{ width: "400px" }}
+        style={{ width: "300px" }}
       />
       <Button type="primary" value="createTask" style={{ width: "200px" }}>
         <Link to="/task/create">{language.button.createTask}</Link>

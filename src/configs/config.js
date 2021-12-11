@@ -10,8 +10,8 @@ export const URI = {
   fetchByIdTask: task + "/details/{id}",
   createTask: task + "/create",
   updateTask: task + "/update/{id}",
-  editTask: task + "/edit",
-  deleteTask: task + "/delete",
+  editTask: task + "/edit/{id}",
+  deleteTask: task + "/delete/{id}",
 
   // Tag
   fetchAllTag: tag,

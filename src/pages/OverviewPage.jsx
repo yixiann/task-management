@@ -72,7 +72,13 @@ export const OverviewPage = ({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => handleDeleteTask(selectedRows),
+      confirmFn: () => {
+        selectedRows.forEach((item)=>{
+          deleteTask(item)
+        })
+        setSelectedRows([])
+        resetReducerTask();
+      },
     });
   };
 

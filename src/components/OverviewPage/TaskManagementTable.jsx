@@ -27,7 +27,7 @@ const TaskManagementTable = ({
     navigate(path);
   };
 
-  const [visible, setVisible] = useState([]);
+  const [visible, setVisible] = useState(false);
   const rowSelection = {
     onChange: (selectedRowKeys) => {
       setSelectedRows(selectedRowKeys);
@@ -36,7 +36,7 @@ const TaskManagementTable = ({
 
   useEffect(() => {
     setVisible(selectedRows.length > 0 ? true : false);
-  }, [selectedRows]);
+  }, [dataSource, selectedRows]);
 
   const columns = [
     {
@@ -67,7 +67,7 @@ const TaskManagementTable = ({
         const currentTags = record.tagId?.filter((item) =>
           tagIds?.includes(item)
         );
-        return currentTags.length != 0
+        return currentTags && currentTags.length != 0
           ? record.tagId
               .filter((item) => tagIds?.includes(item))
               .map((item) => (

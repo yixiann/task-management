@@ -1,5 +1,6 @@
 .main-layout {
     background-color: white;
+    min-width: 700px;
 }
 
 .main-content {

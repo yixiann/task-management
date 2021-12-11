@@ -59,18 +59,11 @@ export function* runUpdateTask(action) {
 
 export function* runEditTask(action) {
   try {
-    const editData = {
-      taskName: "Task 6",
-      details: "Details 6",
-      tagId: [3],
-      deadline: "2021-12-04",
-      createdBy: "me",
-      assignedTo: "you",
-      priority: "low",
-      taskStatus: "notStarted",
-    };
-    console.log("EDIT", action.payload.data.id, action.payload.data);
-    // yield axiosRequest(URI.editTask, action.payload.data, RequestMethod.POST);
+    yield axiosRequest(
+      URI.editTask.replace("{id}", action.payload.data.id),
+      action.payload.data,
+      RequestMethod.POST
+    );
     yield put(TaskAction.editTaskSuccess());
   } catch (err) {
     yield put(TaskAction.editTaskFail());
@@ -79,8 +72,12 @@ export function* runEditTask(action) {
 
 export function* runDeleteTask(action) {
   try {
-    console.log("DELETE", action.payload.data);
-    // yield axiosRequest(URI.deleteTask, action.payload.data, RequestMethod.POST);
+    yield axiosRequest(
+      URI.deleteTask.replace("{id}", action.payload.data),
+      action.payload.data,
+      RequestMethod.POST
+    );
+    console.log("YEY")
     yield put(TaskAction.deleteTaskSuccess());
   } catch (err) {
     yield put(TaskAction.deleteTaskFail());
