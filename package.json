@@ -2,7 +2,7 @@
   "name": "cvwo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://task-management-tau.vercel.app/",
+  "homepage": "https://task-management-tau.vercel.app/overview",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
