@@ -1,0 +1,13 @@
+.main-layout {
+    background-color: white;
+    min-width: 700px;
+}
+
+.main-content {
+    min-height: 100vh;
+    margin: 0px 20px;
+}
+
+.data-table{
+    margin: 0px 20px;
+}
