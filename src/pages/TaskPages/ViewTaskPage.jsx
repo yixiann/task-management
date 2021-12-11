@@ -44,7 +44,7 @@ export const ViewTaskPage = ({
       fetchAllTag();
     }
     if (tagFetchAllFail) {
-      ErrorSwal(language, language.message.failedFetchTags);
+      ErrorSwal(language, language.message.tagFetchFail);
     }
   }, [tagFetchAllSuccess, tagFetchAllData]);
 

@@ -49,7 +49,7 @@ export const CreateTaskPage = ({
       fetchAllTag();
     }
     if (tagFetchAllFail) {
-      ErrorSwal(language, language.message.failedFetchTags);
+      ErrorSwal(language, language.message.tagFetchFail);
     }
   }, [tagFetchAllSuccess, tagFetchAllData]);
 
@@ -87,7 +87,7 @@ export const CreateTaskPage = ({
       fetchAllTask();
     }
     if (taskFetchAllFail) {
-      ErrorSwal(language, language.message.failedFetchTask);
+      ErrorSwal(language, language.message.taskFetchFail);
     }
   }, [taskFetchAllSuccess, taskFetchAllData]);
 
