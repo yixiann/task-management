@@ -48,15 +48,14 @@ export const TaskHeaders = ({
   const [tagName, setTagName] = useState("");
   const [tagColour, setTagColour] = useState("");
   const handleCreateTag = () => {
-    if(checkForDuplicates(fetchAllData, "tagName", tagName)){
-      ErrorSwal(language, language.message.tagExist)
+    if (checkForDuplicates(fetchAllData, "tagName", tagName)) {
+      ErrorSwal(language, language.message.tagExist);
     } else {
-      createTag({ tagName: tagName, tagColour: tagColour });
+      createTag({ tagName: tagName, colour: tagColour });
       setTagName("");
       setTagColour("");
     }
   };
-
 
   // Edit Tag
   const handleEditTag = (e) => {
@@ -82,9 +81,10 @@ export const TaskHeaders = ({
       fetchAllTag();
       setLoading(true);
     }
-    if(deleteSuccess){
+    if (deleteSuccess) {
       SuccessSwal(language, language.message.tagDeleteSuccess);
       resetReducerTag();
+      fetchAllTag();
     }
     if (createFail) {
       ErrorSwal(language, language.message.tagCreateFail);

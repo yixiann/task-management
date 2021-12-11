@@ -1,7 +1,9 @@
 {
   "name": "cvwo",
+  "homepage": "/overview",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:10000",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",

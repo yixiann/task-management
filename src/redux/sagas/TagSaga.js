@@ -6,16 +6,12 @@ import { ActionType } from "../../constants";
 
 export function* runFetchAllTag(action) {
   try {
-    const fetchAllTagData = [
-      { id: 1, tagName: "TAGS1", colour: "red" },
-      { id: 2, tagName: "TAGGING2", colour: "volcano" },
-      { id: 3, tagName: "TAGGER3", colour: "green" },
-      { id: 4, tagName: "TAGME4", colour: "lime" },
-      { id: 5, tagName: "TAGNOBODY5", colour: "blue" },
-    ];
-    console.log("FETCH TAG", fetchAllTagData);
-    // const fetchAllTagData = yield axiosRequest(URI.fetchAllTag);
-    yield put(TagAction.fetchAllTagSuccess(fetchAllTagData));
+    const fetchAllTagData = yield axiosRequest(URI.fetchAllTag);
+    const formatFetchAllTagData = !!fetchAllTagData.data
+      ? fetchAllTagData.data
+      : [];
+    console.log("FETCH TAG", formatFetchAllTagData);
+    yield put(TagAction.fetchAllTagSuccess(formatFetchAllTagData));
   } catch (err) {
     yield put(TagAction.fetchAllTagFail());
   }
@@ -23,12 +19,7 @@ export function* runFetchAllTag(action) {
 
 export function* runCreateTag(action) {
   try {
-    const createData = {
-      tagName: "TAGS1",
-      colour: "red",
-    };
-    console.log("CREATE TAG", action.payload.data)
-    // yield axiosRequest(URI.createTag, action.payload.data, RequestMethod.POST);
+    yield axiosRequest(URI.createTag, action.payload.data, RequestMethod.POST);
     yield put(TagAction.createTagSuccess());
   } catch (err) {
     yield put(TagAction.createTagFail());
@@ -37,13 +28,16 @@ export function* runCreateTag(action) {
 
 export function* runEditTag(action) {
   try {
-    const editData = {
-      id: 1,
-      value: "red",
-      type: "colour",
+    const formatEdit = {
+      ...action.payload.data.record,
+      [action.payload.data.type]: action.payload.data.value,
     };
-    console.log("EDIT TAG", action.payload.data);
-    // yield axiosRequest(URI.updateTag, action.payload.data, RequestMethod.POST);
+    console.log("EDIT TAGS", action.payload.data, formatEdit);
+    yield axiosRequest(
+      URI.editTag.replace("{id}", formatEdit.id),
+      formatEdit,
+      RequestMethod.POST
+    );
     yield put(TagAction.editTagSuccess());
   } catch (err) {
     yield put(TagAction.editTagFail());
@@ -52,9 +46,12 @@ export function* runEditTag(action) {
 
 export function* runDeleteTag(action) {
   try {
-    const deleteData = [1];
-    console.log("DELETE TAG", action.payload.data)
-    // yield axiosRequest(URI.deleteTag, action.payload.data, RequestMethod.POST);
+    console.log("DELETE TAG", action.payload.data);
+    yield axiosRequest(
+      URI.deleteTag.replace("{id}", action.payload.data[0]),
+      action.payload.data[0],
+      RequestMethod.POST
+    );
     yield put(TagAction.deleteTagSuccess());
   } catch (err) {
     yield put(TagAction.deleteTagFail());
@@ -62,7 +59,7 @@ export function* runDeleteTag(action) {
 }
 
 export default function* watchTagSaga() {
-  yield takeLatest(ActionType.TAG_FETCH_ALL, runFetchAllTag);
+  yield takeEvery(ActionType.TAG_FETCH_ALL, runFetchAllTag);
   yield takeEvery(ActionType.TAG_CREATE, runCreateTag);
   yield takeEvery(ActionType.TAG_EDIT, runEditTag);
   yield takeEvery(ActionType.TAG_DELETE, runDeleteTag);

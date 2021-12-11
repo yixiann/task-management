@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Row,
-  Col,
-  Button,
-  Form,
-  Input,
-  DatePicker,
-  Tag,
-  Select,
-} from "antd";
+import { Row, Col, Button, Form, Input, DatePicker, Tag, Select } from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { getKeyById } from "../../utils";
+import { formatDate, getKeyById } from "../../utils";
 import { priority, taskStatus } from "../../utils/enum";
 
 const TaskForm = ({
@@ -25,14 +16,26 @@ const TaskForm = ({
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    if (taskDetails) {
+    if (taskDetails && tagsData) {
       setEdit(true);
+      const deadlineFormat = moment(
+        formatDate(taskDetails?.deadline),
+        "DD/MM/YYYY"
+      );
+      const tagIds = tagsData?.map((item) => item.id);
+      const filterTagIds = taskDetails?.tagId?.filter((item) =>
+        tagIds.includes(item)
+      );
       form.setFieldsValue({
         ...taskDetails,
-        deadline: moment(taskDetails.deadline, "YYYY-MM-DD").local(),
+        deadline: deadlineFormat,
+        tagId: filterTagIds,
       });
+      if (!deadlineFormat.isValid()) {
+        form.resetFields(["deadline"]);
+      }
     }
-  }, [taskDetails]);
+  }, [taskDetails, tagsData]);
 
   const { TextArea } = Input;
   const { Option } = Select;
@@ -99,11 +102,8 @@ const TaskForm = ({
           }))}
         />
       </Form.Item>
-      <Form.Item
-        label={language.task.deadline}
-        name="deadline"
-      >
-        <DatePicker format="DD-MM-YYYY" />
+      <Form.Item label={language.task.deadline} name="deadline">
+        <DatePicker format="DD/MM/YYYY" />
       </Form.Item>
       <Form.Item
         label={language.task.createdBy}

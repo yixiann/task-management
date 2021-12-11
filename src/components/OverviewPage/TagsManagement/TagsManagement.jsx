@@ -31,7 +31,7 @@ const TagsManagement = ({
           <Paragraph
             editable={{
               onChange: (e) =>
-                editTag({ id: record.id, type: "tagName", value: e }),
+                editTag({ record, type: "tagName", value: e }),
               maxLength: 18,
             }}
             style={{ margin: "0px 12px" }}
@@ -55,7 +55,7 @@ const TagsManagement = ({
             fields={colours}
             defaultValue={text}
             onSelect={(e) =>
-              editTag({ id: record.id, type: "colour", value: e })
+              editTag({ record, type: "colour", value: e })
             }
           />
         );
@@ -98,7 +98,7 @@ const TagsManagement = ({
         <Title level={2}>{language.tagsManagement.manageTags}</Title>
         <Table
           style={{ marginTop: "10px" }}
-          loading={loading}
+          // loading={loading}
           columns={columns}
           dataSource={tagsData}
           footer={() => (

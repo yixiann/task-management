@@ -1,15 +1,15 @@
-import axios from 'axios';
-// import { Auth } from 'aws-amplify';
+import axios from "axios";
 
 export const RequestMethod = Object.freeze({
-    GET: 'get',
-    POST: 'post'
+  GET: "get",
+  POST: "post",
+  PUT: "put",
 });
 
-export async function axiosRequest(endpoint, payload = null, method = RequestMethod.GET) {
-    // const session = await Auth.currentSession();
-    // axios.defaults.baseURL = app.Host;
-    // axios.defaults.withCredentials = true;
-    // axios.defaults.headers.common['x-id-token'] = session.getIdToken().jwtToken;
-    return axios[method.toLowerCase()](endpoint, payload);
+export async function axiosRequest(
+  endpoint,
+  payload = null,
+  method = RequestMethod.GET
+) {
+  return axios[method.toLowerCase()](endpoint, payload);
 }

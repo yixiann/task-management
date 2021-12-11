@@ -111,7 +111,7 @@ export const sorter = (c, d) => {
 
 export const getFilters = (language, data, key) => {
   if (data)
-    var filters = data.map((item) => ({
+    var filters = data?.map((item) => ({
       text: language[item[key]],
       value: item[key],
     }));
@@ -143,4 +143,8 @@ export const checkForDuplicates = (data, key, value) => {
         : false
     ).length !== 0
   );
+};
+
+export const formatDate = (date) => {
+  return date?.slice(8, 10) + "/" + date?.slice(5, 7) + "/" + date?.slice(0, 4);
 };

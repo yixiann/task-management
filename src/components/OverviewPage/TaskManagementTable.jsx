@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Table, Tag, Row, Button } from "antd";
-import { CustomMenu, getFilters, getKeyById, sorter } from "../../utils";
+import {
+  CustomMenu,
+  formatDate,
+  getFilters,
+  getKeyById,
+  sorter,
+} from "../../utils";
 import { priority, taskStatus } from "../../utils/enum";
 import { useNavigate } from "react-router-dom";
 import { tooltipEllipse } from "../UI/TooltipEllipse";
@@ -46,7 +52,8 @@ const TaskManagementTable = ({
       key: "details",
       width: "300px",
       sorter: (a, b) => sorter(a.details, b.details),
-      render: (text, record) => (text ? tooltipEllipse(text,"300px") : language.text.none),
+      render: (text, record) =>
+        text ? tooltipEllipse(text, "300px") : language.text.none,
     },
     {
       title: language.overviewTaskTable.tags,
@@ -54,16 +61,22 @@ const TaskManagementTable = ({
       key: "tagId",
       width: "150px",
       filters: tagsData.map((item) => ({ text: item.tagName, value: item.id })),
-      onFilter: (value, record) => record.tagId.includes(value),
+      onFilter: (value, record) => record?.tagId?.includes(value),
       render: (text, record) => {
-        return record.tagId
-          ? record.tagId.map((item) => (
-              <Row style={{ margin: "10px" }}>
-                <Tag color={getKeyById(tagsData, "colour", item)}>
-                  {getKeyById(tagsData, "tagName", item)}
-                </Tag>
-              </Row>
-            ))
+        const tagIds = tagsData.map((item) => item.id);
+        const currentTags = record.tagId?.filter((item) =>
+          tagIds?.includes(item)
+        );
+        return currentTags.length != 0
+          ? record.tagId
+              .filter((item) => tagIds?.includes(item))
+              .map((item) => (
+                <Row style={{ margin: "10px" }}>
+                  <Tag color={getKeyById(tagsData, "colour", item)}>
+                    {getKeyById(tagsData, "tagName", item)}
+                  </Tag>
+                </Row>
+              ))
           : language.text.none;
       },
     },
@@ -73,7 +86,7 @@ const TaskManagementTable = ({
       key: "deadline",
       width: "150px",
       sorter: (a, b) => sorter(a.deadline, b.deadline),
-      render: (text, record) => (text ? text : language.text.none),
+      render: (text, record) => (text ? formatDate(text) : language.text.none),
     },
     {
       title: language.overviewTaskTable.priority,
@@ -88,9 +101,7 @@ const TaskManagementTable = ({
             language={language.priority}
             fields={priority}
             value={text}
-            onSelect={(e) =>
-              updateTask({ id: record.id, type: "priority", value: e })
-            }
+            onSelect={(e) => updateTask({ record, type: "priority", value: e })}
           />
         );
       },
@@ -109,7 +120,7 @@ const TaskManagementTable = ({
             fields={taskStatus}
             value={text}
             onSelect={(e) =>
-              updateTask({ id: record.id, type: "taskStatus", value: e })
+              updateTask({ record, type: "taskStatus", value: e })
             }
           />
         );

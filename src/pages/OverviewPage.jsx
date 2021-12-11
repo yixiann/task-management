@@ -42,7 +42,7 @@ export const OverviewPage = ({
   // Task Management
   const [dataSource, setDataSource] = useState([]);
   const [fullData, setFullData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
   const searchData = (e) => {
@@ -90,7 +90,7 @@ export const OverviewPage = ({
     if (taskFetchAllSuccess) {
       setDataSource(taskFetchAllData);
       setFullData(taskFetchAllData);
-      setLoading(false);
+      // setLoading(false);
     }
     if (taskFetchAllFail) {
       ErrorSwal(language, language.message.taskFetchFail);
@@ -112,19 +112,19 @@ export const OverviewPage = ({
   useEffect(() => {
     if (taskUpdateSuccess) {
       resetReducerTask();
-      setLoading(true);
+      // setLoading(true);
       fetchAllTask();
     }
     if (taskUpdateFail) {
       ErrorSwal(language, language.message.taskUpdateFail);
       resetReducerTask();
-      setLoading(true);
+      // setLoading(true);
       fetchAllTask();
     }
     if (taskDeleteSuccess) {
       SuccessSwal(language, language.message.taskDeleteSuccess);
       resetReducerTask();
-      setLoading(true);
+      // setLoading(true);
       fetchAllTask();
     }
     if (taskDeleteFail) {
@@ -149,7 +149,7 @@ export const OverviewPage = ({
           language={language}
           dataSource={dataSource}
           fullData={fullData}
-          loading={loading}
+          // loading={loading}
           updateTask={handleUpdateTask}
           selectedRows={selectedRows}
           setSelectedRows={setSelectedRows}

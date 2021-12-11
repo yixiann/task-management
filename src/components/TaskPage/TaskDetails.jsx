@@ -7,13 +7,21 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
   const { Title } = Typography;
   const { TextArea } = Input;
 
-  const tags = tagsData?.filter((item) => taskDetails?.tagId? taskDetails.tagId.includes(item.id) : []);
+  const tags = taskDetails?.tagId
+    ? tagsData?.filter((item) => taskDetails.tagId.includes(item.id))
+    : [];
 
-  const newDate = moment(taskDetails?.deadline? taskDetails.deadline: Date.now(), "YYYY-MM-DD").format("DD/MM/YYYY")
+  const newDate = taskDetails?.deadline
+    ? moment(taskDetails.deadline).format("DD/MM/YYYY")
+    : language.text.none;
 
-  const status = language.taskStatus[taskDetails?.taskStatus];
+  const status = taskDetails?.taskStatus
+    ? language.taskStatus[taskDetails?.taskStatus]
+    : language.text.none;
 
-  const priority = language.priority[taskDetails?.priority];
+  const priority = taskDetails?.priority
+    ? language.priority[taskDetails?.priority]
+    : language.text.none;
 
   const formatDetails = [
     { label: language.overviewTaskTable.taskName, data: taskDetails?.taskName },
@@ -45,16 +53,28 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
             <Col span={1} />
             <Col span={6}>
               {item.label === language.overviewTaskTable.tags ? (
-                tags.map((item) => <Tag color={item.colour}>{item.tagName}</Tag>)
+                tags.length === 0 ? (
+                  <Title level={5}>{language.text.none}</Title>
+                ) : (
+                  tags.map((item) => (
+                    <Tag color={item.colour}>{item.tagName}</Tag>
+                  ))
+                )
               ) : item.label === language.overviewTaskTable.details ? (
                 <TextArea
-                  style={{ backgroundColor: "white", color: "black", minWidth: "800px"}}
+                  style={{
+                    backgroundColor: "white",
+                    color: "black",
+                    minWidth: "800px",
+                  }}
                   autoSize={true}
                   value={item.data}
                   disabled
                 />
               ) : (
-                <Title level={5}>{item.data}</Title>
+                <Title level={5}>
+                  {item.data === "" ? language.text.none : item.data}
+                </Title>
               )}
             </Col>
           </Row>
@@ -68,7 +88,9 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
         </Col>
         <Col span={3} align="center">
           <Button type="primary" style={{ width: "100px" }}>
-            <Link to={`/task/edit?id=${taskDetails.id}`}>{language.button.edit}</Link>
+            <Link to={`/task/edit?id=${taskDetails.id}`}>
+              {language.button.edit}
+            </Link>
           </Button>
         </Col>
       </Row>
