@@ -1,4 +1,4 @@
-import { put, takeEvery, takeLatest } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { TagAction } from "../action_creators";
 import { URI } from "../../configs/config";
 import { axiosRequest, RequestMethod } from "../../configs/axios";

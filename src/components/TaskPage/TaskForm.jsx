@@ -35,7 +35,7 @@ const TaskForm = ({
         form.resetFields(["deadline"]);
       }
     }
-  }, [taskDetails, tagsData]);
+  }, [taskDetails, tagsData, form]);
 
   const { TextArea } = Input;
   const { Option } = Select;

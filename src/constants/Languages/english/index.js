@@ -1,4 +1,4 @@
-export default {
+const language = {
   title: {
     taskManagement: "Task Management",
     createTask: "Create Task",
@@ -111,3 +111,5 @@ export default {
     status: "Status",
   },
 };
+
+export default language

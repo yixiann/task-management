@@ -1,4 +1,4 @@
-import { Select, Tag } from "antd";
+import { Select } from "antd";
 
 export const CustomMenu = ({
   language,
@@ -71,11 +71,11 @@ export const sorter = (c, d) => {
   for (var ia in ar) {
     for (var ib in br) {
       var ari = ar[ib];
-      if (ari == undefined) {
+      if (ari === undefined) {
         ari = "";
       }
       var bri = br[ib];
-      if (bri == undefined) {
+      if (bri === undefined) {
         bri = "";
       }
 
@@ -98,7 +98,7 @@ export const sorter = (c, d) => {
           }
         );
       }
-      if (localeCompare != 0) {
+      if (localeCompare !== 0) {
         // If you run out of parts, the name with the fewest parts comes first
         return localeCompare;
       }
@@ -129,7 +129,7 @@ export const getFilters = (language, data, key) => {
   var result = uniquefilters
     .sort((a, b) => sorter(a.text, b.text))
     .filter((item) => {
-      return item.text != "";
+      return item.text !== "";
     });
 
   return result;

@@ -7,7 +7,6 @@ import { TaskHeaders } from "./TaskHeader";
 import {
   ConfirmationSwal,
   ErrorSwal,
-  LoadingSwal,
   SuccessSwal,
 } from "./../../components/UI/ConfirmationSwal";
 import { TagAction, TaskAction } from "../../redux/action_creators";
@@ -50,7 +49,7 @@ export const EditTaskPage = ({
   const [taskDetails, setTaskDetails] = useState({ taskFetchByIdData });
   useEffect(() => {
     var id = new URLSearchParams(window.location.search).get("id");
-    if (id != taskDetails.id || !!taskDetails.id) {
+    if (id !== taskDetails.id || !!taskDetails.id) {
       fetchByIdTask(id);
     }
     return () => resetReducerTask();

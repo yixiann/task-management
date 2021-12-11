@@ -5,13 +5,10 @@ import "./css/common.css";
 import "./css/custom.css";
 import {
   PublicRoutes as publicRoutes,
-  PublicRouter,
-  NotFoundRouter,
 } from "./routers";
 import { connect } from "react-redux";
 import MainLayout from "./layouts/MainLayout";
 import language from "../src/constants/Languages/english";
-import NotFound from "./pages/NotFound";
 
 function App({ ...props }) {
   return (

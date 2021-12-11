@@ -62,10 +62,10 @@ export const OverviewPage = ({
     updateTask(e);
   };
 
-  const handleDeleteTask = (e) => {
-    resetReducerTask();
-    deleteTask(e);
-  };
+  // const handleDeleteTask = (e) => {
+  //   resetReducerTask();
+  //   deleteTask(e);
+  // };
 
   const deleteSelected = (e) => {
     ConfirmationSwal({

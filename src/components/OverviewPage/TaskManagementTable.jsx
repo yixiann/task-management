@@ -67,7 +67,7 @@ const TaskManagementTable = ({
         const currentTags = record.tagId?.filter((item) =>
           tagIds?.includes(item)
         );
-        return currentTags && currentTags.length != 0
+        return currentTags && currentTags.length !== 0
           ? record.tagId
               .filter((item) => tagIds?.includes(item))
               .map((item) => (
@@ -135,7 +135,6 @@ const TaskManagementTable = ({
         dataSource={dataSource}
         loading={loading}
         columns={columns}
-        pagination={false}
         scroll={{ x: 1100 }}
         defaultPageSize={8}
         pagination={{ pageSize: 8 }}
