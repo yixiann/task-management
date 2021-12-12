@@ -2,7 +2,7 @@
   "name": "task-manager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://localhost:3000",
+  "homepage": "https://task-management-yixiann.vercel.app/overview",
   "proxy": "https://localhost:10000",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
