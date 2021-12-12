@@ -11,7 +11,7 @@ import language from "../src/constants/Languages/english";
 function App({ ...props }) {
   return (
     <Suspense fallback={<div>loading...</div>}>
-      <Router>
+      <Router basename="/">
         <MainLayout>
           <Routes>
             {publicRoutes.map((route) => (
