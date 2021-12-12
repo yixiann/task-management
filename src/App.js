@@ -16,7 +16,6 @@ function App({ ...props }) {
           <Routes>
             {publicRoutes.map((route) => (
               <Route
-                exact
                 path={route.path}
                 element={<route.component language={language} />}
               />
