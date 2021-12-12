@@ -13,12 +13,11 @@ import language from "../src/constants/Languages/english";
 function App({ ...props }) {
   return (
     <Suspense fallback={<div>loading...</div>}>
-      <Router>
+      <Router basename="/index.html">
         <MainLayout>
           <Routes>
             {publicRoutes.map((route) => (
               <Route
-                exact
                 path={route.path}
                 element={<route.component language={language} />}
               />
