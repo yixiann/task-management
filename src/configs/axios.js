@@ -11,10 +11,8 @@ export async function axiosRequest(
   payload = null,
   method = RequestMethod.GET
 ) {
-  // axios.defaults.baseURL = "https://localhost:10000";
+  // axios.defaults.baseURL = "http://localhost:10000";
+  // axios.defaults.baseURL = "http://task-management-yixiann.vercel.app";
   const result = axios[method.toLowerCase()](endpoint, payload);
-  // if(typeof result.data !== 'string'){
-  //   return result.reject(typeof result ==='string');
-  // }
-  return result
+  return result.reject();
 }
