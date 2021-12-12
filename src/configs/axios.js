@@ -11,5 +11,8 @@ export async function axiosRequest(
   payload = null,
   method = RequestMethod.GET
 ) {
-  return axios[method.toLowerCase()](endpoint, payload);
+  const result = axios[method.toLowerCase()](endpoint, payload);
+  if(typeof result.data !== 'string'){
+    return result.reject(typeof result ==='string');
+  }
 }
