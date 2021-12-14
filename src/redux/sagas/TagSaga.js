@@ -1,4 +1,4 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeEvery, takeLatest } from "redux-saga/effects";
 import { TagAction } from "../action_creators";
 import { URI } from "../../configs/config";
 import { axiosRequest, RequestMethod } from "../../configs/axios";
@@ -50,7 +50,7 @@ export function* runDeleteTag(action) {
     yield axiosRequest(
       URI.deleteTag.replace("{id}", action.payload.data[0]),
       action.payload.data[0],
-      RequestMethod.POST
+      RequestMethod.DELETE
     );
     yield put(TagAction.deleteTagSuccess());
   } catch (err) {
@@ -62,5 +62,5 @@ export default function* watchTagSaga() {
   yield takeLatest(ActionType.TAG_FETCH_ALL, runFetchAllTag);
   yield takeLatest(ActionType.TAG_CREATE, runCreateTag);
   yield takeLatest(ActionType.TAG_EDIT, runEditTag);
-  yield takeLatest(ActionType.TAG_DELETE, runDeleteTag);
+  yield takeEvery(ActionType.TAG_DELETE, runDeleteTag);
 }

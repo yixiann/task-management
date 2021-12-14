@@ -53,6 +53,7 @@ export const TaskHeaders = ({
     } else if (tagColour === "") {
       ErrorSwal(language, language.message.selectColour)
     } else {
+      setLoading(true)
       createTag({ tagName: tagName, colour: tagColour });
       setTagName("");
       setTagColour("");
