@@ -98,7 +98,7 @@ const TagsManagement = ({
         <Title level={2}>{language.tagsManagement.manageTags}</Title>
         <Table
           style={{ marginTop: "10px" }}
-          // loading={loading}
+          loading={loading}
           columns={columns}
           dataSource={tagsData}
           defaultPageSize={5}

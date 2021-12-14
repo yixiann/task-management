@@ -30,16 +30,27 @@ export const ViewTaskPage = ({
 }) => {
   const tagsFn = { resetReducerTag, fetchAllTag, createTag, editTag, deleteTag };
   const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState(true)
+
+  console.log(loading)
+  const id = new URLSearchParams(window.location.search).get("id");
 
   // Fetch Task
   useEffect(() => {
-    var id = new URLSearchParams(window.location.search).get("id");
+    setLoading(true)
     fetchByIdTask(id);
     return () => resetReducerTask();
   }, []);
 
+  useEffect(()=>{
+    if(taskFetchByIdData!==[]){
+      setLoading(false)
+    }
+  }, [taskFetchByIdData, id])
+
   // Fetch Tags
   useEffect(() => {
+    setLoading(true)
     if (!tagFetchAllSuccess) {
       fetchAllTag();
     }
@@ -69,6 +80,7 @@ export const ViewTaskPage = ({
         language={language}
         taskDetails={taskFetchByIdData}
         tagsData={tagFetchAllData}
+        loading={loading}
       />
       {redirect && <Navigate to={`/overview`} />}
     </div>

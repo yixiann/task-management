@@ -7,6 +7,12 @@ const TaskAction = {
       data
     }
   }),
+  resetTaskDetails: data => ({
+    type: ActionType.TASK_RESET_TASK_DETAILS,
+    payload: {
+      data
+    }
+  }),
   fetchAllTask: data => ({
     type: ActionType.TASK_FETCH_ALL,
     payload: {

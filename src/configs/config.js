@@ -14,7 +14,7 @@ export const URI = {
   deleteTask: task + "/delete/{id}",
 
   // Tag
-  fetchAllTag: tag,
+  fetchAllTag: tag + "/fetch",
   createTag: tag + "/create",
   editTag: tag + "/edit/{id}",
   deleteTag: tag + "/delete/{id}",

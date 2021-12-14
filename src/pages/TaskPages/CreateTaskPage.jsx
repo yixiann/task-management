@@ -88,6 +88,7 @@ export const CreateTaskPage = ({
     }
     if (taskFetchAllFail) {
       ErrorSwal(language, language.message.taskFetchFail);
+      resetReducerTag()
     }
   }, [taskFetchAllSuccess, taskFetchAllData]);
 

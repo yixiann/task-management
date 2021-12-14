@@ -1,4 +1,4 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, takeEvery, takeLatest } from "redux-saga/effects";
 import { TaskAction } from "../action_creators";
 import { URI } from "../../configs/config";
 import { axiosRequest, RequestMethod } from "../../configs/axios";
@@ -10,7 +10,7 @@ export function* runFetchAllTask(action) {
     const formatFetchAllTaskData = !!fetchAllTaskData.data
       ? fetchAllTaskData?.data?.map(item => ({
         ...item,
-        tagId: item.tagId.split(",").map(parseInt)
+        tagId: item.tagId.split(",").map(Number)
       }))
       : [];
     console.log("FETCH ALL TASK", formatFetchAllTaskData);
@@ -89,10 +89,10 @@ export function* runDeleteTask(action) {
 }
 
 export default function* watchTaskSaga() {
-  yield takeEvery(ActionType.TASK_FETCH_ALL, runFetchAllTask);
-  yield takeEvery(ActionType.TASK_FETCH_BY_ID, runFetchByIdTask);
-  yield takeEvery(ActionType.TASK_CREATE, runCreateTask);
-  yield takeEvery(ActionType.TASK_UPDATE, runUpdateTask);
-  yield takeEvery(ActionType.TASK_EDIT, runEditTask);
-  yield takeEvery(ActionType.TASK_DELETE, runDeleteTask);
+  yield takeLatest(ActionType.TASK_FETCH_ALL, runFetchAllTask);
+  yield takeLatest(ActionType.TASK_FETCH_BY_ID, runFetchByIdTask);
+  yield takeLatest(ActionType.TASK_CREATE, runCreateTask);
+  yield takeLatest(ActionType.TASK_UPDATE, runUpdateTask);
+  yield takeLatest(ActionType.TASK_EDIT, runEditTask);
+  yield takeLatest(ActionType.TASK_DELETE, runDeleteTask);
 }

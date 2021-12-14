@@ -1,9 +1,9 @@
 import React from "react";
-import { Row, Col, Typography, Button, Tag, Input } from "antd";
+import { Row, Col, Typography, Button, Tag, Input, Spin } from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-const TaskDetails = ({ language, taskDetails, tagsData }) => {
+const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
   const { Title } = Typography;
   const { TextArea } = Input;
 
@@ -41,7 +41,7 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
   ];
 
   return (
-    <>
+    <Spin spinning={loading}>
       {formatDetails.map((item) => {
         return (
           <Row style={{ margin: "12px 24px" }}>
@@ -80,13 +80,13 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
           </Row>
         );
       })}
-      <Row align="center" style={{marginBottom: "50px"}}>
-        <Col span={3} align="center">
+      <Row align="center" style={{ marginBottom: "50px" }}>
+        <Col span={4} align="center">
           <Button type="primary" style={{ width: "100px" }}>
             <Link to="/overview">{language.button.back}</Link>
           </Button>
         </Col>
-        <Col span={3} align="center">
+        <Col span={4} align="center">
           <Button type="primary" style={{ width: "100px" }}>
             <Link to={`/task/edit?id=${taskDetails.id}`}>
               {language.button.edit}
@@ -94,7 +94,7 @@ const TaskDetails = ({ language, taskDetails, tagsData }) => {
           </Button>
         </Col>
       </Row>
-    </>
+    </Spin>
   );
 };
 

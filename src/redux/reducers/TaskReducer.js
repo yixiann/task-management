@@ -35,6 +35,11 @@ const TaskReducer = (state = InitialState, action) => {
         deleteSuccess: false,
         deleteFail: false,
       };
+    case ActionType.TASK_RESET_TASK_DETAILS:
+      return {
+        ...state,
+        fetchByIdData: [],
+      }
     case ActionType.TASK_FETCH_ALL:
       return {
         ...state,
