@@ -51,9 +51,9 @@ export const TaskHeaders = ({
     if (checkForDuplicates(fetchAllData, "tagName", tagName)) {
       ErrorSwal(language, language.message.tagExist);
     } else if (tagColour === "") {
-      ErrorSwal(language, language.message.selectColour)
+      ErrorSwal(language, language.message.selectColour);
     } else {
-      setLoading(true)
+      setLoading(true);
       createTag({ tagName: tagName, colour: tagColour });
       setTagName("");
       setTagColour("");
@@ -91,12 +91,15 @@ export const TaskHeaders = ({
     }
     if (createFail) {
       ErrorSwal(language, language.message.tagCreateFail);
+      resetReducerTag();
     }
     if (editFail) {
       ErrorSwal(language, language.message.tagEditFail);
+      resetReducerTag();
     }
     if (deleteFail) {
       ErrorSwal(language, language.message.tagDeleteFail);
+      resetReducerTag();
     }
   }, [
     createSuccess,

@@ -26,8 +26,13 @@ export function* runFetchByIdTask(action) {
     const fetchByIdTaskData = yield axiosRequest(
       URI.fetchByIdTask.replace("{id}", action.payload.data)
     );
-    console.log("FETCH BY ID TASK", fetchByIdTaskData.data);
-    yield put(TaskAction.fetchByIdTaskSuccess(fetchByIdTaskData.data));
+    const formatFetchByIdTaskData = !!fetchByIdTaskData.data
+      ? {
+        ...fetchByIdTaskData?.data,
+        tagId: fetchByIdTaskData?.data?.tagId?.split(',').map(Number)
+      } : [];
+    console.log("FETCH BY ID TASK", formatFetchByIdTaskData);
+    yield put(TaskAction.fetchByIdTaskSuccess(formatFetchByIdTaskData));
   } catch (err) {
     yield put(TaskAction.fetchByIdTaskFail());
   }
@@ -35,8 +40,14 @@ export function* runFetchByIdTask(action) {
 
 export function* runCreateTask(action) {
   try {
-    console.log("CREATE TASK", action.payload.data);
-    yield axiosRequest(URI.createTask, action.payload.data, RequestMethod.POST);
+    const createData = action.payload.data
+    const formatCreateTaskData = {
+      ...createData,
+      userId: 1,
+      tagId: createData.tagId.toString()
+    }
+    console.log("CREATE TASK", formatCreateTaskData);
+    yield axiosRequest(URI.createTask, formatCreateTaskData, RequestMethod.POST);
     yield put(TaskAction.createTaskSuccess());
   } catch (err) {
     yield put(TaskAction.createTaskFail());
@@ -79,9 +90,8 @@ export function* runDeleteTask(action) {
     yield axiosRequest(
       URI.deleteTask.replace("{id}", action.payload.data),
       action.payload.data,
-      RequestMethod.POST
+      RequestMethod.DELETE
     );
-    console.log("YEY")
     yield put(TaskAction.deleteTaskSuccess());
   } catch (err) {
     yield put(TaskAction.deleteTaskFail());
@@ -94,5 +104,5 @@ export default function* watchTaskSaga() {
   yield takeLatest(ActionType.TASK_CREATE, runCreateTask);
   yield takeLatest(ActionType.TASK_UPDATE, runUpdateTask);
   yield takeLatest(ActionType.TASK_EDIT, runEditTask);
-  yield takeLatest(ActionType.TASK_DELETE, runDeleteTask);
+  yield takeEvery(ActionType.TASK_DELETE, runDeleteTask);
 }
