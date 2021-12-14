@@ -8,11 +8,15 @@ export function* runFetchAllTask(action) {
   try {
     const fetchAllTaskData = yield axiosRequest(URI.fetchAllTask);
     const formatFetchAllTaskData = !!fetchAllTaskData.data
-      ? fetchAllTaskData.data
+      ? fetchAllTaskData?.data?.map(item => ({
+        ...item,
+        tagId: item.tagId.split(",").map(parseInt)
+      }))
       : [];
     console.log("FETCH ALL TASK", formatFetchAllTaskData);
     yield put(TaskAction.fetchAllTaskSuccess(formatFetchAllTaskData));
   } catch (err) {
+    console.log(err)
     yield put(TaskAction.fetchAllTaskFail());
   }
 }

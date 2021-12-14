@@ -6,7 +6,7 @@ export const URI = {
   // Endpoint URL
 
   // Task
-  fetchAllTask: task,
+  fetchAllTask: task + "/fetch",
   fetchByIdTask: task + "/details/{id}",
   createTask: task + "/create",
   updateTask: task + "/update/{id}",
