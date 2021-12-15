@@ -59,6 +59,7 @@ export const OverviewPage = ({
   };
 
   const handleUpdateTask = (e) => {
+    setLoading(true)
     resetReducerTask();
     updateTask(e);
   };

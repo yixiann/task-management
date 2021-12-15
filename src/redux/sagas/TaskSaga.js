@@ -8,15 +8,14 @@ export function* runFetchAllTask(action) {
   try {
     const fetchAllTaskData = yield axiosRequest(URI.fetchAllTask);
     const formatFetchAllTaskData = !!fetchAllTaskData.data
-      ? fetchAllTaskData?.data?.map(item => ({
-        ...item,
-        tagId: item.tagId.split(",").map(Number)
-      }))
+      ? fetchAllTaskData?.data?.map((item) => ({
+          ...item,
+          tagId: item.tagId.split(",").map(Number),
+        }))
       : [];
     console.log("FETCH ALL TASK", formatFetchAllTaskData);
     yield put(TaskAction.fetchAllTaskSuccess(formatFetchAllTaskData));
   } catch (err) {
-    console.log(err)
     yield put(TaskAction.fetchAllTaskFail());
   }
 }
@@ -28,9 +27,10 @@ export function* runFetchByIdTask(action) {
     );
     const formatFetchByIdTaskData = !!fetchByIdTaskData.data
       ? {
-        ...fetchByIdTaskData?.data,
-        tagId: fetchByIdTaskData?.data?.tagId?.split(',').map(Number)
-      } : [];
+          ...fetchByIdTaskData?.data,
+          tagId: fetchByIdTaskData?.data?.tagId?.split(",").map(Number),
+        }
+      : [];
     console.log("FETCH BY ID TASK", formatFetchByIdTaskData);
     yield put(TaskAction.fetchByIdTaskSuccess(formatFetchByIdTaskData));
   } catch (err) {
@@ -40,14 +40,18 @@ export function* runFetchByIdTask(action) {
 
 export function* runCreateTask(action) {
   try {
-    const createData = action.payload.data
-    const formatCreateTaskData = {
+    const createData = action.payload.data;
+    const formatCreateData = {
       ...createData,
       userId: 1,
-      tagId: createData.tagId.toString()
-    }
-    console.log("CREATE TASK", formatCreateTaskData);
-    yield axiosRequest(URI.createTask, formatCreateTaskData, RequestMethod.POST);
+      tagId: createData.tagId.toString(),
+    };
+    console.log("CREATE TASKS", formatCreateData);
+    yield axiosRequest(
+      URI.createTask,
+      formatCreateData,
+      RequestMethod.POST
+    );
     yield put(TaskAction.createTaskSuccess());
   } catch (err) {
     yield put(TaskAction.createTaskFail());
@@ -56,15 +60,16 @@ export function* runCreateTask(action) {
 
 export function* runUpdateTask(action) {
   try {
-    const formatUpdate = {
-      ...action.payload.data.record,
-      [action.payload.data.type]: action.payload.data.value,
+    const updateData = action.payload.data;
+    const formatUpdateData = {
+      ...updateData.record,
+      [updateData.type]: updateData.value,
+      tagId: updateData.record.tagId.toString(),
     };
-    console.log("UPDATE TASK", action.payload.data, formatUpdate);
     yield axiosRequest(
-      URI.updateTask.replace("{id}", formatUpdate.id),
-      formatUpdate,
-      RequestMethod.POST
+      URI.updateTask.replace("{id}", formatUpdateData.id),
+      formatUpdateData,
+      RequestMethod.PUT
     );
     yield put(TaskAction.updateTaskSuccess());
   } catch (err) {
@@ -74,10 +79,16 @@ export function* runUpdateTask(action) {
 
 export function* runEditTask(action) {
   try {
+    const editData = action.payload.data;
+    const formatEditData = {
+      ...editData,
+      tagId: editData.tagId.toString()
+    };
+    console.log("EDIT TASKS", formatEditData)
     yield axiosRequest(
-      URI.editTask.replace("{id}", action.payload.data.id),
-      action.payload.data,
-      RequestMethod.POST
+      URI.editTask.replace("{id}", editData.id),
+      formatEditData,
+      RequestMethod.PUT
     );
     yield put(TaskAction.editTaskSuccess());
   } catch (err) {

@@ -106,6 +106,7 @@ export const CreateTaskPage = ({
         form={form}
         createTask={handleCreateTask}
         tagsData={tagFetchAllData}
+        loading={false}
       />
       {redirect && <Navigate to="/overview" />}
     </div>

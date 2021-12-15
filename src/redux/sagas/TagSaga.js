@@ -36,7 +36,7 @@ export function* runEditTag(action) {
     yield axiosRequest(
       URI.editTag.replace("{id}", formatEdit.id),
       formatEdit,
-      RequestMethod.POST
+      RequestMethod.PUT
     );
     yield put(TagAction.editTagSuccess());
   } catch (err) {

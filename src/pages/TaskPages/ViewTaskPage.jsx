@@ -32,7 +32,6 @@ export const ViewTaskPage = ({
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(true)
 
-  console.log(loading)
   const id = new URLSearchParams(window.location.search).get("id");
 
   // Fetch Task

@@ -62,6 +62,7 @@ export const TaskHeaders = ({
 
   // Edit Tag
   const handleEditTag = (e) => {
+    setLoading(true);
     editTag(e);
   };
 
@@ -71,7 +72,7 @@ export const TaskHeaders = ({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => deleteTag([e]),
+      confirmFn: () => {setLoading(true); deleteTag([e])},
       afterTitle: language.message.successfullyDeleted,
       failTitle: language.message.failedToDelete,
     });

@@ -44,12 +44,14 @@ export const EditTaskPage = ({
   const [form] = Form.useForm();
   const [redirectEdit, setRedirectEdit] = useState(false);
   const [redirectDelete, setRedirectDelete] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // Fetch Task
-  const [taskDetails, setTaskDetails] = useState({ taskFetchByIdData });
+  const [taskDetails, setTaskDetails] = useState(taskFetchByIdData);
   useEffect(() => {
     var id = new URLSearchParams(window.location.search).get("id");
     if (id !== taskDetails.id || !!taskDetails.id) {
+      setLoading(true)
       fetchByIdTask(id);
     }
     return () => resetReducerTask();
@@ -58,6 +60,7 @@ export const EditTaskPage = ({
   useEffect(() => {
     if (taskFetchByIdSuccess) {
       setTaskDetails(taskFetchByIdData);
+      setLoading(false)
       resetReducerTask();
     }
   }, [taskFetchByIdSuccess]);
@@ -74,6 +77,7 @@ export const EditTaskPage = ({
 
   // Edit Task
   const handleEditTask = () => {
+    setLoading(true)
     editTask({ ...form.getFieldValue(), id: taskDetails.id });
   };
 
@@ -83,7 +87,7 @@ export const EditTaskPage = ({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => deleteTask(taskDetails.id),
+      confirmFn: () => {deleteTask(taskDetails.id)},
       afterFn: () => setRedirectDelete(true),
       afterTitle: language.message.successfullyDeleted,
       failTitle: language.message.failedToDelete,
@@ -124,6 +128,7 @@ export const EditTaskPage = ({
         deleteTask={handleDeleteTask}
         tagsData={tagFetchAllData}
         taskDetails={taskDetails}
+        loading={loading}
       />
       {redirectEdit && <Navigate to={`/task/details?id=${taskDetails.id}`} />}
       {redirectDelete && <Navigate to={`/overview`} />}
