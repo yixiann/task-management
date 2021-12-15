@@ -114,7 +114,7 @@ const TaskManagementTable = ({
       dataIndex: "taskStatus",
       key: "taskStatus",
       width: "150px",
-      filters: getFilters(language?.taskStatus, dataSource, "status"),
+      filters: getFilters(language?.taskStatus, dataSource, "taskStatus"),
       onFilter: (value, record) => record.status === value,
       render: (text, record) => {
         return (
