@@ -6,9 +6,9 @@ import "./css/custom.css";
 import { PublicRoutes as publicRoutes } from "./routers";
 import { connect } from "react-redux";
 import MainLayout from "./layouts/MainLayout";
-import language from "../src/constants/Languages/english";
+import Languages from "../src/constants/Languages";
 
-function App({ ...props }) {
+function App({ languageCode, ...props }) {
   return (
     <Suspense fallback={<div>loading...</div>}>
       <Router basename="/">
@@ -17,7 +17,7 @@ function App({ ...props }) {
             {publicRoutes.map((route) => (
               <Route
                 path={route.path}
-                element={<route.component language={language} />}
+                element={<route.component language={Languages[languageCode]} />}
               />
             ))}
           </Routes>
@@ -27,7 +27,9 @@ function App({ ...props }) {
   );
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  languageCode: state.app.languageCode,
+});
 
 const mapDispatchToProps = {};
 

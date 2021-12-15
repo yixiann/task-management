@@ -73,9 +73,9 @@ export const OverviewPage = ({
 
   const deleteSelected = (e) => {
     ConfirmationSwal({
-      title: language.message.confirmDeletion,
-      text: language.message.actionIrreversible,
-      confirmButtonText: language.message.deleteForever,
+      title: language?.message.confirmDeletion,
+      text: language?.message.actionIrreversible,
+      confirmButtonText: language?.message.deleteForever,
       confirmFn: () => {
         selectedRows.forEach((item) => {
           deleteTask(item);
@@ -104,13 +104,13 @@ export const OverviewPage = ({
       setLoading(false);
     }
     if (taskFetchAllFail) {
-      ErrorSwal(language, language.message.taskFetchFail);
+      ErrorSwal(language, language?.message.taskFetchFail);
     }
     if (tagFetchAllSuccess) {
       setTagsData(tagFetchAllData);
     }
     if (tagFetchAllFail) {
-      ErrorSwal(language, language.message.tagFetchFail);
+      ErrorSwal(language, language?.message.tagFetchFail);
     }
   }, [
     taskFetchAllSuccess,
@@ -127,19 +127,19 @@ export const OverviewPage = ({
       fetchAllTask();
     }
     if (taskUpdateFail) {
-      ErrorSwal(language, language.message.taskUpdateFail);
+      ErrorSwal(language, language?.message.taskUpdateFail);
       resetReducerTask();
       setLoading(true);
       fetchAllTask();
     }
     if (taskDeleteSuccess) {
-      SuccessSwal(language, language.message.taskDeleteSuccess);
+      SuccessSwal(language, language?.message.taskDeleteSuccess);
       resetReducerTask();
       setLoading(true);
       fetchAllTask();
     }
     if (taskDeleteFail) {
-      ErrorSwal(language, language.message.taskDeleteFail);
+      ErrorSwal(language, language?.message.taskDeleteFail);
       resetReducerTask();
     }
   }, [taskUpdateFail, taskUpdateSuccess, taskDeleteFail, taskDeleteSuccess]);
@@ -148,7 +148,7 @@ export const OverviewPage = ({
     <div className="overview">
       <TaskHeaders
         language={language}
-        pageName={language.title.taskOverview}
+        pageName={language?.title.taskOverview}
         button={true}
         breadcrumbs={false}
         tagsState={tagsState}

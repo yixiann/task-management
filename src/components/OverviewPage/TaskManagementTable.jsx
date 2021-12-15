@@ -43,23 +43,23 @@ const TaskManagementTable = ({
 
   const taskManagementColumns = [
     {
-      title: language.overviewTaskTable.taskName,
+      title: language?.overviewTaskTable.taskName,
       dataIndex: "taskName",
       key: "taskName",
       width: "200px",
       sorter: (a, b) => sorter(a.taskName, b.taskName),
     },
     {
-      title: language.overviewTaskTable.details,
+      title: language?.overviewTaskTable.details,
       dataIndex: "details",
       key: "details",
       width: "300px",
       sorter: (a, b) => sorter(a.details, b.details),
       render: (text, record) =>
-        text ? tooltipEllipse(text, "300px") : language.text.none,
+        text ? tooltipEllipse(text, "300px") : language?.text.none,
     },
     {
-      title: language.overviewTaskTable.tags,
+      title: language?.overviewTaskTable.tags,
       dataIndex: "tagId",
       key: "tagId",
       width: "150px",
@@ -80,28 +80,28 @@ const TaskManagementTable = ({
                   </Tag>
                 </Row>
               ))
-          : language.text.none;
+          : language?.text.none;
       },
     },
     {
-      title: language.overviewTaskTable.deadline,
+      title: language?.overviewTaskTable.deadline,
       dataIndex: "deadline",
       key: "deadline",
       width: "150px",
       sorter: (a, b) => sorter(a.deadline, b.deadline),
-      render: (text, _) => (text ? formatDate(text) : language.text.none),
+      render: (text, _) => (text ? formatDate(text) : language?.text.none),
     },
     {
-      title: language.overviewTaskTable.priority,
+      title: language?.overviewTaskTable.priority,
       dataIndex: "priority",
       key: "priority",
       width: "150px",
-      filters: getFilters(language.priority, dataSource, "priority"),
+      filters: getFilters(language?.priority, dataSource, "priority"),
       onFilter: (value, record) => record.priority === value,
       render: (text, record) => {
         return (
           <CustomMenu
-            language={language.priority}
+            language={language?.priority}
             fields={priority}
             value={text}
             onSelect={(e) => updateTask({ record, type: "priority", value: e })}
@@ -110,16 +110,16 @@ const TaskManagementTable = ({
       },
     },
     {
-      title: language.overviewTaskTable.taskStatus,
+      title: language?.overviewTaskTable.taskStatus,
       dataIndex: "taskStatus",
       key: "taskStatus",
       width: "150px",
-      filters: getFilters(language.taskStatus, dataSource, "status"),
+      filters: getFilters(language?.taskStatus, dataSource, "status"),
       onFilter: (value, record) => record.status === value,
       render: (text, record) => {
         return (
           <CustomMenu
-            language={language.taskStatus}
+            language={language?.taskStatus}
             fields={taskStatus}
             value={text}
             onSelect={(e) =>
@@ -152,7 +152,7 @@ const TaskManagementTable = ({
           onClick={() => deleteSelected()}
           style={{ position: "relative", bottom: "48px" }}
         >
-          {language.button.deleteSelected}
+          {language?.button.deleteSelected}
         </Button>
       )}
     </>

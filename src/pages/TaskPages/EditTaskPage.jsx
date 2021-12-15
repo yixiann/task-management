@@ -80,7 +80,7 @@ export const EditTaskPage = ({
       fetchAllTag();
     }
     if (tagFetchAllFail) {
-      ErrorSwal(language, language.message.failedFetchTags);
+      ErrorSwal(language, language?.message.failedFetchTags);
     }
   }, [tagFetchAllSuccess, tagFetchAllData]);
 
@@ -93,33 +93,33 @@ export const EditTaskPage = ({
   // Delete Task
   const handleDeleteTask = () => {
     ConfirmationSwal({
-      title: language.message.confirmDeletion,
-      text: language.message.actionIrreversible,
-      confirmButtonText: language.message.deleteForever,
+      title: language?.message.confirmDeletion,
+      text: language?.message.actionIrreversible,
+      confirmButtonText: language?.message.deleteForever,
       confirmFn: () => {
         deleteTask(taskDetails.id);
       },
       afterFn: () => setRedirectDelete(true),
-      afterTitle: language.message.successfullyDeleted,
-      failTitle: language.message.failedToDelete,
+      afterTitle: language?.message.successfullyDeleted,
+      failTitle: language?.message.failedToDelete,
     });
   };
 
   // Handle After-Effects Of Actions
   useEffect(() => {
     if (taskEditSuccess) {
-      SuccessSwal(language, language.message.taskEditSuccess);
+      SuccessSwal(language, language?.message.taskEditSuccess);
       setRedirectEdit(true);
     }
     if (taskEditFail) {
-      ErrorSwal(language, language.message.taskEditFail);
+      ErrorSwal(language, language?.message.taskEditFail);
     }
     if (taskDeleteSuccess) {
-      SuccessSwal(language, language.message.taskDeleteSuccess);
+      SuccessSwal(language, language?.message.taskDeleteSuccess);
       setRedirectDelete(true);
     }
     if (taskDeleteFail) {
-      ErrorSwal(language, language.message.taskDeleteFail);
+      ErrorSwal(language, language?.message.taskDeleteFail);
     }
   }, [taskEditSuccess, taskEditFail, taskDeleteSuccess, taskDeleteFail]);
 
@@ -127,7 +127,7 @@ export const EditTaskPage = ({
     <div className="overview">
       <TaskHeaders
         language={language}
-        pageName={language.title.editTask}
+        pageName={language?.title.editTask}
         button={true}
         tagsState={tagsState}
         tagsFn={tagsFn}

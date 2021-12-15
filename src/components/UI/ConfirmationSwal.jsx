@@ -23,7 +23,7 @@ export const ConfirmationSwal = ({
 
 export const LoadingSwal = (language) => {
   Swal.fire({
-    title: language.message.loading,
+    title: language?.message.loading,
     icon: "Loading",
     showCancelButton: false,
     showConfirmButton: false,
@@ -35,7 +35,7 @@ export const LoadingSwal = (language) => {
 
 export const SuccessSwal = (language, text) => {
   Swal.fire({
-    title: language.message.success,
+    title: language?.message.success,
     text: text, 
     showCancelButton: false,
     showConfirmButton: false,
@@ -46,7 +46,7 @@ export const SuccessSwal = (language, text) => {
 
 export const ErrorSwal = (language, text) => {
   Swal.fire({
-    title: language.message.error,
+    title: language?.message.error,
     text: text,
     showCancelButton: false,
     showConfirmButton: false,

@@ -91,7 +91,7 @@ const TaskForm = ({
         {...layout}
       >
         <Form.Item
-          label={language.task.taskName}
+          label={language?.task.taskName}
           name="taskName"
           requiredMark={"optional"}
           normalize={(value) => value.replace(/[^A-Za-z0-9 ]+/, "")}
@@ -104,10 +104,14 @@ const TaskForm = ({
         >
           <Input />
         </Form.Item>
-        <Form.Item label={language.task.details} name="details">
+        <Form.Item label={language?.task.details} name="details">
           <TextArea rows={4} />
         </Form.Item>
-        <Form.Item label={language.task.tags} name="tagId">
+        <Form.Item
+          label={language?.task.tags}
+          name="tagId"
+          help={tagsData.length === 0 ? language?.tagsManagement.helpTag : ""}
+        >
           <Select
             mode="multiple"
             showArrow
@@ -118,11 +122,11 @@ const TaskForm = ({
             }))}
           />
         </Form.Item>
-        <Form.Item label={language.task.deadline} name="deadline">
+        <Form.Item label={language?.task.deadline} name="deadline">
           <DatePicker format="DD/MM/YYYY" />
         </Form.Item>
         <Form.Item
-          label={language.task.createdBy}
+          label={language?.task.createdBy}
           normalize={(value) =>
             value.replace(/[^A-Za-z0-9 ]+/, "").slice(0, 64)
           }
@@ -134,7 +138,7 @@ const TaskForm = ({
           <Input />
         </Form.Item>
         <Form.Item
-          label={language.task.assignedTo}
+          label={language?.task.assignedTo}
           normalize={(value) =>
             value.replace(/[^A-Za-z0-9 ]+/, "").slice(0, 64)
           }
@@ -146,7 +150,7 @@ const TaskForm = ({
           <Input />
         </Form.Item>
         <Form.Item
-          label={language.task.priority}
+          label={language?.task.priority}
           name="priority"
           wrapperCol={{
             span: 4,
@@ -154,12 +158,12 @@ const TaskForm = ({
         >
           <Select placeHolder="Select">
             {Object.keys(priority).map((item) => (
-              <Option value={item}>{language.priority[item]}</Option>
+              <Option value={item}>{language?.priority[item]}</Option>
             ))}
           </Select>
         </Form.Item>
         <Form.Item
-          label={language.task.status}
+          label={language?.task.status}
           name="taskStatus"
           wrapperCol={{
             span: 4,
@@ -167,7 +171,7 @@ const TaskForm = ({
         >
           <Select placeHolder="Select">
             {Object.keys(taskStatus).map((item) => (
-              <Option value={item}>{language.taskStatus[item]}</Option>
+              <Option value={item}>{language?.taskStatus[item]}</Option>
             ))}
           </Select>
         </Form.Item>
@@ -183,7 +187,7 @@ const TaskForm = ({
                 <Link
                   to={edit ? `/task/details?id=${taskDetails.id}` : "/overview"}
                 >
-                  {language.button.cancel}
+                  {language?.button.cancel}
                 </Link>
               </Button>
             </Col>
@@ -194,7 +198,7 @@ const TaskForm = ({
                 style={{ width: "100px" }}
                 onClick={() => createTask()}
               >
-                {edit ? language.button.save : language.button.create}
+                {edit ? language?.button.save : language?.button.create}
               </Button>
             </Col>
             <Col span={5} />
@@ -205,7 +209,7 @@ const TaskForm = ({
                   style={{ width: "120px" }}
                   onClick={() => deleteTask(taskDetails.id)}
                 >
-                  {language.button.deleteTask}
+                  {language?.button.deleteTask}
                 </Button>
               )}
             </Col>

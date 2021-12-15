@@ -44,7 +44,7 @@ export function* runCreateTask(action) {
     const formatCreateData = {
       ...createData,
       userId: 1,
-      tagId: createData.tagId.toString(),
+      tagId: createData?.tagId?.toString(),
     };
     console.log("CREATE TASKS", formatCreateData);
     yield axiosRequest(URI.createTask, formatCreateData, RequestMethod.POST);

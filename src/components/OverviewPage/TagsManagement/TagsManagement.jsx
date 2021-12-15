@@ -22,7 +22,7 @@ const TagsManagement = ({
 
   const manageTagsColumns = [
     {
-      title: language.tagsManagement.tags,
+      title: language?.tagsManagement.tags,
       dataIndex: "tagName",
       key: "tagName",
       width: "300px",
@@ -41,7 +41,7 @@ const TagsManagement = ({
       },
     },
     {
-      title: language.tagsManagement.colour,
+      title: language?.tagsManagement.colour,
       dataIndex: "colour",
       key: "colour",
       width: "150px",
@@ -50,7 +50,7 @@ const TagsManagement = ({
         return (
           <CustomMenu
             colour={true}
-            language={language.colour}
+            language={language?.colour}
             fields={colours}
             value={text}
             onSelect={(e) => editTag({ record, type: "colour", value: e })}
@@ -59,7 +59,7 @@ const TagsManagement = ({
       },
     },
     {
-      title: language.tagsManagement.actions,
+      title: language?.tagsManagement.actions,
       dataIndex: "actions",
       key: "actions",
       width: "150px",
@@ -71,7 +71,7 @@ const TagsManagement = ({
             style={{ width: "100px" }}
             onClick={() => deleteTag(record.id)}
           >
-            {language.button.delete}
+            {language?.button.delete}
           </Button>
         );
       },
@@ -92,7 +92,7 @@ const TagsManagement = ({
         width={600}
         style={{ minWidth: "600px" }}
       >
-        <Title level={2}>{language.tagsManagement.manageTags}</Title>
+        <Title level={2}>{language?.tagsManagement.manageTags}</Title>
         <Table
           style={{ marginTop: "10px" }}
           loading={loading}

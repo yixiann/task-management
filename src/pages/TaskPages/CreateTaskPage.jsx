@@ -52,7 +52,7 @@ export const CreateTaskPage = ({
       fetchAllTag();
     }
     if (tagFetchAllFail) {
-      ErrorSwal(language, language.message.tagFetchFail);
+      ErrorSwal(language, language?.message.tagFetchFail);
     }
   }, [tagFetchAllSuccess, tagFetchAllData]);
 
@@ -66,7 +66,7 @@ export const CreateTaskPage = ({
           form.getFieldValue("taskName")
         )
       ) {
-        ErrorSwal(language, language.message.taskExist);
+        ErrorSwal(language, language?.message.taskExist);
       } else {
         createTask(form.getFieldValue());
       }
@@ -75,12 +75,12 @@ export const CreateTaskPage = ({
 
   useEffect(() => {
     if (taskCreateSuccess) {
-      SuccessSwal(language, language.message.taskCreateSuccess);
+      SuccessSwal(language, language?.message.taskCreateSuccess);
       resetReducerTask();
       setRedirect(true);
     }
     if (taskCreateFail) {
-      ErrorSwal(language, language.message.taskCreateFail);
+      ErrorSwal(language, language?.message.taskCreateFail);
     }
   }, [taskCreateSuccess, taskCreateFail]);
 
@@ -90,7 +90,7 @@ export const CreateTaskPage = ({
       fetchAllTask();
     }
     if (taskFetchAllFail) {
-      ErrorSwal(language, language.message.taskFetchFail);
+      ErrorSwal(language, language?.message.taskFetchFail);
       resetReducerTag();
     }
   }, [taskFetchAllSuccess, taskFetchAllData]);
@@ -99,7 +99,7 @@ export const CreateTaskPage = ({
     <div className="create-task">
       <TaskHeaders
         language={language}
-        pageName={language.title.createTask}
+        pageName={language?.title.createTask}
         button={true}
         tagsState={tagsState}
         tagsFn={tagsFn}

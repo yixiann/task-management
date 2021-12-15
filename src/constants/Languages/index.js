@@ -1,10 +1,14 @@
 import english from "./english";
+import chinese from "./chinese"
 
-export const Languagecode = {
-  en: "english",
+export const LanguageCode = {
+  en: "English",
+  ch: "Chinese",
 };
 
-export const Languages = {
-  [Languagecode.en]: english,
-  [Languagecode.zh]: chinese,
+const Languages = {
+  [LanguageCode.en]: english,
+  [LanguageCode.ch]: chinese,
 };
+
+export default Languages

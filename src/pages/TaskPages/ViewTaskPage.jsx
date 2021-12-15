@@ -62,13 +62,13 @@ export const ViewTaskPage = ({
       fetchAllTag();
     }
     if (tagFetchAllFail) {
-      ErrorSwal(language, language.message.tagFetchFail);
+      ErrorSwal(language, language?.message.tagFetchFail);
     }
   }, [tagFetchAllSuccess, tagFetchAllData]);
 
   useEffect(() => {
     if (taskFetchByIdFail) {
-      ErrorSwal(language, language.message.taskFetchFail);
+      ErrorSwal(language, language?.message.taskFetchFail);
       setRedirect(true);
     }
   }, [taskFetchByIdSuccess, taskFetchByIdFail]);
@@ -77,7 +77,7 @@ export const ViewTaskPage = ({
     <div className="overview">
       <TaskHeaders
         language={language}
-        pageName={language.title.viewTask}
+        pageName={language?.title.viewTask}
         button={true}
         tagsState={tagsState}
         tagsFn={tagsFn}

@@ -92,6 +92,7 @@ const language = {
     actions: "Actions",
   },
   tagsManagement: {
+    helpTag: "Create a new tag under 'Manage Tags'",
     manageTags: "Manage Tags",
     createTag: "Create Tag",
     tagName: "Tag Name",
@@ -109,6 +110,10 @@ const language = {
     assignedTo: "Assigned To",
     priority: "Priority",
     status: "Status",
+  },
+  settings: {
+    settings: "Settings",
+    language: "Language",
   },
 };
 

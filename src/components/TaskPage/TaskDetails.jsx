@@ -14,31 +14,31 @@ const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
 
   const newDate = taskDetails?.deadline
     ? formatDate(taskDetails.deadline)
-    : language.text.none;
+    : language?.text.none;
 
   const status = taskDetails?.taskStatus
-    ? language.taskStatus[taskDetails?.taskStatus]
-    : language.text.none;
+    ? language?.taskStatus[taskDetails?.taskStatus]
+    : language?.text.none;
 
   const priority = taskDetails?.priority
-    ? language.priority[taskDetails?.priority]
-    : language.text.none;
+    ? language?.priority[taskDetails?.priority]
+    : language?.text.none;
 
   const formatDetails = [
-    { label: language.overviewTaskTable.taskName, data: taskDetails?.taskName },
-    { label: language.overviewTaskTable.details, data: taskDetails?.details },
-    { label: language.overviewTaskTable.tags, data: taskDetails?.tags },
-    { label: language.overviewTaskTable.deadline, data: newDate },
+    { label: language?.overviewTaskTable.taskName, data: taskDetails?.taskName },
+    { label: language?.overviewTaskTable.details, data: taskDetails?.details },
+    { label: language?.overviewTaskTable.tags, data: taskDetails?.tags },
+    { label: language?.overviewTaskTable.deadline, data: newDate },
     {
-      label: language.overviewTaskTable.createdBy,
+      label: language?.overviewTaskTable.createdBy,
       data: taskDetails?.createdBy,
     },
     {
-      label: language.overviewTaskTable.assignedTo,
+      label: language?.overviewTaskTable.assignedTo,
       data: taskDetails?.assignedTo,
     },
-    { label: language.overviewTaskTable.priority, data: priority },
-    { label: language.overviewTaskTable.taskStatus, data: status },
+    { label: language?.overviewTaskTable.priority, data: priority },
+    { label: language?.overviewTaskTable.taskStatus, data: status },
   ];
 
   return (
@@ -53,15 +53,15 @@ const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
             </Col>
             <Col span={1} />
             <Col span={6}>
-              {item.label === language.overviewTaskTable.tags ? (
+              {item.label === language?.overviewTaskTable.tags ? (
                 tags.length === 0 ? (
-                  <Title level={5}>{language.text.none}</Title>
+                  <Title level={5}>{language?.text.none}</Title>
                 ) : (
                   tags.map((item) => (
                     <Tag color={item.colour}>{item.tagName}</Tag>
                   ))
                 )
-              ) : item.label === language.overviewTaskTable.details ? (
+              ) : item.label === language?.overviewTaskTable.details ? (
                 <TextArea
                   style={{
                     backgroundColor: "white",
@@ -74,7 +74,7 @@ const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
                 />
               ) : (
                 <Title level={5}>
-                  {item.data === "" ? language.text.none : item.data}
+                  {item.data === "" ? language?.text.none : item.data}
                 </Title>
               )}
             </Col>
@@ -84,13 +84,13 @@ const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
       <Row align="center" style={{ marginBottom: "50px" }}>
         <Col span={4} align="center">
           <Button type="primary" style={{ width: "100px" }}>
-            <Link to="/overview">{language.button.back}</Link>
+            <Link to="/overview">{language?.button.back}</Link>
           </Button>
         </Col>
         <Col span={4} align="center">
           <Button type="primary" style={{ width: "100px" }}>
             <Link to={`/task/edit?id=${taskDetails.id}`}>
-              {language.button.edit}
+              {language?.button.edit}
             </Link>
           </Button>
         </Col>

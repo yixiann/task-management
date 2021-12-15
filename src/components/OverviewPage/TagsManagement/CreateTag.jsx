@@ -15,7 +15,7 @@ const CreateTag = ({
       <Row justify="space-between">
         <Col span={11}>
           <Input
-            placeholder={language.text.tagName}
+            placeholder={language?.text.tagName}
             style={{ width: "200px" }}
             maxLength={18}
             value={tagName}
@@ -25,7 +25,7 @@ const CreateTag = ({
         <Col span={6} align="center">
           <CustomMenu
             colour={true}
-            language={language.colour}
+            language={language?.colour}
             fields={colours}
             value={tagColour}
             onSelect={(e) => setTagColour(e)}
@@ -38,7 +38,7 @@ const CreateTag = ({
             onClick={createTag}
             disabled={tagName.length === 0}
           >
-            {language.button.create}
+            {language?.button.create}
           </Button>
         </Col>
       </Row>

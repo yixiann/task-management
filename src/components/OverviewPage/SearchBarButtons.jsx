@@ -8,12 +8,12 @@ const SearchBarAndButtons = ({ language, searchData }) => {
     <Row style={{ marginBottom: "20px" }} justify="space-between">
       <Input
         prefix={<SearchOutlined />}
-        placeholder={language.text.search}
+        placeholder={language?.text.search}
         onChange={searchData}
         style={{ width: "300px" }}
       />
       <Button type="primary" value="createTask" style={{ width: "200px" }}>
-        <Link to="/task/create">{language.button.createTask}</Link>
+        <Link to="/task/create">{language?.button.createTask}</Link>
       </Button>
     </Row>
   );
