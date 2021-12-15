@@ -8,8 +8,8 @@ import {
   ErrorSwal,
   SuccessSwal,
 } from "../../components/UI/ConfirmationSwal";
-import { AppAction, TagAction } from "../../redux/action_creators";
 import { checkForDuplicates } from "../../utils";
+import { Link } from "react-router-dom";
 import Settings from "../../components/SettingsModal/SettingsModal";
 
 export const TaskHeaders = ({
@@ -20,6 +20,7 @@ export const TaskHeaders = ({
   breadcrumbs = true,
   tagsState,
   tagsFn,
+  overview = false,
   ...props
 }) => {
   const { Title } = Typography;
@@ -135,7 +136,7 @@ export const TaskHeaders = ({
         </Breadcrumb>
       )}
       <Row>
-        <Col span={20}>
+        <Col span={12}>
           <Title
             className="site-page-header"
             level={4}
@@ -144,12 +145,19 @@ export const TaskHeaders = ({
             {pageName}
           </Title>
         </Col>
-        <Col span={4} align="right">
+        <Col span={12} align="right">
           {button && (
             <Button type="primary" onClick={() => setVisibleTags(true)}>
               {language?.button.manageTags}
             </Button>
           )}
+          <Button style={{width: "150px"}}>
+            {overview ? (
+              <Link to="/calendar">{language.button.calendar}</Link>
+            ) : (
+              <Link to="/overview">{language.button.overview}</Link>
+            )}
+          </Button>
         </Col>
       </Row>
       <Divider style={{ margin: "20px" }} />
@@ -177,26 +185,8 @@ export const TaskHeaders = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  state: state,
-  // tagFetchAllData: state.tag.fetchAllData,
-  // tagFetchAllSuccess: state.tag.fetchAllSuccess,
-  // tagFetchAllFail: state.tag.fetchAllFail,
+const mapStateToProps = (state) => ({});
 
-  // tagCreateSuccess: state.tag.createSuccess,
-  // tagCreateFail: state.tag.createFail,
-  // tagEditSuccess: state.tag.editSuccess,
-  // tagEditFail: state.tag.editFail,
-  // tagDeleteSuccess: state.tag.deleteSuccess,
-  // tagDeleteFail: state.tag.deleteFail,
-});
-
-const mapDispatchToProps = {
-  updateLanguage: AppAction.updateLanguage,
-  // fetchAllTag: TagAction.fetchAllTag,
-  // createTag: TagAction.createTag,
-  // editTag: TagAction.editTag,
-  // deleteTag: TagAction.deleteTag,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskHeaders);

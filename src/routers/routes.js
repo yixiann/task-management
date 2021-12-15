@@ -22,6 +22,11 @@ const PublicRoutes = [
     component: React.lazy(() => import("../pages/TaskPages/EditTaskPage")),
   },
   {
+    path: "/calendar",
+    exact: true,
+    component: React.lazy(() => import("../pages/CalendarPage")),
+  },
+  {
     path: "*",
     exact: true,
     component: React.lazy(() => import("../pages/NotFound")),

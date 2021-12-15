@@ -6,6 +6,7 @@ const language = {
     editTask: "Edit Task",
     updateTask: "Update Task",
     taskOverview: "Task Overview",
+    calendarOverview: "Calendar Overview",
   },
   text: {
     search: "Search Task or Details",
@@ -28,6 +29,8 @@ const language = {
     deleteTask: "Delete Task",
     createTask: "Create Task",
     createTag: "Create Tag",
+    calendar: "Calendar",
+    overview: "Overview",
   },
   colour: {
     none: "None",

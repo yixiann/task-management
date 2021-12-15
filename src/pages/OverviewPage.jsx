@@ -155,6 +155,7 @@ export const OverviewPage = ({
         tagsState={tagsState}
         tagsFn={tagsFn}
         updateLanguage={updateLanguage}
+        overview={true}
       />
       <div style={{ margin: "0px 40px" }}>
         <SearchBarAndButtons language={language} searchData={searchData} />
