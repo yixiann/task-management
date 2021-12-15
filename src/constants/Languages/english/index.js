@@ -116,5 +116,4 @@ const language = {
     language: "Language",
   },
 };
-
 export default language;

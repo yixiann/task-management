@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { Form } from "antd";
 import TaskForm from "../../components/TaskPage/TaskForm";
 import TaskHeaders from "./TaskHeader";
-import { TagAction, TaskAction } from "../../redux/action_creators";
+import { AppAction, TagAction, TaskAction } from "../../redux/action_creators";
 import { ErrorSwal, SuccessSwal } from "../../components/UI/ConfirmationSwal";
 import { checkForDuplicates } from "../../utils";
 
@@ -12,6 +12,7 @@ export const CreateTaskPage = ({
   language,
   resetReducerTask,
   resetReducerTag,
+  updateLanguage,
 
   createTask,
   taskCreateSuccess,
@@ -103,6 +104,7 @@ export const CreateTaskPage = ({
         button={true}
         tagsState={tagsState}
         tagsFn={tagsFn}
+        updateLanguage={updateLanguage}
       />
       <TaskForm
         language={language}
@@ -133,6 +135,7 @@ const mapDispatchToProps = {
   resetReducerTask: TaskAction.resetReducer,
   fetchAllTask: TaskAction.fetchAllTask,
   createTask: TaskAction.createTask,
+  updateLanguage: AppAction.updateLanguage,
 
   resetReducerTag: TagAction.resetReducer,
   fetchAllTag: TagAction.fetchAllTag,

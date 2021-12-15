@@ -23,10 +23,12 @@ const Settings = ({ language, updateLanguage, visible, setVisible }) => {
         <Title level={2}>{language?.settings.settings}</Title>
         <Row>
           <Col span={6}>
-            <Title level={5} style={{marginTop: "3px"}}>{language?.settings.language}:</Title>
+            <Title level={5} style={{ marginTop: "3px" }}>
+              {language?.settings.language}:
+            </Title>
           </Col>
           <Select
-            defaultValue="English"
+            defaultValue={window.localStorage.getItem("languageCode")}
             style={{ width: 120 }}
             onChange={handleLanguageChange}
           >

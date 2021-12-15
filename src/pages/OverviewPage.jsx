@@ -8,13 +8,14 @@ import {
   ErrorSwal,
   SuccessSwal,
 } from "../components/UI/ConfirmationSwal";
-import { TagAction, TaskAction } from "../redux/action_creators";
+import { AppAction, TagAction, TaskAction } from "../redux/action_creators";
 
 export const OverviewPage = ({
   language,
   resetReducerTask,
   resetReducerTag,
   resetTaskDetails,
+  updateLanguage,
 
   fetchAllTask,
   taskFetchAllData,
@@ -153,6 +154,7 @@ export const OverviewPage = ({
         breadcrumbs={false}
         tagsState={tagsState}
         tagsFn={tagsFn}
+        updateLanguage={updateLanguage}
       />
       <div style={{ margin: "0px 40px" }}>
         <SearchBarAndButtons language={language} searchData={searchData} />
@@ -192,6 +194,7 @@ const mapDispatchToProps = {
   resetReducerTask: TaskAction.resetReducer,
   resetReducerTag: TagAction.resetReducer,
   resetTaskDetails: TaskAction.resetTaskDetails,
+  updateLanguage: AppAction.updateLanguage,
 
   fetchAllTask: TaskAction.fetchAllTask,
   updateTask: TaskAction.updateTask,

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import TaskDetails from "../../components/TaskPage/TaskDetails";
 import { ErrorSwal } from "../../components/UI/ConfirmationSwal";
-import { TagAction, TaskAction } from "../../redux/action_creators";
+import { AppAction, TagAction, TaskAction } from "../../redux/action_creators";
 import { TaskHeaders } from "./TaskHeader";
 
 export const ViewTaskPage = ({
@@ -11,6 +11,7 @@ export const ViewTaskPage = ({
   location,
   resetReducerTask,
   resetReducerTag,
+  updateLanguage,
 
   fetchByIdTask,
   taskFetchByIdData,
@@ -81,6 +82,7 @@ export const ViewTaskPage = ({
         button={true}
         tagsState={tagsState}
         tagsFn={tagsFn}
+        updateLanguage={updateLanguage}
       />
       <TaskDetails
         language={language}
@@ -107,6 +109,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   resetReducerTask: TaskAction.resetReducer,
   fetchByIdTask: TaskAction.fetchByIdTask,
+  updateLanguage: AppAction.updateLanguage,
 
   resetReducerTag: TagAction.resetReducer,
   fetchAllTag: TagAction.fetchAllTag,

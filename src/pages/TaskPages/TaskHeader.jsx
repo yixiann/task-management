@@ -15,7 +15,6 @@ import Settings from "../../components/SettingsModal/SettingsModal";
 export const TaskHeaders = ({
   language,
   updateLanguage,
-
   pageName,
   button,
   breadcrumbs = true,
@@ -180,25 +179,24 @@ export const TaskHeaders = ({
 
 const mapStateToProps = (state) => ({
   state: state,
-  tagFetchAllData: state.tag.fetchAllData,
-  tagFetchAllSuccess: state.tag.fetchAllSuccess,
-  tagFetchAllFail: state.tag.fetchAllFail,
+  // tagFetchAllData: state.tag.fetchAllData,
+  // tagFetchAllSuccess: state.tag.fetchAllSuccess,
+  // tagFetchAllFail: state.tag.fetchAllFail,
 
-  tagCreateSuccess: state.tag.createSuccess,
-  tagCreateFail: state.tag.createFail,
-  tagEditSuccess: state.tag.editSuccess,
-  tagEditFail: state.tag.editFail,
-  tagDeleteSuccess: state.tag.deleteSuccess,
-  tagDeleteFail: state.tag.deleteFail,
+  // tagCreateSuccess: state.tag.createSuccess,
+  // tagCreateFail: state.tag.createFail,
+  // tagEditSuccess: state.tag.editSuccess,
+  // tagEditFail: state.tag.editFail,
+  // tagDeleteSuccess: state.tag.deleteSuccess,
+  // tagDeleteFail: state.tag.deleteFail,
 });
 
 const mapDispatchToProps = {
   updateLanguage: AppAction.updateLanguage,
-
-  fetchAllTag: TagAction.fetchAllTag,
-  createTag: TagAction.createTag,
-  editTag: TagAction.editTag,
-  deleteTag: TagAction.deleteTag,
+  // fetchAllTag: TagAction.fetchAllTag,
+  // createTag: TagAction.createTag,
+  // editTag: TagAction.editTag,
+  // deleteTag: TagAction.deleteTag,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskHeaders);

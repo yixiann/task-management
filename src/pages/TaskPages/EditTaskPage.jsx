@@ -9,12 +9,13 @@ import {
   ErrorSwal,
   SuccessSwal,
 } from "./../../components/UI/ConfirmationSwal";
-import { TagAction, TaskAction } from "../../redux/action_creators";
+import { AppAction, TagAction, TaskAction } from "../../redux/action_creators";
 
 export const EditTaskPage = ({
   language,
   resetReducerTask,
   resetReducerTag,
+  updateLanguage,
 
   fetchByIdTask,
   taskFetchByIdData,
@@ -131,6 +132,7 @@ export const EditTaskPage = ({
         button={true}
         tagsState={tagsState}
         tagsFn={tagsFn}
+        updateLanguage={updateLanguage}
       />
       <TaskForm
         language={language}
@@ -163,6 +165,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  updateLanguage: AppAction.updateLanguage,
   resetReducerTask: TaskAction.resetReducer,
   fetchByIdTask: TaskAction.fetchByIdTask,
   editTask: TaskAction.editTask,
