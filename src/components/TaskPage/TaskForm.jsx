@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Button, Form, Input, DatePicker, Tag, Select, Spin } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  Input,
+  DatePicker,
+  Tag,
+  Select,
+  Spin,
+} from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { formatDate, getKeyById } from "../../utils";
@@ -12,8 +22,22 @@ const TaskForm = ({
   deleteTask,
   tagsData,
   taskDetails,
-  loading
+  loading,
 }) => {
+  const { TextArea } = Input;
+  const { Option } = Select;
+
+  // Form label and wrapper width
+  const layout = {
+    labelCol: {
+      span: 4,
+    },
+    wrapperCol: {
+      span: 10,
+    },
+  };
+
+  // Creating task (false) or Editing task (true)
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
@@ -38,17 +62,7 @@ const TaskForm = ({
     }
   }, [taskDetails, tagsData, form]);
 
-  const { TextArea } = Input;
-  const { Option } = Select;
-  const layout = {
-    labelCol: {
-      span: 4,
-    },
-    wrapperCol: {
-      span: 10,
-    },
-  };
-
+  // Making cool colourful tags
   const tagRender = (props) => {
     const { label, value, closable, onClose } = props;
     const onPreventMouseDown = (event) => {

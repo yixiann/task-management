@@ -78,7 +78,6 @@ export const sorter = (c, d) => {
       if (bri === undefined) {
         bri = "";
       }
-
       // If both parts are strictly numeric, compare them as numbers
       if (!isNaN(ari) && !isNaN(bri)) {
         localeCompare = ari.localeCompare(
@@ -102,7 +101,6 @@ export const sorter = (c, d) => {
         // If you run out of parts, the name with the fewest parts comes first
         return localeCompare;
       }
-
       // If they're the same, move on to the next part
     }
   }
@@ -145,6 +143,7 @@ export const checkForDuplicates = (data, key, value) => {
   );
 };
 
-export const formatDate = (date) => {
-  return date?.slice(8, 10) + "/" + date?.slice(5, 7) + "/" + date?.slice(0, 4);
+export const formatDate = (UTCdate) => {
+  const date = new Date(UTCdate)
+  return date.toLocaleDateString()
 };

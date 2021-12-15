@@ -1,83 +1,83 @@
 const { ActionType } = require("../../constants");
 
 const TagAction = {
-  resetReducer : data => ({
+  resetReducer: (data) => ({
     type: ActionType.TAG_RESET_REDUCER,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchAllTag: data => ({
+  fetchAllTag: (data) => ({
     type: ActionType.TAG_FETCH_ALL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchAllTagSuccess: data => ({
+  fetchAllTagSuccess: (data) => ({
     type: ActionType.TAG_FETCH_ALL_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchAllTagFail: data => ({
+  fetchAllTagFail: (data) => ({
     type: ActionType.TAG_FETCH_ALL_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  createTag: data => ({
+  createTag: (data) => ({
     type: ActionType.TAG_CREATE,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  createTagSuccess: data => ({
+  createTagSuccess: (data) => ({
     type: ActionType.TAG_CREATE_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  createTagFail: data => ({
+  createTagFail: (data) => ({
     type: ActionType.TAG_CREATE_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  editTag: data => ({
+  editTag: (data) => ({
     type: ActionType.TAG_EDIT,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  editTagSuccess: data => ({
+  editTagSuccess: (data) => ({
     type: ActionType.TAG_EDIT_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  editTagFail: data => ({
+  editTagFail: (data) => ({
     type: ActionType.TAG_EDIT_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  deleteTag: data => ({
+  deleteTag: (data) => ({
     type: ActionType.TAG_DELETE,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  deleteTagSuccess: data => ({
+  deleteTagSuccess: (data) => ({
     type: ActionType.TAG_DELETE_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  deleteTagFail: data => ({
+  deleteTagFail: (data) => ({
     type: ActionType.TAG_DELETE_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
 };
 

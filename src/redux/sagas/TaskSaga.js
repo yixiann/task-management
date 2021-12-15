@@ -47,11 +47,7 @@ export function* runCreateTask(action) {
       tagId: createData.tagId.toString(),
     };
     console.log("CREATE TASKS", formatCreateData);
-    yield axiosRequest(
-      URI.createTask,
-      formatCreateData,
-      RequestMethod.POST
-    );
+    yield axiosRequest(URI.createTask, formatCreateData, RequestMethod.POST);
     yield put(TaskAction.createTaskSuccess());
   } catch (err) {
     yield put(TaskAction.createTaskFail());
@@ -82,9 +78,9 @@ export function* runEditTask(action) {
     const editData = action.payload.data;
     const formatEditData = {
       ...editData,
-      tagId: editData.tagId.toString()
+      tagId: editData.tagId.toString(),
     };
-    console.log("EDIT TASKS", formatEditData)
+    console.log("EDIT TASKS", formatEditData);
     yield axiosRequest(
       URI.editTask.replace("{id}", editData.id),
       formatEditData,

@@ -40,7 +40,10 @@ export const CreateTaskPage = ({
     editTag,
     deleteTag,
   };
+  // Form logic
   const [form] = Form.useForm();
+
+  // Redirect to overview page after creation of task
   const [redirect, setRedirect] = useState(false);
 
   // Fetch Tags
@@ -73,7 +76,7 @@ export const CreateTaskPage = ({
   useEffect(() => {
     if (taskCreateSuccess) {
       SuccessSwal(language, language.message.taskCreateSuccess);
-      resetReducerTask()
+      resetReducerTask();
       setRedirect(true);
     }
     if (taskCreateFail) {
@@ -88,7 +91,7 @@ export const CreateTaskPage = ({
     }
     if (taskFetchAllFail) {
       ErrorSwal(language, language.message.taskFetchFail);
-      resetReducerTag()
+      resetReducerTag();
     }
   }, [taskFetchAllSuccess, taskFetchAllData]);
 

@@ -72,7 +72,10 @@ export const TaskHeaders = ({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => {setLoading(true); deleteTag([e])},
+      confirmFn: () => {
+        setLoading(true);
+        deleteTag([e]);
+      },
       afterTitle: language.message.successfullyDeleted,
       failTitle: language.message.failedToDelete,
     });

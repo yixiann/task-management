@@ -1,10 +1,11 @@
 import React from "react";
-// import { Result, Button } from "antd";
+import { Result, Button } from "antd";
 import { Link, Navigate } from "react-router-dom";
 
 const NotFound = ({ language }) => {
   return (
     <Navigate to ='/overview'/>
+    // Alternative not found page
     // <div style={{height:"100vh", display: "flex", alignItems: "center" }}>
     //   <Result
     //     status="404"

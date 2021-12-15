@@ -20,7 +20,7 @@ const TagsManagement = ({
 }) => {
   const { Paragraph, Title } = Typography;
 
-  const columns = [
+  const manageTagsColumns = [
     {
       title: language.tagsManagement.tags,
       dataIndex: "tagName",
@@ -30,8 +30,7 @@ const TagsManagement = ({
         return (
           <Paragraph
             editable={{
-              onChange: (e) =>
-                editTag({ record, type: "tagName", value: e }),
+              onChange: (e) => editTag({ record, type: "tagName", value: e }),
               maxLength: 18,
             }}
             style={{ margin: "0px 12px" }}
@@ -54,9 +53,7 @@ const TagsManagement = ({
             language={language.colour}
             fields={colours}
             value={text}
-            onSelect={(e) =>
-              editTag({ record, type: "colour", value: e })
-            }
+            onSelect={(e) => editTag({ record, type: "colour", value: e })}
           />
         );
       },
@@ -67,7 +64,7 @@ const TagsManagement = ({
       key: "actions",
       width: "150px",
       align: "center",
-      render: (text, record) => {
+      render: (_, record) => {
         return (
           <Button
             type="primary"
@@ -99,7 +96,7 @@ const TagsManagement = ({
         <Table
           style={{ marginTop: "10px" }}
           loading={loading}
-          columns={columns}
+          columns={manageTagsColumns}
           dataSource={tagsData}
           defaultPageSize={5}
           footer={() => (

@@ -1,125 +1,125 @@
 const { ActionType } = require("../../constants");
 
 const TaskAction = {
-  resetReducer: data => ({
+  resetReducer: (data) => ({
     type: ActionType.TASK_RESET_REDUCER,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  resetTaskDetails: data => ({
+  resetTaskDetails: (data) => ({
     type: ActionType.TASK_RESET_TASK_DETAILS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchAllTask: data => ({
+  fetchAllTask: (data) => ({
     type: ActionType.TASK_FETCH_ALL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchAllTaskSuccess: data => ({
+  fetchAllTaskSuccess: (data) => ({
     type: ActionType.TASK_FETCH_ALL_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchAllTaskFail: data => ({
+  fetchAllTaskFail: (data) => ({
     type: ActionType.TASK_FETCH_ALL_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchByIdTask: data => ({
+  fetchByIdTask: (data) => ({
     type: ActionType.TASK_FETCH_BY_ID,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchByIdTaskSuccess: data => ({
+  fetchByIdTaskSuccess: (data) => ({
     type: ActionType.TASK_FETCH_BY_ID_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  fetchByIdTaskFail: data => ({
+  fetchByIdTaskFail: (data) => ({
     type: ActionType.TASK_FETCH_BY_ID_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  createTask: data => ({
+  createTask: (data) => ({
     type: ActionType.TASK_CREATE,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  createTaskSuccess: data => ({
+  createTaskSuccess: (data) => ({
     type: ActionType.TASK_CREATE_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  createTaskFail: data => ({
+  createTaskFail: (data) => ({
     type: ActionType.TASK_CREATE_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  updateTask: data => ({
+  updateTask: (data) => ({
     type: ActionType.TASK_UPDATE,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  updateTaskSuccess: data => ({
+  updateTaskSuccess: (data) => ({
     type: ActionType.TASK_UPDATE_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  updateTaskFail: data => ({
+  updateTaskFail: (data) => ({
     type: ActionType.TASK_UPDATE_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  editTask: data => ({
+  editTask: (data) => ({
     type: ActionType.TASK_EDIT,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  editTaskSuccess: data => ({
+  editTaskSuccess: (data) => ({
     type: ActionType.TASK_EDIT_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  editTaskFail: data => ({
+  editTaskFail: (data) => ({
     type: ActionType.TASK_EDIT_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  deleteTask: data => ({
+  deleteTask: (data) => ({
     type: ActionType.TASK_DELETE,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  deleteTaskSuccess: data => ({
+  deleteTaskSuccess: (data) => ({
     type: ActionType.TASK_DELETE_SUCCESS,
     payload: {
-      data
-    }
+      data,
+    },
   }),
-  deleteTaskFail: data => ({
+  deleteTaskFail: (data) => ({
     type: ActionType.TASK_DELETE_FAIL,
     payload: {
-      data
-    }
+      data,
+    },
   }),
 };
 

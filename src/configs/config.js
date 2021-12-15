@@ -1,4 +1,3 @@
-// const base = "/localhost:10000"
 const task = "/task";
 const tag = "/tag";
 

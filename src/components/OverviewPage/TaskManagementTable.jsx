@@ -21,13 +21,16 @@ const TaskManagementTable = ({
   deleteSelected,
   tagsData,
 }) => {
+  // Navigation for clicking on rows
   const navigate = useNavigate();
   const routeChange = (id) => {
     let path = `/task/details?id=${id}`;
     navigate(path);
   };
 
+  // Selection of rows for deleting and visibility of delete button
   const [visible, setVisible] = useState(false);
+
   const rowSelection = {
     onChange: (selectedRowKeys) => {
       setSelectedRows(selectedRowKeys);
@@ -38,7 +41,7 @@ const TaskManagementTable = ({
     setVisible(selectedRows.length > 0 ? true : false);
   }, [dataSource, selectedRows]);
 
-  const columns = [
+  const taskManagementColumns = [
     {
       title: language.overviewTaskTable.taskName,
       dataIndex: "taskName",
@@ -62,7 +65,7 @@ const TaskManagementTable = ({
       width: "150px",
       filters: tagsData.map((item) => ({ text: item.tagName, value: item.id })),
       onFilter: (value, record) => record?.tagId?.includes(value),
-      render: (text, record) => {
+      render: (_, record) => {
         const tagIds = tagsData.map((item) => item.id);
         const currentTags = record.tagId?.filter((item) =>
           tagIds?.includes(item)
@@ -86,7 +89,7 @@ const TaskManagementTable = ({
       key: "deadline",
       width: "150px",
       sorter: (a, b) => sorter(a.deadline, b.deadline),
-      render: (text, record) => (text ? formatDate(text) : language.text.none),
+      render: (text, _) => (text ? formatDate(text) : language.text.none),
     },
     {
       title: language.overviewTaskTable.priority,
@@ -134,7 +137,7 @@ const TaskManagementTable = ({
         rowKey={"id"}
         dataSource={dataSource}
         loading={loading}
-        columns={columns}
+        columns={taskManagementColumns}
         scroll={{ x: 1100 }}
         defaultPageSize={8}
         pagination={{ pageSize: 8 }}

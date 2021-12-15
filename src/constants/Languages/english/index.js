@@ -69,7 +69,7 @@ const language = {
     taskEditFail: "Failed To Save Task",
     taskFetchFail: "Failed To Fetch Task Data",
     taskUpdateFail: "Failed To Update Task",
-    
+
     tagExist: "Tag Already Exists",
     tagFetchFail: "Failed To Fetch Tags Data",
     tagCreateFail: "Failed To Create Tag",
@@ -78,7 +78,7 @@ const language = {
     tagDeleteSuccess: "Tag Deleted",
     loading: "Loading...",
     success: "Success!",
-    error: "Error!"
+    error: "Error!",
   },
   overviewTaskTable: {
     taskName: "Task Name",
@@ -112,4 +112,4 @@ const language = {
   },
 };
 
-export default language
+export default language;

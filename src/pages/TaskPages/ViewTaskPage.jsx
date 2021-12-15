@@ -28,28 +28,36 @@ export const ViewTaskPage = ({
   deleteTag,
   ...props
 }) => {
-  const tagsFn = { resetReducerTag, fetchAllTag, createTag, editTag, deleteTag };
-  const [redirect, setRedirect] = useState(false);
-  const [loading, setLoading] = useState(true)
+  const tagsFn = {
+    resetReducerTag,
+    fetchAllTag,
+    createTag,
+    editTag,
+    deleteTag,
+  };
+  // Loading spinner
+  const [loading, setLoading] = useState(true);
 
-  const id = new URLSearchParams(window.location.search).get("id");
+  // Redirect to overview page after viewing task
+  const [redirect, setRedirect] = useState(false);
 
   // Fetch Task
+  const id = new URLSearchParams(window.location.search).get("id");
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     fetchByIdTask(id);
     return () => resetReducerTask();
   }, []);
 
-  useEffect(()=>{
-    if(taskFetchByIdData!==[]){
-      setLoading(false)
+  useEffect(() => {
+    if (taskFetchByIdData !== []) {
+      setLoading(false);
     }
-  }, [taskFetchByIdData, id])
+  }, [taskFetchByIdData, id]);
 
   // Fetch Tags
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     if (!tagFetchAllSuccess) {
       fetchAllTag();
     }
@@ -58,7 +66,6 @@ export const ViewTaskPage = ({
     }
   }, [tagFetchAllSuccess, tagFetchAllData]);
 
-  // If Fetch Task Fail
   useEffect(() => {
     if (taskFetchByIdFail) {
       ErrorSwal(language, language.message.taskFetchFail);
@@ -94,13 +101,13 @@ const mapStateToProps = (state) => ({
   tagFetchAllData: state.tag.fetchAllData,
   tagFetchAllSuccess: state.tag.fetchAllSuccess,
   tagFetchAllFail: state.tag.fetchAllFail,
-  tagsState: state.tag
+  tagsState: state.tag,
 });
 
 const mapDispatchToProps = {
   resetReducerTask: TaskAction.resetReducer,
   fetchByIdTask: TaskAction.fetchByIdTask,
-  
+
   resetReducerTag: TagAction.resetReducer,
   fetchAllTag: TagAction.fetchAllTag,
   createTag: TagAction.createTag,

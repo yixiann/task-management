@@ -40,18 +40,27 @@ export const EditTaskPage = ({
   deleteTag,
   ...props
 }) => {
-  const tagsFn = { resetReducerTag, fetchAllTag, createTag, editTag, deleteTag };
+  const tagsFn = {
+    resetReducerTag,
+    fetchAllTag,
+    createTag,
+    editTag,
+    deleteTag,
+  };
+  // Form logic and loading spinner
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+
+  // Redirect to respective pages after edit or delete of task
   const [redirectEdit, setRedirectEdit] = useState(false);
   const [redirectDelete, setRedirectDelete] = useState(false);
-  const [loading, setLoading] = useState(false)
 
   // Fetch Task
   const [taskDetails, setTaskDetails] = useState(taskFetchByIdData);
   useEffect(() => {
     var id = new URLSearchParams(window.location.search).get("id");
     if (id !== taskDetails.id || !!taskDetails.id) {
-      setLoading(true)
+      setLoading(true);
       fetchByIdTask(id);
     }
     return () => resetReducerTask();
@@ -60,7 +69,7 @@ export const EditTaskPage = ({
   useEffect(() => {
     if (taskFetchByIdSuccess) {
       setTaskDetails(taskFetchByIdData);
-      setLoading(false)
+      setLoading(false);
       resetReducerTask();
     }
   }, [taskFetchByIdSuccess]);
@@ -77,7 +86,7 @@ export const EditTaskPage = ({
 
   // Edit Task
   const handleEditTask = () => {
-    setLoading(true)
+    setLoading(true);
     editTask({ ...form.getFieldValue(), id: taskDetails.id });
   };
 
@@ -87,14 +96,16 @@ export const EditTaskPage = ({
       title: language.message.confirmDeletion,
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
-      confirmFn: () => {deleteTask(taskDetails.id)},
+      confirmFn: () => {
+        deleteTask(taskDetails.id);
+      },
       afterFn: () => setRedirectDelete(true),
       afterTitle: language.message.successfullyDeleted,
       failTitle: language.message.failedToDelete,
     });
   };
 
-  //
+  // Handle After-Effects Of Actions
   useEffect(() => {
     if (taskEditSuccess) {
       SuccessSwal(language, language.message.taskEditSuccess);
@@ -148,7 +159,7 @@ const mapStateToProps = (state) => ({
   tagFetchAllData: state.tag.fetchAllData,
   tagFetchAllSuccess: state.tag.fetchAllSuccess,
   tagFetchAllFail: state.tag.fetchAllFail,
-  tagsState: state.tag
+  tagsState: state.tag,
 });
 
 const mapDispatchToProps = {

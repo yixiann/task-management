@@ -1,18 +1,19 @@
 import React from "react";
 import { Row, Col, Typography, Button, Tag, Input, Spin } from "antd";
 import { Link } from "react-router-dom";
-import moment from "moment";
+import { formatDate } from "../../utils";
 
 const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
   const { Title } = Typography;
   const { TextArea } = Input;
 
+  // Format details from json to data that can be displayed
   const tags = taskDetails?.tagId
     ? tagsData?.filter((item) => taskDetails.tagId.includes(item.id))
     : [];
 
   const newDate = taskDetails?.deadline
-    ? moment(taskDetails.deadline).format("DD/MM/YYYY")
+    ? formatDate(taskDetails.deadline)
     : language.text.none;
 
   const status = taskDetails?.taskStatus

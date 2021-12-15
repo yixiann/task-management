@@ -39,7 +39,14 @@ export const OverviewPage = ({
   deleteTag,
   ...props
 }) => {
-  const tagsFn = { resetReducerTag, fetchAllTag, createTag, editTag, deleteTag };
+  const tagsFn = {
+    resetReducerTag,
+    fetchAllTag,
+    createTag,
+    editTag,
+    deleteTag,
+  };
+
   // Task Management
   const [dataSource, setDataSource] = useState([]);
   const [fullData, setFullData] = useState([]);
@@ -59,15 +66,10 @@ export const OverviewPage = ({
   };
 
   const handleUpdateTask = (e) => {
-    setLoading(true)
+    setLoading(true);
     resetReducerTask();
     updateTask(e);
   };
-
-  // const handleDeleteTask = (e) => {
-  //   resetReducerTask();
-  //   deleteTask(e);
-  // };
 
   const deleteSelected = (e) => {
     ConfirmationSwal({
@@ -75,10 +77,10 @@ export const OverviewPage = ({
       text: language.message.actionIrreversible,
       confirmButtonText: language.message.deleteForever,
       confirmFn: () => {
-        selectedRows.forEach((item)=>{
-          deleteTask(item)
-        })
-        setSelectedRows([])
+        selectedRows.forEach((item) => {
+          deleteTask(item);
+        });
+        setSelectedRows([]);
         resetReducerTask();
       },
     });
@@ -89,7 +91,7 @@ export const OverviewPage = ({
 
   // Initial Fetch All Data
   useEffect(() => {
-    resetTaskDetails()
+    resetTaskDetails();
     fetchAllTask();
     fetchAllTag();
   }, []);

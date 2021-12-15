@@ -39,7 +39,7 @@ const TaskReducer = (state = InitialState, action) => {
       return {
         ...state,
         fetchByIdData: [],
-      }
+      };
     case ActionType.TASK_FETCH_ALL:
       return {
         ...state,

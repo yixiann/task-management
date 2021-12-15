@@ -30,7 +30,7 @@ const TagReducer = (state = InitialState, action) => {
         editFail: false,
         deleteSuccess: false,
         deleteFail: false,
-      }
+      };
     case ActionType.TAG_FETCH_ALL:
       return {
         ...state,
