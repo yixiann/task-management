@@ -6,6 +6,7 @@ const language = {
     editTask: "タスクを編集します",
     updateTask: "タスクを更新します",
     taskOverview: "タスクの概要",
+    calendarOverview: "カレンダーの概要",
   },
   text: {
     search: "検索タスクまたは詳細",
@@ -28,6 +29,8 @@ const language = {
     deleteTask: "タスクを削除します",
     createTask: "タスクを作成します",
     createTag: "タグを作成します",
+    calendar: "カレンダー",
+    overview: "概要",
   },
   colour: {
     none: "なし",

@@ -72,7 +72,6 @@ const language = {
     taskEditFail: "Failed To Save Task",
     taskFetchFail: "Failed To Fetch Task Data",
     taskUpdateFail: "Failed To Update Task",
-
     tagExist: "Tag Already Exists",
     tagFetchFail: "Failed To Fetch Tags Data",
     tagCreateFail: "Failed To Create Tag",
