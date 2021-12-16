@@ -78,6 +78,7 @@ const language = {
     createTag: "创建标记",
     calendar: "日历",
     overview: "概述",
+    download: "Download",
   },
   colour: {
     none: "没有任何",

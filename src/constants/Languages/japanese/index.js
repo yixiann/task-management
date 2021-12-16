@@ -31,6 +31,7 @@ const language = {
     createTag: "タグを作成します",
     calendar: "カレンダー",
     overview: "概要",
+    download: "Download",
   },
   colour: {
     none: "なし",

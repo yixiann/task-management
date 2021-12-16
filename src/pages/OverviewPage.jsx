@@ -9,6 +9,7 @@ import {
   SuccessSwal,
 } from "../components/UI/ConfirmationSwal";
 import { AppAction, TagAction, TaskAction } from "../redux/action_creators";
+import DownloadCSV from "../components/OverviewPage/DownloadCSV";
 
 export const OverviewPage = ({
   language,
@@ -145,6 +146,34 @@ export const OverviewPage = ({
     }
   }, [taskUpdateFail, taskUpdateSuccess, taskDeleteFail, taskDeleteSuccess]);
 
+  // CSV file data
+  const isValidDate = (date) => {
+    return date instanceof Date && !isNaN(date);
+  };
+  const date = new Date().toLocaleDateString("en-US").replaceAll("/", "-");
+  const csvData = taskFetchAllData.map((item) => {
+    const date = new Date(item.deadline);
+    const formatDate = isValidDate(date)
+      ? date.toLocaleDateString("en-US")
+      : "";
+    const tags = item?.tagId
+      ?.map((item) => tagsData.filter((tags) => tags.id === item)[0]?.tagName)
+      .toString();
+    return {
+      [language?.overviewTaskTable.taskName]: item?.taskName,
+      [language?.overviewTaskTable.details]: item?.details,
+      [language?.overviewTaskTable.tags]: tags,
+      [language?.overviewTaskTable.deadline]: formatDate,
+      [language?.overviewTaskTable.createdBy]: item?.createdBy,
+      [language?.overviewTaskTable.assignedTo]: item?.assignedTo,
+      [language?.overviewTaskTable.priority]:
+        language?.priority[item?.priority],
+      [language?.overviewTaskTable.taskStatus]:
+        language?.taskStatus[item?.taskStatus],
+    };
+  });
+  const csvFileName = `Tasks_${date}.csv`;
+
   return (
     <div className="overview">
       <TaskHeaders
@@ -171,6 +200,7 @@ export const OverviewPage = ({
           tagsData={tagsData}
         />
       </div>
+      <DownloadCSV language={language} data={csvData} fileName={csvFileName} />
     </div>
   );
 };

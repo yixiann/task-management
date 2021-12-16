@@ -31,6 +31,7 @@ const language = {
     createTag: "Create Tag",
     calendar: "Calendar",
     overview: "Overview",
+    download: "Download",
   },
   colour: {
     none: "None",
