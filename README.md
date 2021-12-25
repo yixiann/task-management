@@ -18,7 +18,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Logic
 React &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;(Application)
-<br />React Dom &emsp;&emsp;&emsp;&nbsp;(Rendering Components)
+<br />React Dom &emsp;&emsp;&emsp;&nbsp;&nbsp;(Rendering Components)
 <br />React Router Dom &nbsp;(Page Navigation)
 <br />Redux&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(State)
 <br />React Json to CSV   (Downloading CSV files)
