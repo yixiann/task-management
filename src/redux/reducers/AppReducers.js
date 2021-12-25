@@ -2,7 +2,7 @@ import { ActionType } from "../../constants";
 import { LanguageCode } from "../../constants/Languages";
 
 const InitialState = {
-  languageCode: window.localStorage.getItem("languageCode")
+  languageCode: window.localStorage.getItem("languageCode")?.length === 0
     ? window.localStorage.getItem("languageCode")
     : LanguageCode.en,
 };

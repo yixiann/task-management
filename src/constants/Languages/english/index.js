@@ -44,7 +44,7 @@ const language = {
     green: "Green",
     cyan: "Cyan",
     blue: "Blue",
-    geekblu: "Geek blue",
+    geekblue: "Geek blue",
     purple: "Purple",
   },
   priority: {

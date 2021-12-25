@@ -43,6 +43,7 @@ export const CreateTaskPage = ({
   };
   // Form logic
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
 
   // Redirect to overview page after creation of task
   const [redirect, setRedirect] = useState(false);
@@ -69,6 +70,7 @@ export const CreateTaskPage = ({
       ) {
         ErrorSwal(language, language?.message.taskExist);
       } else {
+        setLoading(true)
         createTask(form.getFieldValue());
       }
     });
@@ -111,7 +113,9 @@ export const CreateTaskPage = ({
         form={form}
         createTask={handleCreateTask}
         tagsData={tagFetchAllData}
-        loading={false}
+        loading={loading}
+        edit={false}
+        tagsSuccess={tagFetchAllSuccess}
       />
       {redirect && <Navigate to="/overview" />}
     </div>

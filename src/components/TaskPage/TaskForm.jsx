@@ -23,9 +23,33 @@ const TaskForm = ({
   tagsData,
   taskDetails,
   loading,
+  tagsSuccess,
+  edit = true,
 }) => {
   const { TextArea } = Input;
   const { Option } = Select;
+
+  // Store form progress in local storage to prevent loss when edit tag
+  const save = () => {
+    window.localStorage.setItem(
+      "TaskForm",
+      JSON.stringify(form.getFieldValue())
+    );
+  };
+
+  const [taskDetailsFinal, setTaskDetailsFinal] = useState("");
+
+  const current = window.localStorage.getItem("TaskForm");
+
+  useEffect(() => {
+    if (taskDetails && current.length === 0) {
+      setTaskDetailsFinal(taskDetails);
+    }
+    // if (current.length !== 0 && !edit) {
+    if (current.length !== 0) {
+      setTaskDetailsFinal(JSON.parse(current));
+    }
+  }, [current, taskDetails]);
 
   // Form label and wrapper width
   const layout = {
@@ -37,22 +61,18 @@ const TaskForm = ({
     },
   };
 
-  // Creating task (false) or Editing task (true)
-  const [edit, setEdit] = useState(false);
-
   useEffect(() => {
-    if (taskDetails && tagsData) {
-      setEdit(true);
+    if (taskDetailsFinal && tagsData) {
       const deadlineFormat = moment(
-        formatDate(taskDetails?.deadline),
+        formatDate(taskDetailsFinal?.deadline),
         "DD/MM/YYYY"
       );
       const tagIds = tagsData?.map((item) => item.id);
-      const filterTagIds = taskDetails?.tagId?.filter((item) =>
+      const filterTagIds = taskDetailsFinal?.tagId?.filter((item) =>
         tagIds.includes(item)
       );
       form.setFieldsValue({
-        ...taskDetails,
+        ...taskDetailsFinal,
         deadline: deadlineFormat,
         tagId: filterTagIds,
       });
@@ -60,7 +80,7 @@ const TaskForm = ({
         form.resetFields(["deadline"]);
       }
     }
-  }, [taskDetails, tagsData, form]);
+  }, [taskDetailsFinal, tagsData, form]);
 
   // Making cool colourful tags
   const tagRender = (props) => {
@@ -84,12 +104,7 @@ const TaskForm = ({
 
   return (
     <Spin spinning={loading}>
-      <Form
-        form={form}
-        name="task-form"
-        onFinish={() => createTask()}
-        {...layout}
-      >
+      <Form form={form} name="task-form" {...layout} onClick={() => save()}>
         <Form.Item
           label={language?.task.taskName}
           name="taskName"
@@ -104,13 +119,23 @@ const TaskForm = ({
         >
           <Input />
         </Form.Item>
-        <Form.Item label={language?.task.details} name="details">
-          <TextArea rows={4} />
+        <Form.Item
+          label={language?.task.details}
+          name="details"
+          wrapperCol={{
+            span: 12,
+          }}
+        >
+          <TextArea rows={4} maxLength={9999} showCount />
         </Form.Item>
         <Form.Item
           label={language?.task.tags}
           name="tagId"
-          help={tagsData.length === 0 ? language?.tagsManagement.helpTag : ""}
+          help={
+            tagsData.length === 0 && tagsSuccess
+              ? language?.tagsManagement.helpTag
+              : ""
+          }
         >
           <Select
             mode="multiple"
@@ -120,6 +145,7 @@ const TaskForm = ({
               value: item.id,
               label: item.tagName,
             }))}
+            onChange={() => save()}
           />
         </Form.Item>
         <Form.Item label={language?.task.deadline} name="deadline">
@@ -185,7 +211,11 @@ const TaskForm = ({
             <Col span={3} align="center">
               <Button type="primary" style={{ width: "100px" }}>
                 <Link
-                  to={edit ? `/task/details?id=${taskDetails.id}` : "/overview"}
+                  to={
+                    edit
+                      ? `/task/details?id=${taskDetailsFinal.id}`
+                      : "/overview"
+                  }
                 >
                   {language?.button.cancel}
                 </Link>
@@ -196,7 +226,9 @@ const TaskForm = ({
               <Button
                 type="primary"
                 style={{ width: "100px" }}
-                onClick={() => createTask()}
+                onClick={() => {
+                  createTask();
+                }}
               >
                 {edit ? language?.button.save : language?.button.create}
               </Button>
@@ -207,7 +239,7 @@ const TaskForm = ({
                 <Button
                   type="danger"
                   style={{ width: "120px" }}
-                  onClick={() => deleteTask(taskDetails.id)}
+                  onClick={() => deleteTask(taskDetailsFinal.id)}
                 >
                   {language?.button.deleteTask}
                 </Button>

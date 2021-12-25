@@ -79,6 +79,7 @@ export const OverviewPage = ({
       text: language?.message.actionIrreversible,
       confirmButtonText: language?.message.deleteForever,
       confirmFn: () => {
+        setLoading(true);
         selectedRows.forEach((item) => {
           deleteTask(item);
         });
@@ -93,6 +94,7 @@ export const OverviewPage = ({
 
   // Initial Fetch All Data
   useEffect(() => {
+    window.localStorage.setItem("TaskForm", "");
     resetTaskDetails();
     fetchAllTask();
     fetchAllTag();

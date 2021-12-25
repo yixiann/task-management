@@ -44,7 +44,7 @@ const language = {
     green: "緑",
     cyan: "シアン",
     blue: "青い",
-    geekblu: "オタクブルー",
+    geekblue: "オタクブルー",
     purple: "紫の",
   },
   priority: {

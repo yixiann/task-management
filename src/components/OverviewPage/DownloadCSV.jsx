@@ -1,11 +1,11 @@
 import React from "react";
-import { Row, Input, Button, Col } from "antd";
-import { SearchOutlined, DownloadOutlined } from "@ant-design/icons";
+import { Row, Button, Col } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
 import CsvDownload from "react-json-to-csv";
 
 const DownloadCSV = ({ language, data, fileName }) => {
   return (
-    <Row style={{ marginRight: "40px" }} justify="space-between">
+    <Row style={{ margin: "20px 40px 0px 0px" }} justify="space-between">
       <Col />
       <CsvDownload
         style={{ padding: "0px", border: "none" }}

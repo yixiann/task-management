@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { TaskHeaders } from "./TaskPages/TaskHeader";
 import { ErrorSwal } from "../components/UI/ConfirmationSwal";
 import { AppAction, TagAction, TaskAction } from "../redux/action_creators";
-import { Calendar, Badge, Button } from "antd";
-import moment from 'moment'
+import { Calendar, Badge } from "antd";
 
 export const CalendarPage = ({
   language,

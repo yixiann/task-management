@@ -69,8 +69,21 @@ export const TaskHeaders = ({
 
   // Edit Tag
   const handleEditTag = (e) => {
-    setLoading(true);
-    editTag(e);
+    if (e.record[e.type] !== e.value) {
+      const newTagsData = tagsData.map((item) => {
+        if (item.id === e.record.id) {
+          return {
+            ...item,
+            [e.type]: e.value,
+          };
+        } else {
+          return item;
+        }
+      });
+      setTagsData(newTagsData);
+      setLoading(true);
+      editTag(e);
+    }
   };
 
   // Delete Tag
@@ -151,7 +164,7 @@ export const TaskHeaders = ({
               {language?.button.manageTags}
             </Button>
           )}
-          <Button style={{width: "150px"}}>
+          <Button style={{ width: "150px" }}>
             {overview ? (
               <Link to="/calendar">{language.button.calendar}</Link>
             ) : (

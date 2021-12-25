@@ -45,6 +45,7 @@ export const ViewTaskPage = ({
   // Fetch Task
   const id = new URLSearchParams(window.location.search).get("id");
   useEffect(() => {
+    window.localStorage.setItem("TaskForm", "");
     setLoading(true);
     fetchByIdTask(id);
     return () => resetReducerTask();

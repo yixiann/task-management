@@ -91,7 +91,7 @@ const language = {
     green: "绿",
     cyan: "青色",
     blue: "蓝色",
-    geekblu: "极客蓝色",
+    geekblue: "极客蓝色",
     purple: "紫色的",
   },
   priority: {

@@ -8,7 +8,7 @@ export const colours = Object.freeze({
   green: "green",
   cyan: "cyan",
   blue: "blue",
-  geekblu: "geekblue",
+  geekblue: "geekblue",
   purple: "purple",
 });
 

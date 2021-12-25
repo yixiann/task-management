@@ -46,7 +46,7 @@ export const getColour = (value) => {
     green: "#95de64",
     cyan: "#5cdbd3",
     blue: "#69c0ff",
-    geekblu: "#85a5ff",
+    geekblue: "#85a5ff",
     purple: "#b37feb",
   };
   return colours?.[value] ? colours[value] : "white";

@@ -98,6 +98,7 @@ export const EditTaskPage = ({
       text: language?.message.actionIrreversible,
       confirmButtonText: language?.message.deleteForever,
       confirmFn: () => {
+        setLoading(true)
         deleteTask(taskDetails.id);
       },
       afterFn: () => setRedirectDelete(true),
@@ -125,7 +126,7 @@ export const EditTaskPage = ({
   }, [taskEditSuccess, taskEditFail, taskDeleteSuccess, taskDeleteFail]);
 
   return (
-    <div className="overview">
+    <div className="edit-task">
       <TaskHeaders
         language={language}
         pageName={language?.title.editTask}
@@ -142,6 +143,7 @@ export const EditTaskPage = ({
         tagsData={tagFetchAllData}
         taskDetails={taskDetails}
         loading={loading}
+        tagsSuccess={tagFetchAllSuccess}
       />
       {redirectEdit && <Navigate to={`/task/details?id=${taskDetails.id}`} />}
       {redirectDelete && <Navigate to={`/overview`} />}
