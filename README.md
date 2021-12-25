@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# CVWO Task Management Assignment
+
+## `https://task-management-azure-omega.vercel.app/overview`
+
+Use Case:
+
+The main purpose of this task management system is to provide a platform for corporations to efficiently manage taskings. Taskings can be created, read, updated, and deleted. To further aid in completion of tasks, a status, priority and deadline column is added in the datatable. This will enable users to sort and filter taskings based on status and priority. A tagging system will also be included to allow users to sort taskings based on category. 
+
+To improve user experience, the tags will be coloured and users can update these at any time. Tagging names changed will also update taskings. Popup boxes will also warn users if they are about to perform irreversible actions such as deleting a task. Loading icons and spinners will also be implemented to increase responsiveness of the page. Settings will also allow users to choose their desired language.
+
+Additionally, users will be able to export taskings in a CSV file for dissemination. In future an import csv file can be implemented where taskings can be easily uploaded. A calendar view will also allow users to gain a more holistic overview of the taskings in-hand.
+
+We hope to improve overall efficiency and productivity through the implementation of this system!
+
+## What was used
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Logic
+React               Application
+React Dom           Rendering Components
+React Router Dom    Page Navigation
+Axios               REST Api
+Redux               State
+React Json to CSV   Downloading CSV files
 
-In the project directory, you can run:
+### UI
+Antd                Main UI
+Sweet Alert         Confirmation Modals
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Created By
+Tan Yi Xian
+A0233317M
+First-Year Undergraduate in NUS Double Degree Program
+(Computer Science and Business Administration AY2021/2022)
