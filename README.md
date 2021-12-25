@@ -17,7 +17,7 @@ We hope to improve overall efficiency and productivity through the implementatio
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Logic
-React &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;(Application)
+React &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;(Application)
 <br />React Dom &emsp;&emsp;&emsp;&nbsp;&nbsp;(Rendering Components)
 <br />React Router Dom &nbsp;(Page Navigation)
 <br />Redux&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(State)
