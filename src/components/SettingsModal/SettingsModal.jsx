@@ -10,6 +10,8 @@ const Settings = ({ language, updateLanguage, visible, setVisible }) => {
     updateLanguage(e);
   };
 
+  const lang = window.localStorage.getItem("languageCode");
+
   return (
     <div className="settings">
       <Modal
@@ -28,7 +30,7 @@ const Settings = ({ language, updateLanguage, visible, setVisible }) => {
             </Title>
           </Col>
           <Select
-            defaultValue={window.localStorage.getItem("languageCode")}
+            defaultValue={lang ? lang : LanguageCode.en}
             style={{ width: 120 }}
             onChange={handleLanguageChange}
           >
