@@ -30,6 +30,12 @@ Antd &emsp;&emsp;&emsp;&emsp;(Main UI)
 ## Backend
 ## https://github.com/yixiann/task-management-backend
 
+## Running Locally
+Clone the repository
+```sh 
+npm install
+npm start
+```
 
 ## Created By
 Tan Yi Xian
