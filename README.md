@@ -17,16 +17,15 @@ We hope to improve overall efficiency and productivity through the implementatio
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Logic
-React &emsp;&emsp;&emsp;(Application)
-<br />React Dom &emsp;&emsp;(Rendering Components)
+React &emsp;&emsp;&emsp;&emsp;&emsp;(Application)
+<br />React Dom &emsp;&emsp;&emsp;(Rendering Components)
 <br />React Router Dom &nbsp;(Page Navigation)
-<br />Axios&emsp;&emsp;(REST Api)
-<br />Redux&emsp;&emsp;(State)
+<br />Redux&emsp;&emsp;&emsp;&emsp;(State)
 <br />React Json to CSV   (Downloading CSV files)
 
 ### UI
-Antd                Main UI
-<br />Sweet Alert         Confirmation Modals
+Antd &emsp;&emsp;(Main UI)
+<br />Sweet Alert &emsp;(Confirmation Modals)
 
 ## Created By
 Tan Yi Xian
