@@ -1,8 +1,8 @@
 # CVWO Task Management Assignment
 
-## `https://task-management-azure-omega.vercel.app/overview`
+## https://task-management-yixiann.vercel.app/overview 
 
-Use Case:
+## Use Case:
 
 The main purpose of this task management system is to provide a platform for corporations to efficiently manage taskings. Taskings can be created, read, updated, and deleted. To further aid in completion of tasks, a status, priority and deadline column is added in the datatable. This will enable users to sort and filter taskings based on status and priority. A tagging system will also be included to allow users to sort taskings based on category. 
 
@@ -17,19 +17,19 @@ We hope to improve overall efficiency and productivity through the implementatio
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Logic
-React               Application
-React Dom           Rendering Components
-React Router Dom    Page Navigation
-Axios               REST Api
-Redux               State
-React Json to CSV   Downloading CSV files
+<br />React               Application
+<br />React Dom           Rendering Components
+<br />React Router Dom    Page Navigation
+<br />Axios               REST Api
+<br />Redux               State
+<br />React Json to CSV   Downloading CSV files
 
 ### UI
-Antd                Main UI
-Sweet Alert         Confirmation Modals
+<br />Antd                Main UI
+<br />Sweet Alert         Confirmation Modals
 
 ## Created By
-Tan Yi Xian
-A0233317M
-First-Year Undergraduate in NUS Double Degree Program
-(Computer Science and Business Administration AY2021/2022)
+<br />Tan Yi Xian
+<br />A0233317M
+<br />First-Year Undergraduate in NUS Double Degree Program
+<br />(Computer Science and Business Administration AY2021/2022)
