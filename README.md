@@ -17,19 +17,19 @@ We hope to improve overall efficiency and productivity through the implementatio
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Logic
-<br />React               Application
-<br />React Dom           Rendering Components
-<br />React Router Dom    Page Navigation
-<br />Axios               REST Api
-<br />Redux               State
-<br />React Json to CSV   Downloading CSV files
+React               (Application)
+<br />React Dom &emsp;           (Rendering Components)
+<br />React Router Dom  &nbsp;  (Page Navigation)
+<br />Axios    <space>           (REST Api)
+<br />Redux     <space>          (State)
+<br />React Json to CSV   (Downloading CSV files)
 
 ### UI
-<br />Antd                Main UI
+Antd                Main UI
 <br />Sweet Alert         Confirmation Modals
 
 ## Created By
-<br />Tan Yi Xian
+Tan Yi Xian
 <br />A0233317M
 <br />First-Year Undergraduate in NUS Double Degree Program
 <br />(Computer Science and Business Administration AY2021/2022)
