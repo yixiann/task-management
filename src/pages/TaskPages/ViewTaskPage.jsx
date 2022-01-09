@@ -62,6 +62,8 @@ export const ViewTaskPage = ({
     setLoading(true);
     if (!tagFetchAllSuccess) {
       fetchAllTag();
+    } else {
+      setLoading(false);
     }
     if (tagFetchAllFail) {
       ErrorSwal(language, language?.message.tagFetchFail);
