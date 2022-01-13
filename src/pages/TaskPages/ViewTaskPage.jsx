@@ -52,19 +52,17 @@ export const ViewTaskPage = ({
   }, []);
 
   useEffect(() => {
-    if (taskFetchByIdData !== []) {
+    if (taskFetchByIdData !== [] && tagFetchAllSuccess) {
       setLoading(false);
     }
-  }, [taskFetchByIdData, id]);
+  }, [taskFetchByIdData,tagFetchAllSuccess, id]);
 
   // Fetch Tags
   useEffect(() => {
     setLoading(true);
     if (!tagFetchAllSuccess) {
       fetchAllTag();
-    } else {
-      setLoading(false);
-    }
+    } 
     if (tagFetchAllFail) {
       ErrorSwal(language, language?.message.tagFetchFail);
     }
