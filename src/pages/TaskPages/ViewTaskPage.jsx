@@ -51,7 +51,7 @@ export const ViewTaskPage = ({
   }, []);
 
   useEffect(() => {
-    if (taskFetchByIdData !== [] && tagFetchAllSuccess) {
+    if (taskFetchByIdData.length !== 0 && tagFetchAllSuccess) {
       setLoading(false);
     }
   }, [taskFetchByIdData, tagFetchAllSuccess, id]);
