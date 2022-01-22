@@ -46,7 +46,6 @@ export const ViewTaskPage = ({
   const id = new URLSearchParams(window.location.search).get("id");
   useEffect(() => {
     window.localStorage.setItem("TaskForm", "");
-    setLoading(true);
     fetchByIdTask(id);
     return () => resetReducerTask();
   }, []);
@@ -55,12 +54,12 @@ export const ViewTaskPage = ({
     if (taskFetchByIdData !== [] && tagFetchAllSuccess) {
       setLoading(false);
     }
-  }, [taskFetchByIdData,tagFetchAllSuccess, id]);
+  }, [taskFetchByIdData, tagFetchAllSuccess, id]);
 
   // Fetch Tags
   useEffect(() => {
-    setLoading(true);
     if (!tagFetchAllSuccess) {
+      setLoading(true);
       fetchAllTag();
     } 
     if (tagFetchAllFail) {
