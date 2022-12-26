@@ -19,7 +19,6 @@ export async function axiosRequest(
   axios.defaults.baseURL = baseURL;
   axios.defaults.headers.common["Access-Control-Allow-Headers"] =
     "Origin, X-Requested, Content-Type, Accept Authorization";
-  axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
   axios.defaults.headers.common["Access-Control-Allow-Credentials"] = "true";
   const result = axios[method.toLowerCase()](endpoint, payload);
   return result;
