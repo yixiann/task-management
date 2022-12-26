@@ -14,9 +14,13 @@ export async function axiosRequest(
 ) {
   // const baseURL ="https://stark-garden-74903.herokuapp.com/"
   // axios.defaults.baseURL = baseURL
-  // axios.defaults.baseURL = "localhost:8080"
+  // axios.defaults.baseURL = "localhost:8080";
   const baseURL = "https://stark-garden-74903.herokuapp.com/";
   axios.defaults.baseURL = baseURL;
   const result = axios[method.toLowerCase()](endpoint, payload);
+  result.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested, Content-Type, Accept Authorization"
+  );
   return result;
 }
