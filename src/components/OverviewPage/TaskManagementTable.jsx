@@ -13,7 +13,7 @@ import { tooltipEllipse } from "../UI/TooltipEllipse";
 
 const TaskManagementTable = ({
   language,
-  taskData,
+  dataSource,
   loading,
   updateTask,
   selectedRows,
@@ -21,7 +21,9 @@ const TaskManagementTable = ({
   deleteSelected,
   tagsData,
 }) => {
-  const sortedTaskData = taskData?.sort((tag1, tag2) => tag1.id - tag2.id);
+  const sortedTaskData = dataSource?.sort(
+    (task1, task2) => task1.id - task2.id
+  );
 
   // Navigation for clicking on rows
   const navigate = useNavigate();
@@ -41,7 +43,7 @@ const TaskManagementTable = ({
 
   useEffect(() => {
     setVisible(selectedRows.length > 0 ? true : false);
-  }, [taskData, selectedRows]);
+  }, [dataSource, selectedRows]);
 
   const taskManagementColumns = [
     {
@@ -98,7 +100,7 @@ const TaskManagementTable = ({
       dataIndex: "priority",
       key: "priority",
       width: "150px",
-      filters: getFilters(language?.priority, taskData, "priority"),
+      filters: getFilters(language?.priority, dataSource, "priority"),
       onFilter: (value, record) => record.priority === value,
       render: (text, record) => {
         return (
@@ -116,7 +118,7 @@ const TaskManagementTable = ({
       dataIndex: "taskStatus",
       key: "taskStatus",
       width: "150px",
-      filters: getFilters(language?.taskStatus, taskData, "taskStatus"),
+      filters: getFilters(language?.taskStatus, dataSource, "taskStatus"),
       onFilter: (value, record) => record.status === value,
       render: (text, record) => {
         return (
@@ -137,7 +139,7 @@ const TaskManagementTable = ({
     <>
       <Table
         rowKey={"id"}
-        taskData={sortedTaskData}
+        dataSource={sortedTaskData}
         loading={loading}
         columns={taskManagementColumns}
         scroll={{ x: 1100 }}

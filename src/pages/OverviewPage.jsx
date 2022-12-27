@@ -192,7 +192,7 @@ export const OverviewPage = ({
         <SearchBarAndButtons language={language} searchData={searchData} />
         <TaskManagementTable
           language={language}
-          taskData={dataSource}
+          dataSource={dataSource}
           fullData={fullData}
           loading={loading}
           updateTask={handleUpdateTask}
