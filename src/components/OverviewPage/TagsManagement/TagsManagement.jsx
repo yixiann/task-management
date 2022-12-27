@@ -20,7 +20,7 @@ const TagsManagement = ({
 }) => {
   const { Paragraph, Title } = Typography;
 
-  const sortedTagsData = tagsData.sort((tag1, tag2) => tag1.id - tag2.id);
+  const sortedTagsData = tagsData?.sort((tag1, tag2) => tag1.id - tag2.id);
 
   const manageTagsColumns = [
     {
