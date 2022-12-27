@@ -12,7 +12,8 @@ export async function axiosRequest(
   payload = null,
   method = RequestMethod.GET
 ) {
-  const baseURL = "https://stark-garden-74903.herokuapp.com/";
+  const baseURL = "https://task-management-yixiann.vercel.app/";
+  // const baseURL = "https://stark-garden-74903.herokuapp.com/";
   // const baseURL = "http://localhost:8080"; This works
   const headers = {
     "Access-Control-Allow-Origin": baseURL,
