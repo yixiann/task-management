@@ -13,7 +13,17 @@ export async function axiosRequest(
   method = RequestMethod.GET
 ) {
   const baseURL = "https://stark-garden-74903.herokuapp.com/";
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Headers":
+      "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With",
+    "Access-Control-Allow-Methods": "POST, OPTIONS, GET, PUT, DELETE",
+  };
   axios.defaults.baseURL = baseURL;
-  const result = axios[method.toLowerCase()](endpoint, payload);
+  const result = axios[method.toLowerCase()](endpoint, {
+    ...payload,
+    ...headers,
+  });
   return result;
 }
