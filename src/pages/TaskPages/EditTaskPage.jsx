@@ -87,8 +87,10 @@ export const EditTaskPage = ({
 
   // Edit Task
   const handleEditTask = () => {
-    setLoading(true);
-    editTask({ ...form.getFieldValue(), id: taskDetails.id });
+    form.validateFields().then(() => {
+      setLoading(true);
+      editTask({ ...form.getFieldValue(), id: taskDetails.id });
+    });
   };
 
   // Delete Task
@@ -98,7 +100,7 @@ export const EditTaskPage = ({
       text: language?.message.actionIrreversible,
       confirmButtonText: language?.message.deleteForever,
       confirmFn: () => {
-        setLoading(true)
+        setLoading(true);
         deleteTask(taskDetails.id);
       },
       afterFn: () => setRedirectDelete(true),
