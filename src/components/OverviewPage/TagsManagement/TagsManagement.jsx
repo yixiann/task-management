@@ -20,6 +20,8 @@ const TagsManagement = ({
 }) => {
   const { Paragraph, Title } = Typography;
 
+  const sortedTagsData = tagsData.sort((tag1, tag2) => tag1.id - tag2.id);
+
   const manageTagsColumns = [
     {
       title: language?.tagsManagement.tags,
@@ -97,7 +99,7 @@ const TagsManagement = ({
           style={{ marginTop: "10px" }}
           loading={loading}
           columns={manageTagsColumns}
-          dataSource={tagsData}
+          dataSource={sortedTagsData}
           defaultPageSize={5}
           footer={() => (
             <CreateTag
