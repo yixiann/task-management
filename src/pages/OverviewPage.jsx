@@ -104,7 +104,8 @@ export const OverviewPage = ({
   useEffect(() => {
     if (taskFetchAllSuccess) {
       setDataSource(taskFetchAllData);
-      setFullData(taskFetchAllData);
+      taskFetchAllData?.sort((task1, task2) => task1.id - task2.id);
+      setFullData(tagFetchAllData);
       setLoading(false);
     }
     if (taskFetchAllFail) {
