@@ -24,7 +24,7 @@ export async function axiosRequest(
   axios.defaults.baseURL = baseURL;
   const result = axios[method.toLowerCase()](endpoint, {
     ...payload,
-    ...headers,
+    headers,
   });
   return result;
 }
