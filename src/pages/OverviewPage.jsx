@@ -104,7 +104,6 @@ export const OverviewPage = ({
   useEffect(() => {
     if (taskFetchAllSuccess) {
       setDataSource(taskFetchAllData);
-      taskFetchAllData?.sort((task1, task2) => task1.id - task2.id);
       setFullData(tagFetchAllData);
       setLoading(false);
     }
@@ -193,7 +192,7 @@ export const OverviewPage = ({
         <SearchBarAndButtons language={language} searchData={searchData} />
         <TaskManagementTable
           language={language}
-          dataSource={dataSource}
+          taskData={dataSource}
           fullData={fullData}
           loading={loading}
           updateTask={handleUpdateTask}
