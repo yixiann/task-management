@@ -12,7 +12,8 @@ export async function axiosRequest(
   payload = null,
   method = RequestMethod.GET
 ) {
-  const baseURL = "http://localhost:8080";
+  // const baseURL = "http://localhost:8080";
+  const baseURL = "https://task-management-yixian.herokuapp.com";
   axios.defaults.baseURL = baseURL;
   const result = axios[method.toLowerCase()](endpoint, payload);
   return result;
