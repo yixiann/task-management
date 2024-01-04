@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://task-management-yixiann.vercel.app",
   "proxy": "https://stark-garden-74903.herokuapp.com/",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@ant-design/dark-theme": "^2.0.2",
     "@ant-design/icons": "^4.7.0",
