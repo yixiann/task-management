@@ -119,7 +119,7 @@ const TaskManagementTable = ({
       key: "taskStatus",
       width: "150px",
       filters: getFilters(language?.taskStatus, dataSource, "taskStatus"),
-      onFilter: (value, record) => record.status === value,
+      onFilter: (value, record) => record.taskStatus === value,
       render: (text, record) => {
         return (
           <CustomMenu
