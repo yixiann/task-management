@@ -9,6 +9,7 @@ import {
   formatDate,
   getFilters,
   getKeyById,
+  sorter,
 } from "../../utils/utils";
 
 const TaskManagementTable = ({
@@ -59,7 +60,7 @@ const TaskManagementTable = ({
       key: "details",
       width: "300px",
       sorter: (a, b) => sorter(a.details, b.details),
-      render: (text, record) =>
+      render: (text) =>
         text ? tooltipEllipse(text, "300px") : language?.text.none,
     },
     {
@@ -93,7 +94,7 @@ const TaskManagementTable = ({
       key: "deadline",
       width: "150px",
       sorter: (a, b) => sorter(a.deadline, b.deadline),
-      render: (text, _) => (text ? formatDate(text) : language?.text.none),
+      render: (text) => (text ? formatDate(text) : language?.text.none),
     },
     {
       title: language?.overviewTaskTable.priority,

@@ -4,14 +4,15 @@ import { URI } from "../../configs/config";
 import { axiosRequest, RequestMethod } from "../../configs/axios";
 import { ActionType } from "../../constants";
 
-export function* runFetchAllTag(action) {
+export function* runFetchAllTag() {
   try {
     const fetchAllTagData = yield axiosRequest(URI.fetchAllTag);
-    const formatFetchAllTagData = !!fetchAllTagData.data
+    const formatFetchAllTagData = fetchAllTagData.data
       ? fetchAllTagData.data
       : [];
     yield put(TagAction.fetchAllTagSuccess(formatFetchAllTagData));
   } catch (err) {
+    console.log(err);
     yield put(TagAction.fetchAllTagFail());
   }
 }
@@ -21,6 +22,7 @@ export function* runCreateTag(action) {
     yield axiosRequest(URI.createTag, action.payload.data, RequestMethod.POST);
     yield put(TagAction.createTagSuccess());
   } catch (err) {
+    console.log(err);
     yield put(TagAction.createTagFail());
   }
 }
@@ -38,6 +40,7 @@ export function* runEditTag(action) {
     );
     yield put(TagAction.editTagSuccess());
   } catch (err) {
+    console.log(err);
     yield put(TagAction.editTagFail());
   }
 }
@@ -51,6 +54,7 @@ export function* runDeleteTag(action) {
     );
     yield put(TagAction.deleteTagSuccess());
   } catch (err) {
+    console.log(err);
     yield put(TagAction.deleteTagFail());
   }
 }
