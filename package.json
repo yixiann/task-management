@@ -3,6 +3,9 @@
   "private": true,
   "homepage": "https://task-management-yixiann.vercel.app",
   "proxy": "https://stark-garden-74903.herokuapp.com/",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
