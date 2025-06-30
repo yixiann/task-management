@@ -1,12 +1,10 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "antd/dist/antd.css";
 import "./css/common.css";
-import "./css/custom.css";
 import { PublicRoutes as publicRoutes } from "./routers";
 import { connect } from "react-redux";
 import MainLayout from "./layouts/MainLayout";
-import Languages from "../src/constants/Languages";
+import Languages from "./constants/Languages";
 
 function App({ languageCode, ...props }) {
   return (
@@ -16,6 +14,7 @@ function App({ languageCode, ...props }) {
           <Routes>
             {publicRoutes.map((route) => (
               <Route
+                key={route.path}
                 path={route.path}
                 element={<route.component language={Languages[languageCode]} />}
               />

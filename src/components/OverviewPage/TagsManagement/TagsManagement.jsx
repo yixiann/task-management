@@ -1,13 +1,12 @@
-import React from "react";
 import { Button, Table, Modal, Typography } from "antd";
 import CreateTag from "./CreateTag";
-import { CustomMenu } from "../../../utils";
+import { CustomMenu } from "../../../utils/utils";
 import { colours } from "../../../utils/enum";
 
 const TagsManagement = ({
   language,
-  visible,
-  setVisible,
+  open,
+  setOpen,
   loading,
   tagName,
   setTagName,
@@ -20,7 +19,9 @@ const TagsManagement = ({
 }) => {
   const { Paragraph, Title } = Typography;
 
-  const sortedTagsData = tagsData?.sort((tag1, tag2) => tag1.id - tag2.id);
+  const sortedTagsData = [...(tagsData || [])].sort(
+    (tag1, tag2) => tag1.id - tag2.id
+  );
 
   const manageTagsColumns = [
     {
@@ -83,9 +84,9 @@ const TagsManagement = ({
   return (
     <div className="tags-management">
       <Modal
-        visible={visible}
+        open={open}
         onCancel={() => {
-          setVisible(!visible);
+          setOpen(!open);
           setTagName("");
           setTagColour("");
         }}
@@ -99,7 +100,10 @@ const TagsManagement = ({
           style={{ marginTop: "10px" }}
           loading={loading}
           columns={manageTagsColumns}
-          dataSource={sortedTagsData}
+          dataSource={sortedTagsData?.map((item) => ({
+            ...item,
+            key: item.id,
+          }))}
           defaultPageSize={5}
           footer={() => (
             <CreateTag

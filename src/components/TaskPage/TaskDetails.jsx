@@ -1,7 +1,6 @@
-import React from "react";
 import { Row, Col, Typography, Button, Tag, Input, Spin } from "antd";
 import { Link } from "react-router-dom";
-import { formatDate } from "../../utils";
+import { formatDate } from "../../utils/utils";
 
 const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
   const { Title } = Typography;
@@ -25,7 +24,10 @@ const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
     : language?.text.none;
 
   const formatDetails = [
-    { label: language?.overviewTaskTable.taskName, data: taskDetails?.taskName },
+    {
+      label: language?.overviewTaskTable.taskName,
+      data: taskDetails?.taskName,
+    },
     { label: language?.overviewTaskTable.details, data: taskDetails?.details },
     { label: language?.overviewTaskTable.tags, data: taskDetails?.tags },
     { label: language?.overviewTaskTable.deadline, data: newDate },
@@ -45,7 +47,7 @@ const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
     <Spin spinning={loading}>
       {formatDetails.map((item) => {
         return (
-          <Row style={{ margin: "12px 24px" }}>
+          <Row key={item.label} style={{ margin: "12px 24px" }}>
             <Col span={4}>
               <Title level={5} align="right">
                 {item.label + " : "}
@@ -58,12 +60,19 @@ const TaskDetails = ({ language, taskDetails, tagsData, loading }) => {
                   <Title level={5}>{language?.text.none}</Title>
                 ) : (
                   tags.map((item) => (
-                    <Tag color={item.colour}>{item.tagName}</Tag>
+                    <Tag
+                      key={item.id}
+                      color={item.colour}
+                      style={{ marginTop: "28px" }}
+                    >
+                      {item.tagName}
+                    </Tag>
                   ))
                 )
               ) : item.label === language?.overviewTaskTable.details ? (
                 <TextArea
                   style={{
+                    marginTop: "24px",
                     backgroundColor: "white",
                     color: "black",
                     minWidth: "800px",

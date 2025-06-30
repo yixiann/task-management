@@ -1,4 +1,4 @@
-const { ActionType } = require("../../constants");
+import { ActionType } from "../../constants";
 
 const TagAction = {
   resetReducer: (data) => ({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import TaskDetails from "../../components/TaskPage/TaskDetails";
@@ -61,7 +61,7 @@ export const ViewTaskPage = ({
     if (!tagFetchAllSuccess) {
       setLoading(true);
       fetchAllTag();
-    } 
+    }
     if (tagFetchAllFail) {
       ErrorSwal(language, language?.message.tagFetchFail);
     }

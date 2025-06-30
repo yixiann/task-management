@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Table, Tag, Row, Button } from "antd";
+
+import { priority, taskStatus } from "../../utils/enum";
+import { useNavigate } from "react-router-dom";
+import { tooltipEllipse } from "../UI/TooltipEllipse";
 import {
   CustomMenu,
   formatDate,
   getFilters,
   getKeyById,
-  sorter,
-} from "../../utils";
-import { priority, taskStatus } from "../../utils/enum";
-import { useNavigate } from "react-router-dom";
-import { tooltipEllipse } from "../UI/TooltipEllipse";
+} from "../../utils/utils";
 
 const TaskManagementTable = ({
   language,
@@ -21,7 +21,7 @@ const TaskManagementTable = ({
   deleteSelected,
   tagsData,
 }) => {
-  const sortedTaskData = dataSource?.sort(
+  const sortedTaskData = [...(dataSource || [])].sort(
     (task1, task2) => task1.id - task2.id
   );
 
@@ -33,7 +33,7 @@ const TaskManagementTable = ({
   };
 
   // Selection of rows for deleting and visibility of delete button
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const rowSelection = {
     onChange: (selectedRowKeys) => {
@@ -42,7 +42,7 @@ const TaskManagementTable = ({
   };
 
   useEffect(() => {
-    setVisible(selectedRows.length > 0 ? true : false);
+    setOpen(selectedRows.length > 0 ? true : false);
   }, [dataSource, selectedRows]);
 
   const taskManagementColumns = [
@@ -78,7 +78,7 @@ const TaskManagementTable = ({
           ? record.tagId
               .filter((item) => tagIds?.includes(item))
               .map((item) => (
-                <Row style={{ margin: "10px" }}>
+                <Row key={item} style={{ margin: "10px" }}>
                   <Tag color={getKeyById(tagsData, "colour", item)}>
                     {getKeyById(tagsData, "tagName", item)}
                   </Tag>
@@ -139,7 +139,10 @@ const TaskManagementTable = ({
     <>
       <Table
         rowKey={"id"}
-        dataSource={sortedTaskData}
+        dataSource={sortedTaskData.map((item) => ({
+          ...item,
+          key: item.id,
+        }))}
         loading={loading}
         columns={taskManagementColumns}
         scroll={{ x: 1100 }}
@@ -150,9 +153,10 @@ const TaskManagementTable = ({
         })}
         rowSelection={{ type: "checkbox", ...rowSelection }}
       />
-      {visible && (
+      {open && (
         <Button
-          type="danger"
+          danger
+          type="primary"
           onClick={() => deleteSelected()}
           style={{ position: "relative", bottom: "48px" }}
         >

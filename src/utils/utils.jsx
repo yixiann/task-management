@@ -144,6 +144,10 @@ export const checkForDuplicates = (data, key, value) => {
 };
 
 export const formatDate = (UTCdate) => {
-  const date = new Date(UTCdate)
-  return date.toLocaleDateString()
+  const date = new Date(UTCdate);
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
 };

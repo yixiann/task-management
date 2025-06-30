@@ -1,5 +1,5 @@
 import { Row, Col, Button, Input } from "antd";
-import { CustomMenu } from "../../../utils";
+import { CustomMenu } from "../../../utils/utils";
 import { colours } from "../../../utils/enum";
 
 const CreateTag = ({

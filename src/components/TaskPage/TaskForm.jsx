@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Row,
   Col,
@@ -11,9 +11,9 @@ import {
   Spin,
 } from "antd";
 import { Link } from "react-router-dom";
-import moment from "moment";
-import { formatDate, getKeyById } from "../../utils";
+import { getKeyById } from "../../utils/utils";
 import { priority, taskStatus } from "../../utils/enum";
+import dayjs from "dayjs";
 
 const TaskForm = ({
   form,
@@ -45,7 +45,6 @@ const TaskForm = ({
     if (taskDetails && current.length === 0) {
       setTaskDetailsFinal(taskDetails);
     }
-    // if (current.length !== 0 && !edit) {
     if (current.length !== 0) {
       setTaskDetailsFinal(JSON.parse(current));
     }
@@ -63,22 +62,15 @@ const TaskForm = ({
 
   useEffect(() => {
     if (taskDetailsFinal && tagsData) {
-      const deadlineFormat = moment(
-        formatDate(taskDetailsFinal?.deadline),
-        "DD/MM/YYYY"
-      );
       const tagIds = tagsData?.map((item) => item.id);
       const filterTagIds = taskDetailsFinal?.tagId?.filter((item) =>
         tagIds.includes(item)
       );
       form.setFieldsValue({
         ...taskDetailsFinal,
-        deadline: deadlineFormat,
         tagId: filterTagIds,
+        deadline: dayjs(taskDetailsFinal?.deadline),
       });
-      if (!deadlineFormat.isValid()) {
-        form.resetFields(["deadline"]);
-      }
     }
   }, [taskDetailsFinal, tagsData, form]);
 
@@ -139,7 +131,6 @@ const TaskForm = ({
         >
           <Select
             mode="multiple"
-            showArrow
             tagRender={tagRender}
             options={tagsData.map((item) => ({
               value: item.id,
@@ -149,7 +140,7 @@ const TaskForm = ({
           />
         </Form.Item>
         <Form.Item label={language?.task.deadline} name="deadline">
-          <DatePicker format="DD/MM/YYYY" />
+          <DatePicker format="DD-MM-YYYY" />
         </Form.Item>
         <Form.Item
           label={language?.task.createdBy}
@@ -182,7 +173,7 @@ const TaskForm = ({
             span: 4,
           }}
         >
-          <Select placeHolder="Select">
+          <Select placeholder="Select">
             {Object.keys(priority).map((item) => (
               <Option value={item}>{language?.priority[item]}</Option>
             ))}
@@ -195,7 +186,7 @@ const TaskForm = ({
             span: 4,
           }}
         >
-          <Select placeHolder="Select">
+          <Select placeholder="Select">
             {Object.keys(taskStatus).map((item) => (
               <Option value={item}>{language?.taskStatus[item]}</Option>
             ))}
@@ -226,9 +217,7 @@ const TaskForm = ({
               <Button
                 type="primary"
                 style={{ width: "100px" }}
-                onClick={() => {
-                  createTask();
-                }}
+                onClick={() => createTask()}
               >
                 {edit ? language?.button.save : language?.button.create}
               </Button>

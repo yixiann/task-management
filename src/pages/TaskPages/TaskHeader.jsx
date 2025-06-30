@@ -8,7 +8,7 @@ import {
   ErrorSwal,
   SuccessSwal,
 } from "../../components/UI/ConfirmationSwal";
-import { checkForDuplicates } from "../../utils";
+import { checkForDuplicates } from "../../utils/utils";
 import { Link } from "react-router-dom";
 import Settings from "../../components/SettingsModal/SettingsModal";
 
@@ -39,11 +39,11 @@ export const TaskHeaders = ({
   } = tagsState;
 
   // Setting
-  const [visibleSetting, setVisibleSetting] = useState(false);
+  const [openSetting, setOpenSetting] = useState(false);
 
   // Tags management
   const [loading, setLoading] = useState(true);
-  const [visibleTags, setVisibleTags] = useState(false);
+  const [openTags, setOpenTags] = useState(false);
   const [tagsData, setTagsData] = useState();
 
   useEffect(() => {
@@ -138,15 +138,16 @@ export const TaskHeaders = ({
     <div className="task-header">
       <Title level={2} style={{ margin: "50px 20px 5px 20px" }}>
         {language?.title.taskManagement}{" "}
-        <SettingOutlined onClick={() => setVisibleSetting(true)} />
+        <SettingOutlined onClick={() => setOpenSetting(true)} />
       </Title>
       {breadcrumbs && (
-        <Breadcrumb separator=">" style={{ margin: "0px 24px" }}>
-          <Breadcrumb.Item href="/overview">
-            {language?.title.taskOverview}
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>{pageName}</Breadcrumb.Item>
-        </Breadcrumb>
+        <Breadcrumb
+          style={{ margin: "0px 24px" }}
+          items={[
+            { title: language?.title.taskOverview, href: "/overview" },
+            { title: pageName },
+          ]}
+        />
       )}
       <Row>
         <Col span={12}>
@@ -160,7 +161,7 @@ export const TaskHeaders = ({
         </Col>
         <Col span={12} align="right">
           {button && (
-            <Button type="primary" onClick={() => setVisibleTags(true)}>
+            <Button type="primary" onClick={() => setOpenTags(true)}>
               {language?.button.manageTags}
             </Button>
           )}
@@ -177,13 +178,13 @@ export const TaskHeaders = ({
       <Settings
         language={language}
         updateLanguage={updateLanguage}
-        visible={visibleSetting}
-        setVisible={setVisibleSetting}
+        open={openSetting}
+        setOpen={setOpenSetting}
       />
       <TagsManagement
         language={language}
-        visible={visibleTags}
-        setVisible={setVisibleTags}
+        open={openTags}
+        setOpen={setOpenTags}
         loading={loading}
         tagsData={tagsData}
         tagName={tagName}

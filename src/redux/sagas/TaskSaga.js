@@ -13,7 +13,6 @@ export function* runFetchAllTask(action) {
           tagId: item.tagId.split(",").map(Number),
         }))
       : [];
-    // console.log("FETCH ALL TASK", formatFetchAllTaskData);
     yield put(TaskAction.fetchAllTaskSuccess(formatFetchAllTaskData));
   } catch (err) {
     yield put(TaskAction.fetchAllTaskFail());
@@ -31,7 +30,6 @@ export function* runFetchByIdTask(action) {
           tagId: fetchByIdTaskData?.data?.tagId?.split(",").map(Number),
         }
       : [];
-    // console.log("FETCH BY ID TASK", formatFetchByIdTaskData);
     yield put(TaskAction.fetchByIdTaskSuccess(formatFetchByIdTaskData));
   } catch (err) {
     yield put(TaskAction.fetchByIdTaskFail());
@@ -46,7 +44,6 @@ export function* runCreateTask(action) {
       userId: 1,
       tagId: createData?.tagId?.toString(),
     };
-    // console.log("CREATE TASKS", formatCreateData);
     yield axiosRequest(URI.createTask, formatCreateData, RequestMethod.POST);
     yield put(TaskAction.createTaskSuccess());
   } catch (err) {
@@ -80,7 +77,6 @@ export function* runEditTask(action) {
       ...editData,
       tagId: editData.tagId.toString(),
     };
-    // console.log("EDIT TASKS", formatEditData);
     yield axiosRequest(
       URI.editTask.replace("{id}", editData.id),
       formatEditData,

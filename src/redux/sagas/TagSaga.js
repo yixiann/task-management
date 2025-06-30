@@ -10,7 +10,6 @@ export function* runFetchAllTag(action) {
     const formatFetchAllTagData = !!fetchAllTagData.data
       ? fetchAllTagData.data
       : [];
-    // console.log("FETCH TAG", formatFetchAllTagData);
     yield put(TagAction.fetchAllTagSuccess(formatFetchAllTagData));
   } catch (err) {
     yield put(TagAction.fetchAllTagFail());
@@ -32,7 +31,6 @@ export function* runEditTag(action) {
       ...action.payload.data.record,
       [action.payload.data.type]: action.payload.data.value,
     };
-    // console.log("EDIT TAGS", action.payload.data, formatEdit);
     yield axiosRequest(
       URI.editTag.replace("{id}", formatEdit.id),
       formatEdit,
@@ -46,7 +44,6 @@ export function* runEditTag(action) {
 
 export function* runDeleteTag(action) {
   try {
-    // console.log("DELETE TAG", action.payload.data);
     yield axiosRequest(
       URI.deleteTag.replace("{id}", action.payload.data[0]),
       action.payload.data[0],

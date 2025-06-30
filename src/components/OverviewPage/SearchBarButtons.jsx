@@ -1,4 +1,3 @@
-import React from "react";
 import { Row, Input, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Form } from "antd";
@@ -6,7 +6,11 @@ import TaskForm from "../../components/TaskPage/TaskForm";
 import TaskHeaders from "./TaskHeader";
 import { AppAction, TagAction, TaskAction } from "../../redux/action_creators";
 import { ErrorSwal, SuccessSwal } from "../../components/UI/ConfirmationSwal";
-import { checkForDuplicates } from "../../utils";
+import { checkForDuplicates } from "../../utils/utils";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 export const CreateTaskPage = ({
   language,
@@ -70,8 +74,11 @@ export const CreateTaskPage = ({
       ) {
         ErrorSwal(language, language?.message.taskExist);
       } else {
-        setLoading(true)
-        createTask(form.getFieldValue());
+        setLoading(true);
+        createTask({
+          ...form.getFieldValue(),
+          deadline: dayjs(form.getFieldValue("deadline")).utc().format(),
+        });
       }
     });
   };

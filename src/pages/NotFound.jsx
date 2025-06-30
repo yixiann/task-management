@@ -1,4 +1,3 @@
-import React from "react";
 // import { Result, Button } from "antd";
 // import { Link, Navigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";

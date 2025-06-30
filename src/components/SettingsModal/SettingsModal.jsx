@@ -1,8 +1,7 @@
-import React from "react";
 import { Modal, Typography, Select, Row, Col } from "antd";
 import { LanguageCode } from "../../constants/Languages";
 
-const Settings = ({ language, updateLanguage, visible, setVisible }) => {
+const Settings = ({ language, updateLanguage, open, setOpen }) => {
   const { Title } = Typography;
   const { Option } = Select;
 
@@ -15,8 +14,8 @@ const Settings = ({ language, updateLanguage, visible, setVisible }) => {
   return (
     <div className="settings">
       <Modal
-        visible={visible}
-        onCancel={() => setVisible(!visible)}
+        open={open}
+        onCancel={() => setOpen(!open)}
         closable={false}
         footer={false}
         width={600}

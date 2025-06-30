@@ -10,6 +10,10 @@ import {
   SuccessSwal,
 } from "./../../components/UI/ConfirmationSwal";
 import { AppAction, TagAction, TaskAction } from "../../redux/action_creators";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 export const EditTaskPage = ({
   language,
@@ -20,7 +24,6 @@ export const EditTaskPage = ({
   fetchByIdTask,
   taskFetchByIdData,
   taskFetchByIdSuccess,
-  taskFetchByIdFail,
 
   editTask,
   taskEditSuccess,
@@ -39,7 +42,6 @@ export const EditTaskPage = ({
   createTag,
   editTag,
   deleteTag,
-  ...props
 }) => {
   const tagsFn = {
     resetReducerTag,
@@ -89,7 +91,11 @@ export const EditTaskPage = ({
   const handleEditTask = () => {
     form.validateFields().then(() => {
       setLoading(true);
-      editTask({ ...form.getFieldValue(), id: taskDetails.id });
+      editTask({
+        ...form.getFieldValue(),
+        id: taskDetails.id,
+        deadline: dayjs(form.getFieldValue("deadline")).utc().format(),
+      });
     });
   };
 

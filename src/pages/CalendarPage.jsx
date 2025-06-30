@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { TaskHeaders } from "./TaskPages/TaskHeader";
 import { ErrorSwal } from "../components/UI/ConfirmationSwal";
@@ -123,6 +123,16 @@ export const CalendarPage = ({
     setFormatData(formatTaskForCalendar);
   };
 
+  const cellRender = (current, info) => {
+    if (info.type === "date") {
+      return dateCellRender(current);
+    }
+    if (info.type === "month") {
+      return monthCellRender(current);
+    }
+    return info.originNode;
+  };
+
   return (
     <div className="calendar">
       <TaskHeaders
@@ -134,11 +144,7 @@ export const CalendarPage = ({
         tagsFn={tagsFn}
         updateLanguage={updateLanguage}
       />
-      <Calendar
-        onPanelChange={handleCalendar}
-        dateCellRender={dateCellRender}
-        monthCellRender={monthCellRender}
-      />
+      <Calendar onPanelChange={handleCalendar} cellRender={cellRender} />
     </div>
   );
 };
